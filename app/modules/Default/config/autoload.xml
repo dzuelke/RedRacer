@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<ae:configuration>
+		
+		<autoload name="RedracerDefaultBaseAction">%core.module_dir%/Default/lib/action/RedracerDefaultBaseAction.class.php</autoload>
+		<autoload name="RedracerDefaultBaseModel">%core.module_dir%/Default/lib/model/RedracerDefaultBaseModel.class.php</autoload>
+		<autoload name="RedracerDefaultBaseView">%core.module_dir%/Default/lib/view/RedracerDefaultBaseView.class.php</autoload>
+		
+	</ae:configuration>
+</ae:configurations>

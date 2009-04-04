@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" parent="%core.system_config_dir%/autoload.xml">
+	<ae:configuration>
+	
+		<!-- for FirePHP output  -->
+		<autoload name="AdtDebugFilter">%core.app_dir%/../libs/adt/filter/AdtDebugFilter.class.php</autoload>
+		<autoload name="AdtDebugFilter">%core.app_dir%/../libs/adt/filter/AdtDebugFilter.class.php</autoload>
+		<autoload name="AdtDebugFirePhpFilter">%core.app_dir%/../libs/adt/filter/AdtDebugFirePhpFilter.class.php</autoload>
+		<autoload name="AdtFirePhp">%core.app_dir%/../libs/adt/firephp/AdtFirePhp.class.php</autoload>
+		<autoload name="FirePHP">%core.app_dir%/../libs/adt/vendor/FirePHPCore/FirePHP.class.php</autoload>
+		
+		
+		<autoload name="RedracerBaseAction">%core.lib_dir%/action/RedracerBaseAction.class.php</autoload>
+		<autoload name="RedracerBaseModel">%core.lib_dir%/model/RedracerBaseModel.class.php</autoload>
+		<autoload name="RedracerBaseView">%core.lib_dir%/view/RedracerBaseView.class.php</autoload>
+		
+	</ae:configuration>
+</ae:configurations>

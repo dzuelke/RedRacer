@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
+	<ae:configuration>
+		<routes>
+			<!-- default action for "/" -->
+			<route name="index" pattern="^/$" module="%actions.default_module%" action="%actions.default_action%" />
+			
+			<!-- an example for a CRUD-style set of routes -->
+			<route name="project" pattern="^/project" module="Projects">
+				<!-- do not put the action into the parent route, because that one is not anchored at the end of the pattern! -->
+				<route name=".index" pattern="^$" action="Index" />
+				<route name=".latest" pattern="^/latest$" action="Latest" />
+				
+				<route name=".create" pattern="^/add$" action="Add" />
+				<!-- "Product" is not an action, but just a folder with sub-actions. if only this route, without children, matches, then the action cannot be resolved and a 404 is shown - exactly what we want! -->
+				<route name=".project" pattern="^/(id:\d+)" action="Project">
+					<route name=".view" pattern="^$" action=".View" />
+					<route name=".edit" pattern="^/edit$" action=".Edit" />
+					<route name=".delete" pattern="^/delete$" action=".Delete" />
+				</route>
+			</route>
+		</routes>
+	</ae:configuration>
+</ae:configurations>
