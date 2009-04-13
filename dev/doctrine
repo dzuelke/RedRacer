@@ -1,0 +1,5 @@
+#!/usr/bin/env /usr/local/php5.3/bin/php
+<?PHP
+chdir(dirname(__FILE__).'/db');
+include('doctrine.php');
+?>

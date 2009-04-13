@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" parent="%core.system_config_dir%/autoload.xml">
 	<ae:configuration>
-	
+		<!-- Doctrine -->
+		<autoload name="Doctrine">%core.vendor_dir%/doctrine/Doctrine.php</autoload>
+		
+		<!-- User -->
+		<autoload name="RedracerUser">%core.lib_dir%/user/RedracerUser.class.php</autoload>
+		
 		<!-- for FirePHP output  -->
 		<autoload name="AdtDebugFilter">%core.app_dir%/../libs/adt/filter/AdtDebugFilter.class.php</autoload>
 		<autoload name="AdtDebugFilter">%core.app_dir%/../libs/adt/filter/AdtDebugFilter.class.php</autoload>

@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	xmlns="http://agavi.org/agavi/config/parts/databases/1.0">
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/databases/1.0">
 
 	<ae:configuration>
 		<databases default="doctrine">
 
 			<database name="doctrine" class="AgaviDoctrineDatabase">
-				<parameters>
-					<parameter name="dsn">mysql://redracer:@localhost/redracer</parameter>
-					<parameter name="attributes">
-						<parameters>
-							<parameter name="AUTOLOAD_TABLE_CLASSES">true</parameter>
-							<parameter name="VALIDATE">LENGTHS</parameter>
-							<parameter name="AUTO_ACCESSOR_OVERRIDE">true</parameter>
-						</parameters>
-					</parameter>
-					<parameter name="manager_attributes">
-						<parameters>
-							<parameter name="model_loading">conservative</parameter>
-						</parameters>
-					</parameter>
-					<parameter name="load_models">%core.lib_dir%/doctrine/models</parameter>
-				</parameters>
+				<ae:parameters>
+					<ae:parameter name="dsn">mysql://redracer:@localhost/redracer</ae:parameter>
+					<ae:parameter name="attributes">
+						<ae:parameters>
+							<ae:parameter name="AUTOLOAD_TABLE_CLASSES">true</ae:parameter>
+							<ae:parameter name="VALIDATE">LENGTHS</ae:parameter>
+							<ae:parameter name="AUTO_ACCESSOR_OVERRIDE">true</ae:parameter>
+						</ae:parameters>
+					</ae:parameter>
+					<ae:parameter name="manager_attributes">
+						<ae:parameters>
+							<ae:parameter name="model_loading">conservative</ae:parameter>
+						</ae:parameters>
+					</ae:parameter>
+					<ae:parameter name="load_models">%core.lib_dir%/doctrine</ae:parameter>
+				</ae:parameters>
 			</database>
 
 		</databases>
