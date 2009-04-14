@@ -177,7 +177,7 @@ Users:
     id: { type: integer(4), primary: true, autoincrement: true }
     username: { type: string(50), notnull: true }
     email: { type: string(100), notnull: true }
-    salt: { type: string(32), fixed: true, notnull: true }
+    salt: { type: string(40), fixed: true, notnull: true }
     password: { type: string(128), fixed: true, notnull: true }
     role: { type: string(30), notnull: true }
     realname: { type: string(120) }

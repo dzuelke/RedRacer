@@ -19,6 +19,9 @@
 					<route name=".delete" pattern="^/delete$" action=".Delete" />
 				</route>
 			</route>
+			
+			<route name="login" pattern="^/login" module="%actions.login_module%" action="%actions.login_action%" />
+			<route name="logout" pattern="^/logout" module="Default" action="Logout" />
 		</routes>
 	</ae:configuration>
 </ae:configurations>

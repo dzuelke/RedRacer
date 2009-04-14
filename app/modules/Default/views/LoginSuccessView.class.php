@@ -4,9 +4,8 @@ class Default_LoginSuccessView extends RedracerDefaultBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
-		$this->setupHtml($rd);
-
-		$this->setAttribute('_title', 'Login');
+		// for now just forward to the default index page
+		return $this->createForwardContainer('Default','Index');
 	}
 }
 

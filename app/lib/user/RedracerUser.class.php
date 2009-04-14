@@ -21,23 +21,35 @@
  * @version    $Id$
 */
 class RedracerUser extends AgaviRbacSecurityUser {
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @throws
+	 * 
+	 * @param $username
+	 * @param $password
+	 * @param $isPasswordHashed
+	 * @return void
+	 */
 	public function login($username, $password, $isPasswordHashed = false)
 	{
-		$user = Doctrine::getTable('Users')->findOneBy('username', $username);
+		$user = Doctrine::getTable('Users')->findOneByUsername($username);
 		
 		if($user === false) {
 			throw new AgaviSecurityException('username');
 		}
-echo '<pre>', var_dump($user), '</pre>'; exit();
+		
 		$password = $this->computeHash($password, $user->salt);
 
-		if($password != $user->getPassword()) {
+		if($password != $user->password) {
 			throw new AgaviSecurityException('password');
 		}
 
 		$this->setAuthenticated(true);
 		$this->clearCredentials();
-		$this->grantRole($user->getRole());
+		$this->grantRole($user->role);
 	}
 	
 	/**

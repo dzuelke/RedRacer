@@ -8,6 +8,47 @@ class RedracerBaseView extends AgaviView
 	const SLOT_LAYOUT_NAME = 'slot';
 	
 	/**
+	 * @var        AgaviRouting
+	 */
+	protected $ro;
+
+	/**
+	 * @var        AgaviRequest
+	 */
+	protected $rq;
+
+	/**
+	 * @var        AgaviTranslationManager
+	 */
+	protected $tm;
+
+	/**
+	 * @var        AgaviUser
+	 */
+	protected $us;
+	
+	/**
+	 * @var        AgaviFlashMessage
+	 */
+	protected $flash;
+
+	/**
+	 * (non-PHPdoc)
+	 * @see libs/agavi/view/AgaviView#initialize()
+	 */
+	public function initialize(AgaviExecutionContainer $container)
+	{
+		parent::initialize($container);
+
+		$this->ro = $this->getContext()->getRouting();
+		$this->rq = $this->getContext()->getRequest();
+		$this->tm = $this->getContext()->getTranslationManager();
+		$this->us = $this->getContext()->getUser();
+		$this->flash = new AgaviFlashMessage();
+	}
+	
+	
+	/**
 	 * Handles output types that are not handled elsewhere in the view. The
 	 * default behavior is to simply throw an exception.
 	 *

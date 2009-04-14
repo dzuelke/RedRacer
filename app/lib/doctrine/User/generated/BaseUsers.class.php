@@ -30,7 +30,7 @@ abstract class BaseUsers extends Doctrine_Record
         $this->hasColumn('id', 'integer', 4, array('type' => 'integer', 'primary' => true, 'autoincrement' => true, 'length' => '4'));
         $this->hasColumn('username', 'string', 50, array('type' => 'string', 'notnull' => true, 'length' => '50'));
         $this->hasColumn('email', 'string', 100, array('type' => 'string', 'notnull' => true, 'length' => '100'));
-        $this->hasColumn('salt', 'string', 32, array('type' => 'string', 'fixed' => 1, 'notnull' => true, 'length' => '32'));
+        $this->hasColumn('salt', 'string', 40, array('type' => 'string', 'fixed' => 1, 'notnull' => true, 'length' => '40'));
         $this->hasColumn('password', 'string', 128, array('type' => 'string', 'fixed' => 1, 'notnull' => true, 'length' => '128'));
         $this->hasColumn('role', 'string', 30, array('type' => 'string', 'notnull' => true, 'length' => '30'));
         $this->hasColumn('realname', 'string', 120, array('type' => 'string', 'length' => '120'));
