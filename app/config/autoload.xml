@@ -15,7 +15,7 @@
 		<autoload name="FirePHP">%core.app_dir%/../libs/adt/vendor/FirePHPCore/FirePHP.class.php</autoload>
 		
 		<!-- Misc -->
-		<autoload name="AgaviFlashMessge">%core.lib_dir%/misc/AgaviFlashMassage.class.php</autoload>
+		<autoload name="AgaviFlashMessage">%core.lib_dir%/misc/AgaviFlashMassage.class.php</autoload>
 		
 		<autoload name="RedracerBaseAction">%core.lib_dir%/action/RedracerBaseAction.class.php</autoload>
 		<autoload name="RedracerBaseModel">%core.lib_dir%/model/RedracerBaseModel.class.php</autoload>
