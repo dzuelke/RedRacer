@@ -1,6 +1,6 @@
 <?php
 
-class Default_LoginInputView extends RedracerDefaultBaseView
+class User_LoginInputView extends RedracerUserBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

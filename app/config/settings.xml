@@ -30,8 +30,13 @@
 			</system_action>
 
 			<system_action name="login">
-				<module>Default</module>
+				<module>User</module>
 				<action>Login</action>
+			</system_action>
+			
+			<system_action name="logout">
+				<module>User</module>
+				<action>Logout</action>
 			</system_action>
 
 		</system_actions>
@@ -43,7 +48,7 @@
 			<setting name="debug">false</setting>
 
 			<setting name="use_database">true</setting>
-			<setting name="use_logging">false</setting>
+			<setting name="use_logging">true</setting>
 			<setting name="use_security">true</setting>
 			<setting name="use_translation">false</setting>
 		</settings>

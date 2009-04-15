@@ -61,5 +61,24 @@
 		</layouts>
 
 	</ae:configuration>
+	
+	<ae:configuration environment="development.*">
+		<loggers default="debug">
+			<!-- logs only DEBUG messages -->
+			<logger name="debug" class="AgaviLogger" level="AgaviLogger::DEBUG">
+				<appenders>
+					<appender>AdtRequestLogAppender</appender>
+				</appenders>
+			</logger>
+		</loggers>
+ 
+		<appenders>
+			<appender name="AdtRequestLogAppender" class="AdtRequestLogAppender" layout="PassthruLayout" />
+		</appenders>
+ 
+		<layouts>
+			<layout name="PassthruLayout" class="AgaviPassthruLoggerLayout" />
+		</layouts>
+	</ae:configuration>
 
 </ae:configurations>

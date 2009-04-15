@@ -1,12 +1,7 @@
 <?php
 
-class Default_LogoutAction extends RedracerDefaultBaseAction
+class User_UpdateInformationAction extends RedracerUserBaseAction
 {
-	public function execute(AgaviRequestDataHolder $rd) 
-	{
-		$this->context->getUser()->logout();
-		return 'Success';
-	}
 	/**
 	 * Returns the default view if the action does not serve the request
 	 * method used.

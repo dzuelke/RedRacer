@@ -1,6 +1,6 @@
 <?php
 
-class Default_LoginErrorView extends RedracerDefaultBaseView
+class User_LoginErrorView extends RedracerUserBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

@@ -21,7 +21,7 @@
 			</route>
 			
 			<route name="login" pattern="^/login" module="%actions.login_module%" action="%actions.login_action%" />
-			<route name="logout" pattern="^/logout" module="Default" action="Logout" />
+			<route name="logout" pattern="^/logout" module="%actions.logout_module%" action="%actions.logout_action%" />
 		</routes>
 	</ae:configuration>
 </ae:configurations>

@@ -1,6 +1,6 @@
 <?php
 
-class Default_LogoutSuccessView extends RedracerDefaultBaseView
+class User_LogoutSuccessView extends RedracerUserBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

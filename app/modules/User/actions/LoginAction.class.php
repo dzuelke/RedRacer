@@ -1,6 +1,6 @@
 <?php
 
-class Default_LoginAction extends RedracerDefaultBaseAction
+class User_LoginAction extends RedracerUserBaseAction
 {
 	public function executeRead(AgaviRequestDataHolder $rd)
 	{
