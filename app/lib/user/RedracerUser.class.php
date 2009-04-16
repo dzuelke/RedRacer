@@ -8,9 +8,9 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * 
+ *
  * (Description here)
- * 
+ *
  * @copyright  (c) the authors
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
@@ -19,15 +19,42 @@
  * @subpackage User
  * @since      1.0
  * @version    $Id$
-*/
+ */
 class RedracerUser extends AgaviRbacSecurityUser {
-	
+
+
 	/**
-	 * 
-	 * 
-	 * 
+	 * (non-PHPdoc)
+	 * @see src/user/AgaviUser#startup()
+	 */
+	public function startup() {
+		parent::startup();
+
+		// Fetch the Request Data
+		$reqData = $this->getContext()->getRequest()->getRequestData();
+
+		// Only try to log the user in, if he hasn't been logged in and has
+		// an autologin cookie
+		if(!$this->isAuthenticated() && $reqData->hasCookie('autologon')) {
+			try {
+				// shorten it a bit
+				$login = $reqData->getCookie('autologon');
+
+				// we try to log the user in...
+				$this->login($login['username'], $login['password'], true);
+			} catch (AgaviSecurityException $e) {
+				// ... if it fails we kill the cookie!
+				$this->killAutologonCookie();
+			}
+		}
+	}
+
+	/**
+	 *
+	 *
+	 *
 	 * @throws
-	 * 
+	 *
 	 * @param $username
 	 * @param $password
 	 * @param $isPasswordHashed
@@ -35,13 +62,16 @@ class RedracerUser extends AgaviRbacSecurityUser {
 	 */
 	public function login($username, $password, $isPasswordHashed = false)
 	{
-		$user = Doctrine::getTable('Users')->findOneByUsername($username);
-		
+		$user = $this->getContext()->getModel('User')->findOneByUsername($username);
+
 		if($user === false) {
 			throw new AgaviSecurityException('username');
 		}
-		
-		$password = $this->computeHash($password, $user->salt);
+
+		// Hash the Password. No need for plaintext.
+		if (!$isPasswordHashed) {
+			$password = $this->computeHash($password, $user->salt);
+		}
 
 		if($password != $user->password) {
 			throw new AgaviSecurityException('password');
@@ -50,20 +80,23 @@ class RedracerUser extends AgaviRbacSecurityUser {
 		$this->setAuthenticated(true);
 		$this->clearCredentials();
 		$this->grantRole($user->role);
+		
+		//clear up
+		unset($user, $password);
 	}
-	
+
 	/**
 	 * Computes a random salt
-	 * 
+	 *
 	 * @return		string A random Salt
 	 */
 	public function computeSalt() {
 		return sha1(uniqid(rand(), true));
 	}
-	
+
 	/**
 	 * Computes the hash of a password with a given salt
-	 * 
+	 *
 	 * @param		string the cleartext password
 	 * @param		string the salt
 	 * @return		string the computed salted hash of the password

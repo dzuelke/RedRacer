@@ -241,3 +241,64 @@ a:hover
 {
 	clear: both;
 }
+
+/*
+	FormPopulationFilter Errors
+*/
+input.error,textarea.error {
+	background-color: #FFE0E0;
+}
+
+label.error {
+	color: #D00;
+}
+
+p.error {
+	padding: 0.5em;
+	border: 2px solid #D66;
+	background-color: #FFF0F0;
+	color: #D00;
+}
+
+/*
+	Flash Messages
+*/
+#flash {
+	background-position: 4px center;
+	background-repeat: no-repeat;
+	margin: 5px 0 5px 0;
+	min-height: 26px;
+	padding: 10px 10px 10px 45px;
+	vertical-align: middle;
+	display: table;
+	width: 85%;
+}
+
+#flash.message {
+	background-color: #F0FFF1;
+	background-image: url("/images/flash/check.png");
+	border: 2px solid #66DD6B;
+	color: #0CDD00;
+}
+
+#flash.info {
+	background-color: #F0F7FF;
+	background-image: url("/images/flash/info.png");
+	border: 2px solid #6691DD;
+	color: #0050DD:
+}
+
+
+#flash.debug, #flash.notice {
+	background-color: ##FFF9EF;
+	background-image: url("/images/flash/alert.png");
+	border: 2px solid #DD9B66;
+	color: #DD8800;
+}
+
+#flash.error {
+	background-color: #FFF0F0;
+	background-image: url("/images/flash/error.png");
+	border: 2px solid #D66;	
+	color: #D00;
+}

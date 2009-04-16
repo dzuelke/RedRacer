@@ -27,10 +27,6 @@ class RedracerBaseView extends AgaviView
 	 */
 	protected $us;
 	
-	/**
-	 * @var        AgaviFlashMessage
-	 */
-	protected $flash;
 
 	/**
 	 * (non-PHPdoc)
@@ -44,7 +40,6 @@ class RedracerBaseView extends AgaviView
 		$this->rq = $this->getContext()->getRequest();
 		$this->tm = $this->getContext()->getTranslationManager();
 		$this->us = $this->getContext()->getUser();
-		$this->flash = new AgaviFlashMessage($this->getContext());
 	}
 	
 	

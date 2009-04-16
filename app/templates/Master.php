@@ -39,6 +39,7 @@
 		</div>
 		<div id="primary">
 			<?php if(isset($t['_title'])) echo '<h2>' . htmlspecialchars($t['_title']) . '</h2>'; ?>
+			<?php echo $slots['flash']; ?>
 			<?php echo $inner; ?>
 		</div>
 		<div class="clear"></div>
