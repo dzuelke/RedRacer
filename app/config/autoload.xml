@@ -7,9 +7,6 @@
 		<!-- User -->
 		<autoload name="RedracerUser">%core.lib_dir%/user/RedracerUser.class.php</autoload>
 		
-		<!-- Misc -->
-		<autoload name="AgaviFlashMessage">%core.lib_dir%/misc/AgaviFlashMessage.class.php</autoload>
-		
 		<autoload name="RedracerBaseAction">%core.lib_dir%/action/RedracerBaseAction.class.php</autoload>
 		<autoload name="RedracerBaseModel">%core.lib_dir%/model/RedracerBaseModel.class.php</autoload>
 		<autoload name="RedracerBaseView">%core.lib_dir%/view/RedracerBaseView.class.php</autoload>
