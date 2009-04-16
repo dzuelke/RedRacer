@@ -55,7 +55,7 @@ class FlashMessageModel extends RedracerBaseModel implements AgaviISingletonMode
 	 * (non-PHPdoc)
 	 * @see libs/agavi/model/AgaviModel#initialize()
 	 */
-	public function initialize(AgaviContext $context, Array $parameters)
+	public function initialize(AgaviContext $context, array $parameters = array())
 	{
 		parent::initialize($context, $parameters);
 
