@@ -3,16 +3,18 @@
 class UserModel extends RedracerBaseModel
 {
 
-	/**
-	 * Looks up a user from the Database by his username
-	 * 
-	 * @param      String $username
-	 * @return     Users
-	 */
-	public function findOneByUsername($username)
+	private $userinfo;
+	
+	public function initialize(AgaviContext $context, array $parameters = array())
 	{
-		return Doctrine::getTable('Users')->findOneByUsername($username);
+		parent::initialize($context, $parameters);
+		
+		if (!is_array($parameters['userinfo'])) {
+			// if no userinfo is providet
+			throw new RedracerUserModelException('No useringo was given.');
+		}
 	}
 }
 
+class RedracerUserModelException extends AgaviException {}
 ?>

@@ -1,0 +1,22 @@
+Users:
+  User_1:
+    username: admin
+    email: admin@redracer.tld
+    salt: 248df49dfede969fedfc1bf401e0e1d880270768
+    password: ed1c69d1e81ab7265d066583ef92b5ea65c6d83226daa7818307dee2fe42b3f7a5a28fb019de070fc336f6da43289a68b3984d5a133397e1a9424213bae319f3
+    role: Administrator
+    realname: Admin Redracer
+  User_2:
+    username: dev
+    email: dev@redracer.tld
+    salt: 68ba0f4c6da243e6a94e303693a867b9d59b831b
+    password: 6651801da94440a2a2893745d601ac429bc2d122715fa9441503a61fcfda503e8424d62bd9d158bd2a9ffa0b6adf1447d2be5b04b6626ca7f6338d253c8ca2d2
+    role: Developer
+    realname: Admin Redracer
+  User_3:
+    username: member
+    email: member@redracer.tld
+    salt: f06678742d4d959a1ac7f264f21910f596fd8e00
+    password: 636daab5233b75e5af2dd2bdf54f75191ecf03eff43ed1c426f9a50a7c4d4303610578bc4e901c1b7aaf4f988ffd63f1344a436bd07bb0a81c088baf282e6aad
+    role: Member
+    realname: Admin Redracer

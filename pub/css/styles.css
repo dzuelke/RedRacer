@@ -302,3 +302,48 @@ p.error {
 	border: 2px solid #D66;	
 	color: #D00;
 }
+
+/* 
+	Users - Login Form
+*/
+#login {
+	margin: 0 auto;
+	width: 200px;
+}
+
+#login p {
+	font-size: x-small;
+	margin: 0;
+	padding-top: 0.5em;
+}
+
+#login LABEL {
+	display: block;
+}
+
+#login INPUT {
+	border: 1px solid #CCC;
+	color: #999999;
+	margin-bottom: 0.5em;
+	padding: 2px 5px;
+	width: 188px;
+}
+
+#login INPUT[type=submit] {
+	border-color: #FFFFFF #CCCCCC #CCCCCC #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	width: 60px;
+	float: right;
+	color: #555;
+}
+
+#login legend {
+	display: none;
+}
+
+#login fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+}

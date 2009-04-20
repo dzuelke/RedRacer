@@ -43,26 +43,27 @@ class RedracerUser extends AgaviRbacSecurityUser {
 				// we try to log the user in...
 				$this->login($login['username'], $login['password'], true);
 			} catch (AgaviSecurityException $e) {
-				// ... if it fails we kill the cookie!
-				$this->killAutologonCookie();
+				// ... if it fails we logout the user!
+				$this->logout();
 			}
 		}
 	}
 
 	/**
+	 * User login
+	 * 
+	 * Looks up userinfo from database and trys to authenticat the user.
 	 *
-	 *
-	 *
-	 * @throws
-	 *
-	 * @param $username
-	 * @param $password
-	 * @param $isPasswordHashed
-	 * @return void
+	 * @param      String the username
+	 * @param      String the users password, either clear text or hashed
+	 * @param      bool wether the password is already hashed or not
+	 * 
+	 * @throws     AgaviSecurityException
+	 * @return     void
 	 */
 	public function login($username, $password, $isPasswordHashed = false)
 	{
-		$user = $this->getContext()->getModel('User')->findOneByUsername($username);
+		$user = $this->getContext()->getModel('UserManager')->findOneByUsername($username);
 
 		if($user === false) {
 			throw new AgaviSecurityException('username');
@@ -79,7 +80,10 @@ class RedracerUser extends AgaviRbacSecurityUser {
 
 		$this->setAuthenticated(true);
 		$this->clearCredentials();
+		$this->revokeAllRoles();
 		$this->grantRole($user->role);
+		
+		// Set the 
 		
 		//clear up
 		unset($user, $password);
@@ -110,8 +114,20 @@ class RedracerUser extends AgaviRbacSecurityUser {
 	 */
 	public function logout()
 	{
+		$this->killAutologonCookie();
 		$this->clearCredentials();
 		$this->setAuthenticated(false);
+	}
+	
+	/**
+	 * Kill the autologon Cookie
+	 * 
+	 * @return void
+	 */
+	private function killAutologonCookie() {
+		$response = $this->getContext()->getController()->getGlobalResponse();
+		$response->setCookie('autologon[username]', false);
+		$response->setCookie('autologon[password]', false);
 	}
 }
 
