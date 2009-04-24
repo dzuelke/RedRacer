@@ -90,14 +90,14 @@ class FlashMessageModel extends RedracerBaseModel implements AgaviISingletonMode
 	/**
 	 * Returns the Flash Messages Array
 	 *
-	 * @param		$type		The type of message we want to read, if null returns all messages
-	 * @return 		mixed 		<ul>
+	 * @param      $type		The type of message we want to read, if null returns all messages
+	 * @return     mixed 		<ul>
 	 * 								<li>null if no flash messages exist
 	 * 								<li>an array of flash messages for given $type
 	 *								<li>an array with (type => messages) if $type null
 	 *							</ul>
 	 *
-	 * @author		Benjamin Boerngen-Schmidt
+	 * @author     Benjamin B√∂rngen-Schmidt <benjamin@boerngen-schmidt.de>
 	 */
 	public function read($type = null)
 	{
@@ -110,9 +110,7 @@ class FlashMessageModel extends RedracerBaseModel implements AgaviISingletonMode
 				$retval = $this->us->removeAttribute($type, $this->ns);
 				break;
 			default:
-				// Since removeAttributeNamespace just clears the namespace we have to do a workaround
-				$retval = $this->us->getAttributeNamespace($this->ns);
-				$this->us->removeAttributeNamespace($this->ns);
+				$retval = $this->us->removeAttributeNamespace($this->ns);
 		}
 		return $retval;
 	}
