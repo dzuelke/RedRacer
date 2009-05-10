@@ -22,7 +22,11 @@ $config = array(
 	'yaml_schema_path' =>  AgaviConfig::get('doctrine.schema_dir', $dir . '/schema/schema.yml'),
 	'generate_models_options' => array(
 //		'base_class_name' => 'RedracerDoctrineRecord',
-		'suffix' => '.class.php'
+		'suffix' => '.class.php',
+		'phpDocPackage' => 'Redracer',
+		'phpDocSubpackage' => 'Database',
+		'phpDocName' => 'Benjamin Börngen-Schmidt',
+		'phpDocEmail' => 'benjamin@boerngen-schmidt.de',
 	)
 );
 

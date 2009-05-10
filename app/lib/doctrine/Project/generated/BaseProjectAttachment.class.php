@@ -15,9 +15,9 @@
  * @property string $mime
  * @property Projects $Projects
  * 
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
+ * @package    Redracer
+ * @subpackage Database
+ * @author     Benjamin Börngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @version    SVN: $Id: Builder.php 5441 2009-01-30 22:58:43Z jwage $
  */
 abstract class BaseProjectAttachment extends Doctrine_Record
