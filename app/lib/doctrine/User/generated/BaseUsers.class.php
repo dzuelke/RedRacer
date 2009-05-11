@@ -36,6 +36,9 @@ abstract class BaseUsers extends Doctrine_Record
         $this->hasColumn('realname', 'string', 120, array('type' => 'string', 'length' => '120'));
 
 
+        $this->index('username', array('fields' => array(0 => 'username'), 'type' => 'unique'));
+        $this->index('email', array('fields' => array(0 => 'email'), 'type' => 'unique'));
+
         $this->setAttribute(Doctrine::ATTR_EXPORT, Doctrine::EXPORT_ALL);
 
         $this->option('collate', 'utf8_unicode_ci');

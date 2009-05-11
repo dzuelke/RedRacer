@@ -22,6 +22,7 @@
 			
 			<route name="login" pattern="^/login" module="%actions.login_module%" action="%actions.login_action%" />
 			<route name="logout" pattern="^/logout" module="%actions.logout_module%" action="%actions.logout_action%" />
+			<route name="register" pattern="^/register" module="User" action="Register" />
 		</routes>
 	</ae:configuration>
 </ae:configurations>

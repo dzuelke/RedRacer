@@ -304,24 +304,24 @@ p.error {
 }
 
 /* 
-	Users - Login Form
+	Users - Register Form
 */
-#login {
+#register {
 	margin: 0 auto;
 	width: 200px;
 }
 
-#login p {
+#register p {
 	font-size: x-small;
 	margin: 0;
 	padding-top: 0.5em;
 }
 
-#login LABEL {
+#register LABEL {
 	display: block;
 }
 
-#login INPUT {
+#register INPUT {
 	border: 1px solid #CCC;
 	color: #999999;
 	margin-bottom: 0.5em;
@@ -329,7 +329,7 @@ p.error {
 	width: 188px;
 }
 
-#login INPUT[type=submit] {
+#register INPUT[type=submit] {
 	border-color: #FFFFFF #CCCCCC #CCCCCC #FFFFFF;
 	border-style: solid;
 	border-width: 1px;
@@ -338,11 +338,56 @@ p.error {
 	color: #555;
 }
 
-#login legend {
+#register legend {
 	display: none;
 }
 
-#login fieldset {
+/* 
+	Users - Login Form
+*/
+#register {
+	margin: 0 auto;
+	width: 200px;
+}
+
+#register p {
+	font-size: x-small;
+	margin: 0;
+	padding-top: 0.5em;
+}
+
+#register LABEL {
+	display: block;
+}
+
+#register INPUT {
+	border: 1px solid #CCC;
+	color: #999999;
+	margin-bottom: 0.5em;
+	padding: 2px 5px;
+	width: 188px;
+}
+
+#register INPUT[type=submit] {
+	border-color: #FFFFFF #CCCCCC #CCCCCC #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	width: 60px;
+	float: right;
+	color: #555;
+}
+
+#register legend {
+	display: none;
+}
+
+#register fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+#register fieldset {
 	border: none;
 	margin: 0;
 	padding: 0;

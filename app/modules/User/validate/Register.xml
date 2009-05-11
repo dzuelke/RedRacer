@@ -1,13 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/User/config/validators.xml"
->
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" parent="%core.module_dir%/User/config/validators.xml">
 	<ae:configuration>
-		
-		<validators>
+
+		<validators method="write">
+
+			<validator class="and">
+				<validator class="string" provides="password_given">
+					<argument>password</argument>
+					<errors>
+						<error for="min">Password should have at least 7 characters</error>
+					</errors>
+					<ae:parameter name="min">7</ae:parameter>
+				</validator>
+
+				<validator class="equals" depends="password_given">
+					<arguments>
+						<argument>password</argument>
+						<argument>password2</argument>
+					</arguments>
+					<errors>
+						<error>Passwords do not match.</error>
+					</errors>
+				</validator>
+			</validator>
+
+			<validator class="string" provides="username_given">
+				<ae:parameters>
+					<ae:parameter name="min">5</ae:parameter>
+					<ae:parameter name="max">50</ae:parameter>
+					<ae:parameter name="trim">true</ae:parameter>
+				</ae:parameters>
+				<argument>username</argument>
+				<errors>
+					<error for="min">Username should have at least 5 characters</error>
+					<error for="max">Username cannot be longer than 50 characters</error>
+				</errors>
+			</validator>
+			
+			<validator class="email" provides="email_given">
+				<argument>email</argument>
+				<error>No valid Email address given.</error>
+			</validator>
+			
+			<validator class="RedracerUserUniqueValidator" depends="username_given email_given">
+				<arguments>
+					<argument name="username">username</argument>
+					<argument name="email">email</argument>
+				</arguments>
+				<errors>
+					<error for="username">Username is already taken.</error>
+					<error for="email">Email is already used.</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" required="false">
+				<ae:parameters>
+					<ae:parameter name="max">120</ae:parameter>
+				</ae:parameters>
+				<argument>realname</argument>
+				<errors>
+					<error for="max">Woohoo your Realname has more than 120 Characters!</error>
+				</errors>
+			</validator>
+
 		</validators>
-		
+
 	</ae:configuration>
 </ae:configurations>

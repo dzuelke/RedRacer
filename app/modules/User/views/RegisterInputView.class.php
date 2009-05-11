@@ -1,6 +1,6 @@
 <?php
 
-class User_RegisterInuptView extends RedracerUserBaseView
+class User_RegisterInputView extends RedracerUserBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

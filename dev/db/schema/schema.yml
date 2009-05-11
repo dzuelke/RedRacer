@@ -186,3 +186,10 @@ Users:
     ProjectComments: { local: id, foreign: user, type: many }
     ProjectMaintainer: { local: id, foreign: maintainer, type: many }
     ProjectRating: { local: id, foreign: user, type: many }
+  indexes:
+    username:
+      fields: [username]
+      type: unique
+    email:
+      fields: [email]
+      type: unique
