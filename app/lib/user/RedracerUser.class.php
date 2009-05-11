@@ -8,10 +8,8 @@
 // +---------------------------------------------------------------------------+
 
 /**
- *
- * (Description here)
- *
- * @copyright  (c) the authors
+ * Redracer User Class
+ * 
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
  * @license    GPLv3
@@ -21,7 +19,6 @@
  * @version    $Id$
  */
 class RedracerUser extends AgaviRbacSecurityUser {
-
 
 	/**
 	 * (non-PHPdoc)
@@ -63,6 +60,9 @@ class RedracerUser extends AgaviRbacSecurityUser {
 	 */
 	public function login($username, $password, $isPasswordHashed = false)
 	{
+		/**
+		 * @var        UserModel
+		 */
 		$user = $this->getContext()->getModel('UserManager')->findOneByUsername($username);
 
 		if($user === false) {
@@ -83,7 +83,8 @@ class RedracerUser extends AgaviRbacSecurityUser {
 		$this->revokeAllRoles();
 		$this->grantRole($user->role);
 		
-		// Set the 
+		// Set the userinfo
+		$this->setAttribute('userinfo', $user);
 		
 		//clear up
 		unset($user, $password);
@@ -105,12 +106,14 @@ class RedracerUser extends AgaviRbacSecurityUser {
 	 * @param		string the salt
 	 * @return		string the computed salted hash of the password
 	 */
-	private function computeHash($password, $salt) {
+	public function computeHash($password, $salt) {
 		return hash_hmac('sha512', $password, $salt);
 	}
 
 	/**
 	 * Performs the logout procedure
+	 * 
+	 * @return     void
 	 */
 	public function logout()
 	{
