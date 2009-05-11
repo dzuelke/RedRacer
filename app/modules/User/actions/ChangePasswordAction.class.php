@@ -2,6 +2,12 @@
 
 class User_ChangePasswordAction extends RedracerUserBaseAction
 {
+	
+	public function executeWrite(AgaviRequestDataHolder $rd)
+	{
+		
+	}
+	
 	/**
 	 * Returns the default view if the action does not serve the request
 	 * method used.
