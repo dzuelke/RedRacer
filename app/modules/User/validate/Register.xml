@@ -25,7 +25,8 @@
 				</validator>
 			</validator>
 
-			<validator class="string" provides="username_given">
+			<validator class="and" provides="username_given">
+			<validator class="string" provides="valid_username">
 				<ae:parameters>
 					<ae:parameter name="min">5</ae:parameter>
 					<ae:parameter name="max">50</ae:parameter>
@@ -38,20 +39,22 @@
 				</errors>
 			</validator>
 			
-			<validator class="email" provides="email_given">
+			<validator class="RedracerUserUniqueValidator" depends="valid_username">
+				<argument>username</argument>
+				<error>Username is already taken.</error>
+			</validator>
+			</validator>
+			
+			<validator class="and" provides="email_given">
+			<validator class="email" provides="email_valid">
 				<argument>email</argument>
 				<error>No valid Email address given.</error>
 			</validator>
 			
-			<validator class="RedracerUserUniqueValidator" depends="username_given email_given">
-				<arguments>
-					<argument name="username">username</argument>
-					<argument name="email">email</argument>
-				</arguments>
-				<errors>
-					<error for="username">Username is already taken.</error>
-					<error for="email">Email is already used.</error>
-				</errors>
+			<validator class="RedracerUserUniqueValidator" depends="email_valid">
+				<argument>email</argument>
+				<error>Email is already used.</error>
+			</validator>
 			</validator>
 			
 			<validator class="string" required="false">

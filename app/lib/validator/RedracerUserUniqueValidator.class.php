@@ -22,30 +22,20 @@
 class RedracerUserUniqueValidator extends AgaviValidator {
 	public function validate()
 	{
-		$valid = true;
-		
-		$arguments = $this->getArguments();
-		if (!isset($arguments['username']) && !isset($arguments['email'])) {
-			throw new AgaviException('Expecting arguments "username" and "email"');
-		}
-		$username = $this->getData($arguments['username']);
-		$email = $this->getData($arguments['email']);
+		$argument = $this->getArgument();
+		$data = $this->getData($argument);
 		
 		/**
 		 * @var UserManagerModel
 		 */
 		$um = $this->getContext()->getModel('UserManager');
 		
-		if(!$um->isUnique('username', $username)) {
-			$this->throwError('username', 'username');
-			$valid = false;
-		}
-		if(!$um->isUnique('email', $email)) {
-			$this->throwError('email', 'email');
-			$valid = false;
+		if($um->isUnique($argument, $data)) {
+			return true;
 		}
 		
-		return $valid;
+		$this->throwError();
+		return false;
 	}
 }
 ?>
