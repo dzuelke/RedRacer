@@ -9,7 +9,7 @@ class User_LoginSuccessView extends RedracerUserBaseView
 		 */
 		$flash = $this->getContext()->getModel('FlashMessage');
 		$flash->write('You have successfully logged in.', FlashMessageModel::MESSAGE);
-var_dump($this->us->getAttributes());
+
 		// set the autologon cookie if requested
 		if($rd->hasParameter('remember')) {
 			$res = $this->getResponse();

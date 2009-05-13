@@ -115,6 +115,7 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	 */
 	public function isUnique($field, $value)
 	{
+		return true;
 		$field = 'findBy'.ucfirst($field);
 		$table = Doctrine::getTable('Users');
 		return ($table->$field($value)->count() == 0);
@@ -132,6 +133,11 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	{
 		$user = new Users();
 		$user->fromArray($u->toArray());
+		$table = Doctrine::getTable('Users');
+		$table->validateUniques($user);
+		var_dump($user->getErrorStackAsString());
+		die();
+		
 		if ($user->isValid()) {
 			$user->save();
 		} else {

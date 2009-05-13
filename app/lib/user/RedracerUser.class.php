@@ -63,7 +63,7 @@ class RedracerUser extends AgaviRbacSecurityUser {
 		/**
 		 * @var        UserModel
 		 */
-		$user = $this->getContext()->getModel('UserManager')->findOneByUsername($username);
+		$user = $this->getContext()->getModel('UserManager')->lookupUserByUsername($username);
 
 		if($user === false) {
 			throw new AgaviSecurityException('username');
@@ -85,9 +85,6 @@ class RedracerUser extends AgaviRbacSecurityUser {
 		
 		// Set the userinfo
 		$this->setAttribute('userinfo', $user);
-		
-		//clear up
-		unset($user, $password);
 	}
 
 	/**
