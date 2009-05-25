@@ -14,7 +14,7 @@
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
  * @license    GPLv3
- * @package    Redracer
+ * @package    User
  * @subpackage Validator
  * @since      1.0
  * @version    $Id$

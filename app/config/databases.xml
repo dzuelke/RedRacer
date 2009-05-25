@@ -10,7 +10,7 @@
 					<ae:parameter name="attributes">
 						<ae:parameters>
 							<ae:parameter name="AUTOLOAD_TABLE_CLASSES">true</ae:parameter>
-							<ae:parameter name="VALIDATE">LENGTHS</ae:parameter>
+							<ae:parameter name="VALIDATE">ALL</ae:parameter>
 							<ae:parameter name="AUTO_ACCESSOR_OVERRIDE">true</ae:parameter>
 						</ae:parameters>
 					</ae:parameter>

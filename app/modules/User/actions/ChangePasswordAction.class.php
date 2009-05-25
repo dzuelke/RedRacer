@@ -5,7 +5,26 @@ class User_ChangePasswordAction extends RedracerUserBaseAction
 	
 	public function executeWrite(AgaviRequestDataHolder $rd)
 	{
+		/**
+		 * @var $um UserManagerModel
+		 */
+		$um = $this->getContext()->getModel('UserManager');
 		
+		$usr = $this->getContext()->getUser();
+		$userinfo = $usr->getAttribute('userinfo');
+		
+		/**
+		 * @var UserModel
+		 */
+		$u = $um->lookupUserByid($userinfo['id']);
+		$u->setPassword($rd->getParameter('newpassword'));
+		
+		// Update the User
+		$um->updateUser($u);
+		
+		// Save new userinfo
+		$usr->setAttribute('userinfo', $u->toArray());
+		return 'Success';
 	}
 	
 	/**
@@ -22,7 +41,17 @@ class User_ChangePasswordAction extends RedracerUserBaseAction
 	 */
 	public function getDefaultViewName()
 	{
-		return 'Success';
+		return 'Input';
+	}
+	
+	public function isSecure()
+	{
+		return true;
+	}
+	
+	public function getCredentials()
+	{
+		return 'changepassword';
 	}
 }
 

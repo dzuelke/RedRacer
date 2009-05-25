@@ -8,9 +8,9 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * 
+ *
  * (Description here)
- * 
+ *
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
  * @license    GPLv3
@@ -18,14 +18,14 @@
  * @subpackage User
  * @since      1.0
  * @version    $Id$
-*/
+ */
 
 class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 {
 	/**
-	 * An array with UserModel objects
+	 * An array with Doctrine_Record objects
 	 *
-	 * @var        Array with UserModels
+	 * @var        Array with Doctrine_Redord, using userid as key
 	 */
 	private $users = array();
 
@@ -38,24 +38,27 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	public function lookupUserByUsername($username)
 	{
 		// Query Database for Userinfo
-		$user = Doctrine::getTable('Users')->findOneByUsername($username, Doctrine::HYDRATE_ARRAY);
-		
-		if (!$this->hasUser($user['id'])) {
-			/**
-			 * Fetch a new UserModel
-			 *
-			 * @var       UserModel
-			 */
-			$u = $this->getContext()->getModel('User');
-			$u->fromArray($user);
+		/**
+		* @var Doctrine_Record
+		*/
+		$user = Doctrine::getTable('Users')->findOneByUsername($username, Doctrine::HYDRATE_RECORD);
 
+		if (!$this->hasUser($user->id)) {
 			// save the User if we need him again later
-			$this->users[$user['id']] = $u;
+			$this->users[$user->id] = $user;
 		}
-		
-		return $this->users[$user['id']];
+
+		/**
+		 * Fetch a new UserModel
+		 *
+		 * @var       UserModel
+		 */
+		$u = $this->getContext()->getModel('User');
+		$u->fromArray($user->toArray());
+
+		return $u;
 	}
-	
+
 	/**
 	 * Looks up a user from the Database by his userid
 	 *
@@ -64,27 +67,30 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	 */
 	public function lookupUserById($id)
 	{
+		$u = null;
+
 		if(!$this->hasUser($id)) {
 			// Query Database for Userinformation
-			$user = Doctrine::getTable('Users')->findOneById($id, Doctrine::HYDRATE_ARRAY);
-			/**
-			 * Fetch a new UserModel
-			 *
-			 * @var       UserModel
-			 */
-			$u = $this->getContext()->getModel('User');
-			$u->fromArray($user);
-
+			$user = Doctrine::getTable('Users')->findOneById($id, Doctrine::HYDRATE_RECORD);
 			// save the User if we need him again later
-			$this->users[$user['id']] = $u;
+			$this->users[$user->id] = $user;
+		} else {
+			$user = $this->users[$id];
 		}
-		
-		return $this->users[$id];
+
+		/**
+		 * Fetch a new UserModel
+		 *
+		 * @var       UserModel
+		 */
+		$u = $this->getContext()->getModel('User');
+		$u->fromArray($user->toArray());
+		return $u;
 	}
 
 	/**
 	 * Returns a UserModel for a given Id
-	 * 
+	 *
 	 * Alias for lookupUserById
 	 *
 	 * @param      Integer the users Id
@@ -108,7 +114,7 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 
 	/**
 	 * Checks if a value is unique
-	 * 
+	 *
 	 * @param     string $field the field name
 	 * @param     mixed $value
 	 * @return    bool
@@ -120,30 +126,39 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 		$table = Doctrine::getTable('Users');
 		return ($table->$field($value)->count() == 0);
 	}
-	
+
 	/**
 	 * Creates a new User
-	 * 
+	 *
 	 * Creates a new User in the Database from a UserModel instance
-	 * 
-	 * @param      UserModel 
+	 *
+	 * @param      UserModel
 	 * @return     void
 	 */
 	public function createNewUser(UserModel $u)
 	{
 		$user = new Users();
 		$user->fromArray($u->toArray());
-		$table = Doctrine::getTable('Users');
-		$table->validateUniques($user);
-		var_dump($user->getErrorStackAsString());
-		die();
-		
 		if ($user->isValid()) {
 			$user->save();
 		} else {
-			// TODO not nice 
+			// TODO not nice
 			throw new AgaviException('User could not be save since he was not valid.');
 		}
+	}
+
+	public function updateUser(UserModel $u)
+	{
+		if (!$this->hasUser($u->getId())){
+			$this->lookupUserById($u->getId());
+		}
+
+		/**
+		 * @var Users
+		 */
+		$user = $this->users[$u->getId()];
+		$user->fromArray($u->toArray());
+		$user->save();
 	}
 }
 

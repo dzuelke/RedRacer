@@ -6,5 +6,9 @@
 		<autoload name="RedracerUserBaseModel">%core.module_dir%/User/lib/model/RedracerUserBaseModel.class.php</autoload>
 		<autoload name="RedracerUserBaseView">%core.module_dir%/User/lib/view/RedracerUserBaseView.class.php</autoload>
 		
+		<!-- validators for User module -->
+		<autoload name="RedracerUserUniqueValidator">%core.module_dir%/User/lib/validator/RedracerUserUniqueValidator.class.php</autoload>
+		<autoload name="RedracerOldPasswordValidator">%core.module_dir%/User/lib/validator/RedracerOldPasswordValidator.class.php</autoload>
+		
 	</ae:configuration>
 </ae:configurations>

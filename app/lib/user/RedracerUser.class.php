@@ -84,7 +84,7 @@ class RedracerUser extends AgaviRbacSecurityUser {
 		$this->grantRole($user->role);
 		
 		// Set the userinfo
-		$this->setAttribute('userinfo', $user);
+		$this->setAttribute('userinfo', $user->toArray());
 	}
 
 	/**
