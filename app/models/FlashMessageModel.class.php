@@ -8,16 +8,21 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * Model for Flashmessages.
- * Inspired by Ruby on Rails Flash Messages.
+ * FlashMessageModel, which is inspired by Ruby on Rails Flashmessages
  * 
- * @author Benjamin Boerngen-Schmidt
- *
- */
+ * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
+ * @copyright  Authors
+ * @license    GPLv3
+ * @package    Redracer
+ * @subpackage Default
+ * @since      1.0
+ * @version    $Id$
+*/
 class FlashMessageModel extends RedracerBaseModel implements AgaviISingletonModel
 {
 	/**
 	 * Message Level
+	 * @constant MESSAGE
 	 */
 	CONST MESSAGE = 'message';
 
@@ -33,6 +38,7 @@ class FlashMessageModel extends RedracerBaseModel implements AgaviISingletonMode
 
 	/**
 	 * Info Level
+	 * @
 	 */
 	CONST INFO = 'info';
 

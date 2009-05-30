@@ -8,8 +8,11 @@
 // +---------------------------------------------------------------------------+
 
 /**
- *
- * (Description here)
+ * Manager Model for Users
+ * 
+ * The Model is the only place which interacts with the Database, so if you want to use
+ * RAW SQL or another ORM like Propel as Background, you will just need to exchange this class,
+ * everything else will remain.
  *
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors

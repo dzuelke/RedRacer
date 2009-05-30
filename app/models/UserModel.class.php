@@ -8,8 +8,11 @@
 // +---------------------------------------------------------------------------+
 
 /**
+ * This Model represents a User
  * 
- * (Description here)
+ * The purpose of this models is, to add some more abstraction. One abstraction level is
+ * the ORM, by default Doctrine, but if we would use Doctrine Classes everywhere, there would be
+ * not point of having the UserManagerModel.
  * 
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors

@@ -8,8 +8,7 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * 
- * (Description here)
+ * This action handles a register request for a new user
  * 
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
