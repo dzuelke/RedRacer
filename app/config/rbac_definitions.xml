@@ -7,6 +7,7 @@
 			<role name="Member">
 				<permissions>
 					<permission>changepassword</permission>
+					<permission>user.index</permission>
 				</permissions>
 
 				<roles>
