@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://redracer.org/config/mailing"
+	elementFormDefault="qualified" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:mail="http://redracer.org/config/mailing" 
+	xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0"
+	xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0">
+
+	<xs:import namespace="http://agavi.org/agavi/config/global/envelope/1.0"
+		schemaLocation="../../../../../libs/agavi/config/xsd/_envelope.xsd">
+	</xs:import>
+	<xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
+		schemaLocation="../../../../../libs/agavi/config/xsd/_types.xsd"></xs:import>
+	<xs:complexType name="transports">
+		<xs:sequence>
+			<xs:element name="transport" type="mail:transport"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="default" type="xs:string" use="required"></xs:attribute>
+	</xs:complexType>
+
+	<xs:group name="configuration">
+		<xs:choice>
+			<xs:element name="transports" type="mail:transports"
+				minOccurs="0" maxOccurs="1">
+			</xs:element>
+			<xs:element name="transport" type="mail:transport"></xs:element>
+			<xs:element name="swift" type="mail:swift"></xs:element>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="transport">
+		<xs:sequence>
+			<xs:group ref="envelope_1_0:parameters"></xs:group>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="class" type="types_1_0:identifier"
+			use="required"></xs:attribute>
+	</xs:complexType>
+
+
+	<xs:complexType name="swift">
+		<xs:sequence>
+			<xs:group ref="envelope_1_0:parameters"></xs:group>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

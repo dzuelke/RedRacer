@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://redracer.org/config/mailing">
+	<ae:configuration>
+		<swift>
+			<ae:parameters>
+				<ae:parameter name="swift_dir">%core.lib_dir%/swift</ae:parameter>
+				<ae:parameter name="class_dir">%core.lib_dir%/swift/classes</ae:parameter>
+				<ae:parameter name="map_dir">%core.lib_dir%/swift/dependency_maps</ae:parameter>
+				<ae:parameter name="preferences">
+					<ae:parameters>
+						<ae:parameter name="charset">utf-8</ae:parameter>
+						<ae:parameter name="cache_type">disk</ae:parameter>
+						<ae:parameter name="temp_dir">%core.cache_dir%/swift</ae:parameter>
+				</ae:parameters>
+				</ae:parameter>
+			</ae:parameters>
+		</swift>
+
+		<transports default="localhost">
+			<transport name="localhost" class="Swift_SmtpTransport">
+				<ae:parameters>
+					<ae:parameter name="host">localhost</ae:parameter>
+					<ae:parameter name="port">25</ae:parameter>
+					<ae:parameter name="username">redracer</ae:parameter>
+				</ae:parameters>
+			</transport>
+		</transports>
+	</ae:configuration>
+</ae:configurations>

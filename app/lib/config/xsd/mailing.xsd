@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://agavi.org/agavi/config/global/envelope/1.0"
+	elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://agavi.org/agavi/config/global/envelope/1.0" xmlns:mail="http://redracer.org/config/mailing">
+	<xsd:import namespace="http://redracer.org/config/mailing"
+		schemaLocation="parts/mailing.xsd"></xsd:import>
+	<xsd:redefine schemaLocation="../../../../libs/agavi/config/xsd/_envelope.xsd">
+		<xsd:complexType name="configuration">
+			<xsd:complexContent>
+				<xsd:extension base="configuration">
+					<xsd:group ref="mail:configuration"></xsd:group>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:redefine>
+
+</xsd:schema>
