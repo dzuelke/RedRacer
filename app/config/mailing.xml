@@ -5,9 +5,9 @@
 	<ae:configuration>
 		<swift>
 			<ae:parameters>
-				<ae:parameter name="swift_dir">%core.lib_dir%/swift</ae:parameter>
-				<ae:parameter name="class_dir">%core.lib_dir%/swift/classes</ae:parameter>
-				<ae:parameter name="map_dir">%core.lib_dir%/swift/dependency_maps</ae:parameter>
+				<ae:parameter name="swift_dir">%core.vendor_dir%/swift</ae:parameter>
+				<ae:parameter name="class_dir">%core.vendor_dir%/swift/classes</ae:parameter>
+				<ae:parameter name="map_dir">%core.vendor_dir%/swift/dependency_maps</ae:parameter>
 				<ae:parameter name="preferences">
 					<ae:parameters>
 						<ae:parameter name="charset">utf-8</ae:parameter>

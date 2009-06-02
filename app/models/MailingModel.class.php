@@ -24,10 +24,10 @@ class MailingModel extends RedracerBaseModel implements AgaviISingletonModel
 	
 	private $transports = array();
 	
-	public function initialize(AgaviContext $context, array $parameter = array())
+	public function initialize(AgaviContext $context, array $parameters = array())
 	{
 		parent::initialize($context, $parameters);
-		AgaviConfigCache::load(AgaviConfig::get('core.config_dir') . '/mailing.xml');
+		$swfitConfiguration = include(AgaviConfigCache::checkConfig(AgaviConfig::get('core.config_dir') . '/mailing.xml'));
 	}
 }
 

@@ -19,13 +19,12 @@
 	</xs:complexType>
 
 	<xs:group name="configuration">
-		<xs:choice>
-			<xs:element name="transports" type="mail:transports"
-				minOccurs="0" maxOccurs="1">
+        <xs:all>
+            <xs:element name="swift" type="mail:swift" maxOccurs="1" minOccurs="0"></xs:element>
+            <xs:element name="transports" type="mail:transports" minOccurs="0" maxOccurs="1">
 			</xs:element>
-			<xs:element name="transport" type="mail:transport"></xs:element>
-			<xs:element name="swift" type="mail:swift"></xs:element>
-		</xs:choice>
+			<xs:element name="transport" type="mail:transport" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:all>
 	</xs:group>
 
 	<xs:complexType name="transport">
