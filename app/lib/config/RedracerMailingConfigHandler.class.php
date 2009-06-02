@@ -9,8 +9,8 @@
 
 /**
  * Complies the mailing.xml configfile
- * 
- * 
+ *
+ *
  *
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
@@ -35,35 +35,15 @@ class RedracerMailingConfigHandler extends AgaviXmlConfigHandler
 		$transports = array();
 		$defaultTransport = null;
 		$transports = $this->parseTransports($document, $defaultTransport);
-
-		$data = array();
-		// init swift
-		$data[] = sprintf('define(\'SWIFT_CLASS_DIRECTORY\', %s);', var_export($swift['class_dir'], true));
-		$data[] = sprintf('require_once %s;', var_export($swift['class_dir'].'/Swift.php', true));
-		$data[] = 'Swift::registerAutoload();';
-		$data[] = sprintf('require_once %s;', var_export($swift['map_dir'].'/cache_deps.php', true));
-		$data[] = sprintf('require_once %s;', var_export($swift['map_dir'].'/mime_deps.php', true));
-		$data[] = sprintf('require_once %s;', var_export($swift['map_dir'].'/transport_deps.php', true));
-		$data[] = sprintf('Swift_Preferences::getInstance()->setCharset(%s);', var_export($swift['preferences']['charset'], true));
-		$data[] = sprintf('Swift_Preferences::getInstance()->setTempDir(%s);', var_export($swift['preferences']['temp_dir'], true));
-		$data[] = sprintf('Swift_Preferences::getInstance()->setCacheType(%s);', var_export($swift['preferences']['cache_type'], true));
-
-		foreach($transports as $name => $tp) {
-			// append new data
-			$data[] = sprintf('$transport = %s::newInstance();', $tp['class']);
-			foreach ($tp['parameters'] as $parameter => $value) {
-				$data[] = sprintf('$transport->set%s(%s);', ucfirst($parameter), var_export($value, true));
-			}
-			$data[] = sprintf('$this->transports[%s] = $transport;', var_export($name, true));
-		}
-
 		if(!isset($transports[$defaultTransport])) {
 			$error = 'Configuration file "%s" specifies undefined default transport "%s".';
 			$error = sprintf($error, $document->documentURI, $defaultTransport);
 			throw new AgaviConfigurationException($error);
 		}
 
-		$data[] = sprintf('$this->defaultTransportName = %s;', var_export($defaultTransport, true));
+		$data = array();
+		$config = array_merge($swift, array('defaultTransport' => $defaultTransport, 'transports' => $transports));
+		$data[] = sprintf('return %s;', var_export($config, true));
 
 		return $this->generate($data, $document->documentURI);
 	}
@@ -120,7 +100,7 @@ class RedracerMailingConfigHandler extends AgaviXmlConfigHandler
 				'charset' => 'uft-8',
 				'temp_dir' => AgaviConfig::get('core.cache_dir').'/swift',
 				'cache_type' => 'disk',
-			),
+		),
 		);
 
 		$swift = array();
@@ -131,7 +111,7 @@ class RedracerMailingConfigHandler extends AgaviXmlConfigHandler
 			if(!$configuration->has('swift')) {
 				continue;
 			}
-				
+
 			$swiftElement = $configuration->getChild('swift');
 			$swift = $swiftElement->getAgaviParameters();
 		}
