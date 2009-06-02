@@ -7,7 +7,7 @@ Options -MultiViews -Indexes +FollowSymLinks
 
 <IfModule rewrite_module>
 	RewriteEngine On
-	RewriteBase /
+	RewriteBase %%PUBLIC_BASE%%
 
 	# If the requested URL does not exist (it's likely an agavi route),
 	# pass it as path info to index.php, the Agavi dispatch script.
