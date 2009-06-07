@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/databases/1.0">
 
-	<ae:configuration>
+	<ae:configuration environment="development.ercisco">
 		<databases default="doctrine">
 
 			<database name="doctrine" class="AgaviDoctrineDatabase">
 				<ae:parameters>
 					<ae:parameter name="dsn">mysql://redracer:redracer@localhost/redracer</ae:parameter>
+					<ae:parameter name="attributes">
+						<ae:parameters>
+							<ae:parameter name="AUTOLOAD_TABLE_CLASSES">true</ae:parameter>
+							<ae:parameter name="VALIDATE">ALL</ae:parameter>
+							<ae:parameter name="AUTO_ACCESSOR_OVERRIDE">true</ae:parameter>
+						</ae:parameters>
+					</ae:parameter>
+					<ae:parameter name="manager_attributes">
+						<ae:parameters>
+							<ae:parameter name="model_loading">conservative</ae:parameter>
+						</ae:parameters>
+					</ae:parameter>
+					<ae:parameter name="load_models">%core.lib_dir%/doctrine</ae:parameter>
+				</ae:parameters>
+			</database>
+
+		</databases>
+	</ae:configuration>
+
+	<ae:configuration>
+		<databases default="doctrine">
+
+			<database name="doctrine" class="AgaviDoctrineDatabase">
+				<ae:parameters>
+					<ae:parameter name="dsn">mysql://redracer:@localhost/redracer</ae:parameter>
 					<ae:parameter name="attributes">
 						<ae:parameters>
 							<ae:parameter name="AUTOLOAD_TABLE_CLASSES">true</ae:parameter>

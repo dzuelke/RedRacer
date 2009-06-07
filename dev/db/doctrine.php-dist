@@ -6,7 +6,7 @@ $args = $_SERVER['argv'];
 require('../../libs/agavi/agavi.php');
 require('../../app/config.php');
 
-Agavi::bootstrap(require('../../environment.php'));
+Agavi::bootstrap('%%DEVELOPER.ENVIRONMENT%%');
 
 spl_autoload_register(array('Doctrine', 'autoload'));
 
