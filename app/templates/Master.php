@@ -21,7 +21,8 @@
                 <li><a href="<?php echo $ro->gen('user.index'); ?>" accesskey="4" title="">User</a></li>
                 <li><a href="<?php echo $ro->gen('logout');?>" accesskey="5" title="">Logout</a></li>
             <?php else: ?>
-                <li><a href="<?php echo $ro->gen('login');?>" accesskey="4" title="">Login</a></li>
+                <li><a href="<?php echo $ro->gen('user.register');?>" accesskey="4" title="">Register</a></li>
+                <li><a href="<?php echo $ro->gen('login');?>" accesskey="5" title="">Login</a></li>
             <?php endif; ?>
 		</ul>
 	</div>

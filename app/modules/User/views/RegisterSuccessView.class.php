@@ -22,9 +22,14 @@ class User_RegisterSuccessView extends RedracerUserBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
-		$this->setupHtml($rd);
-
-		$this->setAttribute('_title', 'Register');
+		/**
+		 * @var        FlashMessageModel
+		 */
+		$flash = $this->getContext()->getModel('FlashMessage');
+		$flash->write('You have successfully registered.'.
+            'You may now login using the account have you created.',
+            FlashMessageModel::MESSAGE);
+        return $this->createForwardContainer('User', 'Login', null, null, 'read');
 	}
 }
 
