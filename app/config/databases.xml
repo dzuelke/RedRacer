@@ -6,7 +6,7 @@
 
 			<database name="doctrine" class="AgaviDoctrineDatabase">
 				<ae:parameters>
-					<ae:parameter name="dsn">mysql://redracer:@localhost/redracer</ae:parameter>
+					<ae:parameter name="dsn">mysql://redracer:redracer@localhost/redracer</ae:parameter>
 					<ae:parameter name="attributes">
 						<ae:parameters>
 							<ae:parameter name="AUTOLOAD_TABLE_CLASSES">true</ae:parameter>

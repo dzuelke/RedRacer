@@ -6,7 +6,32 @@
 >
 	<ae:configuration>
 		
-		<validators>
+		<validators method="write">
+
+            <!-- Email -->
+            <validator class="AgaviEmailValidator" provides="valid_email_format">
+                <argument>email</argument>
+                <error>This is not a valid email address.</error>
+            </validator>
+            <validator class="RedracerEmailValidator" depends="valid_email_format">
+                <argument>email</argument>
+                <error>This email address has already been used by a different account.</error>
+                <ae:parameter name="can_match_current_user">true</ae:parameter>
+            </validator>
+
+            <!-- Real Name-->
+            <validator class="AgaviStringValidator">
+                <argument>realname</argument>
+                <errors>
+                    <error>This name is not valid.</error>
+                    <error for="min_error">You must supply a name.</error>
+                    <error for="max_error">Please shorten your name to under 120 characters.</error>
+                </errors>
+                <ae:parameter name="min">1</ae:parameter>
+                <ae:parameter name="max">120</ae:parameter>
+                <ae:parameter name="trim">true</ae:parameter>
+            </validator>
+
 		</validators>
 		
 	</ae:configuration>

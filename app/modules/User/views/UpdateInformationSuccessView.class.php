@@ -22,10 +22,10 @@ class User_UpdateInformationSuccessView extends RedracerUserBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
-		$this->setupHtml($rd);
-
-		$this->setAttribute('_title', 'UpdateInformation');
-	}
+		$flash = $this->getContext()->getModel('FlashMessage');
+		$flash->write('Your information has been successfully updated.', FlashMessageModel::MESSAGE);
+        return $this->createForwardContainer('User','Index');
+    }
 }
 
 ?>

@@ -6,8 +6,9 @@
 		<roles>
 			<role name="Member">
 				<permissions>
-					<permission>changepassword</permission>
+					<permission>user.changepassword</permission>
 					<permission>user.index</permission>
+                    <permission>user.updateinformation</permission>
 				</permissions>
 
 				<roles>

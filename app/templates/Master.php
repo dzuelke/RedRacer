@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<base href="<?php echo $ro->getBaseHref(); ?>" />
-		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="screen, projection" />
 		<title><?php if(isset($t['_title'])) echo htmlspecialchars($t['_title']) . ' - '; echo AgaviConfig::get('core.app_name'); ?></title>
 	</head>
 	<body>
@@ -17,8 +17,12 @@
 			<li class="first"><a href="#" accesskey="1" title="">Home</a></li>
 			<li><a href="#" accesskey="2" title="">About Us</a></li>
 			<li><a href="#" accesskey="3" title="">Products</a></li>
-			<li><a href="<?php echo $ro->gen('login');?>" accesskey="4" title="">Login</a></li>
-			<li><a href="<?php echo $ro->gen('logout');?>" accesskey="5" title="">Logout</a></li>
+            <?php if ($us->isAuthenticated()): ?>
+                <li><a href="<?php echo $ro->gen('user.index'); ?>" accesskey="4" title="">User</a></li>
+                <li><a href="<?php echo $ro->gen('logout');?>" accesskey="5" title="">Logout</a></li>
+            <?php else: ?>
+                <li><a href="<?php echo $ro->gen('login');?>" accesskey="4" title="">Login</a></li>
+            <?php endif; ?>
 		</ul>
 	</div>
 	<div id="content">
@@ -47,6 +51,6 @@
 	<div id="footer">
 		<p>Copyright &#169; 2009 http://www.redracer.org. </p>
 	</div>
-</div>
+    </div>
 	</body>
 </html>

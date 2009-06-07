@@ -23,6 +23,7 @@
 				<route name=".changepassword" pattern="^/changepassword" action="ChangePassword" />
 				<route name=".register" pattern="^/register" action="Register" />
 				<route name=".index" pattern="^$" action="Index" />
+                <route name=".updateinformation" pattern="^/updateinformation" action="UpdateInformation" />
 			</route>
 			
 			<route name="login" pattern="^/login" module="%actions.login_module%" action="%actions.login_action%" />

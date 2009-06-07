@@ -24,7 +24,7 @@ class User_UpdateInformationInputView extends RedracerUserBaseView
 	{
 		$this->setupHtml($rd);
 
-		$this->setAttribute('_title', 'UpdateInformation');
+		$this->setAttribute('_title', 'Update Information');
 	}
 }
 

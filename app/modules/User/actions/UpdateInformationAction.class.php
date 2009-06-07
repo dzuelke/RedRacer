@@ -20,6 +20,63 @@
 */
 class User_UpdateInformationAction extends RedracerUserBaseAction
 {
+
+    /**
+	 * Generic excute function for action
+	 *
+	 * We use a gerneric function here, because on POST as well as on GET Requests
+	 * the Index page should be shown with the userinfo
+	 *
+	 * @param      AgaviRequestDataHolder
+	 * @return     String Name of view to be called
+	 */
+	public function execute(AgaviRequestDataHolder $rd)
+	{
+		$this->setUserInfo();
+		return 'Input';
+	}
+
+    /**
+     * Handles the event where the POST data did not pass validation
+     *
+     * @return      String name of view to be called
+     */
+    public function handleWriteError(AgaviRequestDataHolder $rd)
+    {
+        $this->setUserInfo();
+        return 'Input';
+    }
+
+    /**
+     * Handles the processing of valid POST data
+     *
+     * @return      String name of view to be called
+     */
+    public function executeWrite(AgaviRequestDataHolder $rd)
+    {
+        /**
+		 * @var $um UserManagerModel
+		 */
+		$um = $this->getContext()->getModel('UserManager');
+
+		$usr = $this->getContext()->getUser();
+		$userinfo = $usr->getAttribute('userinfo');
+
+		/**
+		 * @var UserModel
+		 */
+		$u = $um->lookupUserByid($userinfo['id']);
+        $u->setEmail($rd->getParameter('email'));
+        $u->setRealname($rd->getParameter('realname'));
+
+		// Update the User
+		$um->updateUser($u);
+
+		// Save new userinfo
+		$usr->setAttribute('userinfo', $u->toArray());
+		return 'Success';
+    }
+
 	/**
 	 * Returns the default view if the action does not serve the request
 	 * method used.
@@ -34,8 +91,45 @@ class User_UpdateInformationAction extends RedracerUserBaseAction
 	 */
 	public function getDefaultViewName()
 	{
-		return 'Success';
+		return 'Input';
 	}
+
+    /**
+     * @return      Boolean true
+     */
+    public function isSecure() {
+        return true;
+    }
+
+    /**
+     * @return      String user.updateinformation
+     */
+    public function getCredentials() {
+        return 'user.updateinformation';
+    }
+
+    /**
+     * Looks up the current user and passes on its information for use in the
+     * view and template.
+     *
+     * @return      void
+     */
+    private function setUserInfo() {
+        /**
+		 * @var UserManagerModel
+		 */
+		$um = $this->getContext()->getModel('UserManager');
+		$userinfo = $this->getContext()->getUser()->getAttribute('userinfo');
+
+		/**
+		 * @var UserModel
+		 */
+		$u = $um->lookupUserById($userinfo['id']);
+
+		// set attibute for the view
+		$this->setAttribute('user', $u);
+    }
+
 }
 
 ?>

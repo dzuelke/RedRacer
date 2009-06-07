@@ -69,7 +69,7 @@ class User_ChangePasswordAction extends RedracerUserBaseAction
 	
 	public function getCredentials()
 	{
-		return 'changepassword';
+		return 'user.changepassword';
 	}
 }
 

@@ -1,3 +1,28 @@
+<h3>Current Informaton</h3>
+
+<table>
+    <tbody>
+        <tr>
+            <td>Username</td>
+            <td><?php echo $t['user']->username; ?></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><?php echo $t['user']->email; ?></td>
+        </tr>
+        <tr>
+            <td>Real Name</td>
+            <td><?php echo $t['user']->realname; ?></td>
+        </tr>
+        <tr>
+            <td>Rights</td>
+            <td><?php echo $t['user']->role; ?></td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="<?php echo $ro->gen('user.updateinformation'); ?>">Update Information</a></p>
+
+<h3>**DEV** info</h3>
 <table>
 <thead>
 <tr>
