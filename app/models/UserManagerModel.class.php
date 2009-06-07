@@ -151,14 +151,14 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 
 	public function updateUser(UserModel $u)
 	{
-		if (!$this->hasUser($u->getId())){
-			$this->lookupUserById($u->getId());
+		if (!$this->hasUser($u['id'])){
+			$this->lookupUserById($u['id']);
 		}
 
 		/**
 		 * @var Users
 		 */
-		$user = $this->users[$u->getId()];
+		$user = $this->users[$u['id']];
 		$user->fromArray($u->toArray());
 		$user->save();
 	}

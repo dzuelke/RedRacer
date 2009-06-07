@@ -66,8 +66,8 @@ class User_UpdateInformationAction extends RedracerUserBaseAction
 		 * @var UserModel
 		 */
 		$u = $um->lookupUserByid($userinfo['id']);
-        $u->setEmail($rd->getParameter('email'));
-        $u->setRealname($rd->getParameter('realname'));
+        $u['email'] = $rd->getParameter('email');
+        $u['realname'] = $rd->getParameter('realname');
 
 		// Update the User
 		$um->updateUser($u);
