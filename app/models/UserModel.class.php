@@ -23,7 +23,7 @@
  * @version    $Id$
 */
 
-class UserModel extends RedracerBaseModel
+class UserModel extends RedracerBaseModel implements ArrayAccess
 {
 	const SALT_LENGTH = 32;
 
@@ -123,6 +123,52 @@ class UserModel extends RedracerBaseModel
 	{
 		return $this->data;
 	}
+
+    /**
+     * @return      Boolean true if the attribute exists
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->data[$offset]);
+    }
+
+    /**
+     * @return      Mixed the attribute value or null if it does not exist
+     */
+    public function offsetGet($offset)
+    {
+        $getter = 'get'.$offset;
+        if (method_exists($this, $getter)) {
+            return $this->$getter();
+        } else {
+            return isset($this->data[$offset]) ? $this->data[$offset] : null;
+        }
+    }
+
+    /**
+     * Sets the attribute to the given value
+     *
+     * @return      void
+     */
+    public function offsetSet($offset, $value)
+    {
+        $setter = 'set'.$offset;
+        if (method_exists($this, $setter)) {
+            $this->$setter($value);
+        } else {
+            $this->data[$offset] = $value;
+        }
+    }
+
+    /**
+     * Always throws an exception
+     *
+     * @throws RedracerUserModelException
+     */
+    public function offsetUnset($offset)
+    {
+        throw new RedracerUserModelException('Not allowed to unset attributes.');
+    }
 
 	/**
 	 * Access user attributes via accessor and mutator
