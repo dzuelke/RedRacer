@@ -64,11 +64,11 @@ class UserModel extends RedracerBaseModel implements ArrayAccess
 			 * @var RedracerUser
 			 */
 			$usr = $this->getContext()->getUser();
-			if (!$this->has('salt')) {
+			if (!array_key_exists('salt', $this->data)) {
 				$salt = $usr->computeSalt();
-				$this->set('salt', $salt);
+				$this->data['salt'] = $salt;
 			}
-			$this->set('password', $usr->computeHash($password, $this->get('salt')));
+			$this->data['password'] = $usr->computeHash($password, $this->data['salt']);
 		}
 	}
 
