@@ -20,7 +20,8 @@
         </tr>
     </tbody>
 </table>
-<p><a href="<?php echo $ro->gen('user.updateinformation'); ?>">Update Information</a></p>
+<p><a href="<?php echo $ro->gen('user.updateinformation'); ?>">Update Information</a>
+<br /><a href="<?php echo $ro->gen('user.changepassword'); ?>">Change Password</a></p>
 
 <h3>**DEV** info</h3>
 <table>
