@@ -22,9 +22,9 @@ class User_UpdateInformationErrorView extends RedracerUserBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
+		$this->setAttribute('_title', 'Update Informaton');
 		$this->setupHtml($rd);
-
-		$this->setAttribute('_title', 'UpdateInformation');
+		$this->getLayer('content')->setTemplate('UpdateInformationInput');
 	}
 }
 

@@ -44,7 +44,7 @@ class User_UpdateInformationAction extends RedracerUserBaseAction
     public function handleWriteError(AgaviRequestDataHolder $rd)
     {
         $this->setUserInfo();
-        return 'Input';
+        return 'Error';
     }
 
     /**

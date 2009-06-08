@@ -46,7 +46,7 @@ class User_RegisterAction extends RedracerUserBaseAction
 	
 	public function handleError(AgaviRequestDataHolder $rd)
 	{
-		return 'Input';
+		return 'Error';
 	}
 	/**
 	 * Returns the default view if the action does not serve the request
