@@ -9,7 +9,7 @@
 
 /**
  * Manager Model for Users
- * 
+ *
  * The Model is the only place which interacts with the Database, so if you want to use
  * RAW SQL or another ORM like Propel as Background, you will just need to exchange this class,
  * everything else will remain.
@@ -117,6 +117,8 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 
 	/**
 	 * Checks if a value is unique
+	 * 
+	 * True is also returned if $value matches the current user's value of the field
 	 *
 	 * @param     string $field the field name
 	 * @param     mixed $value
@@ -124,9 +126,18 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	 */
 	public function isUnique($field, $value)
 	{
-		$field = 'findBy'.ucfirst($field);
-		$table = Doctrine::getTable('Users');
-		return ($table->$field($value)->count() == 0);
+		$return = false;
+		$userinfo = $this->getContext()->getUser()->getAttribute('userinfo');
+		
+		// Check value agains the current users value
+		if ($userinfo[$field] == $value) {
+			$return = true;
+		} else {
+			$field = 'findBy'.ucfirst($field);
+			$table = Doctrine::getTable('Users');
+			$return = ($table->$field($value)->count() == 0);
+		}
+		return $return;
 	}
 
 	/**
