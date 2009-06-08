@@ -9,7 +9,7 @@
 				<validator class="string" provides="password_given">
 					<argument>password</argument>
 					<errors>
-						<error for="min">Password should have at least 7 characters</error>
+						<error for="min">Your password must have at least seven characters.</error>
 					</errors>
 					<ae:parameter name="min">7</ae:parameter>
 				</validator>
@@ -34,7 +34,8 @@
 				</ae:parameters>
 				<argument>username</argument>
 				<errors>
-					<error for="min">Username should have at least 5 characters</error>
+                    <error>You must supply a username</error>
+					<error for="min">Username should have at least five characters</error>
 					<error for="max">Username cannot be longer than 50 characters</error>
 				</errors>
 			</validator>
@@ -48,7 +49,7 @@
 			<validator class="and" provides="email_given">
 			<validator class="email" provides="email_valid">
 				<argument>email</argument>
-				<error>No valid Email address given.</error>
+				<error>No valid email address given.</error>
 			</validator>
 			
 			<validator class="RedracerUserUniqueValidator" depends="email_valid">
@@ -63,7 +64,7 @@
 				</ae:parameters>
 				<argument>realname</argument>
 				<errors>
-					<error for="max">Woohoo your Realname has more than 120 Characters!</error>
+					<error for="max">Please shorten your real name to 120 characters or less.</error>
 				</errors>
 			</validator>
 

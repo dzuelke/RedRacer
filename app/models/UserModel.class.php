@@ -23,7 +23,7 @@
  * @version    $Id$
 */
 
-class UserModel extends RedracerBaseModel
+class UserModel extends RedracerBaseModel implements ArrayAccess
 {
 	const SALT_LENGTH = 32;
 
@@ -41,8 +41,9 @@ class UserModel extends RedracerBaseModel
 	{
 		parent::initialize($context, $parameters);
 
-		$this->data = array();
-		$this->set('role', AgaviConfig::get('org.redracer.config.user.default_group'));
+		$this->data = array(
+            'role' => AgaviConfig::get('org.redracer.config.user.default_group')
+        );
 	}
 
 	/**
@@ -63,11 +64,11 @@ class UserModel extends RedracerBaseModel
 			 * @var RedracerUser
 			 */
 			$usr = $this->getContext()->getUser();
-			if (!$this->has('salt')) {
+			if (!array_key_exists('salt', $this->data)) {
 				$salt = $usr->computeSalt();
-				$this->set('salt', $salt);
+				$this->data['salt'] = $salt;
 			}
-			$this->set('password', $usr->computeHash($password, $this->get('salt')));
+			$this->data['password'] = $usr->computeHash($password, $this->data['salt']);
 		}
 	}
 
@@ -124,34 +125,51 @@ class UserModel extends RedracerBaseModel
 		return $this->data;
 	}
 
-	/**
-	 * Access user attributes via accessor and mutator
-	 *
-	 * First letter after get|has|set must be uppercase, the rest lowercase
-	 *
-	 * @throws      RedracerUserModelException for any non get,set,has call
-	 *
-	 * @param       string $name
-	 * @param       array $args the arguments of the called function
-	 * @return      mixed Void on set-, bool on has- and mixed on get-call
-	 */
-	public function __call($name, $args)
-	{
-		$matches = array();
-		// the is a must for the first letter being uppercase
-		preg_match('/^(get|set|has)([A-Z][a-z]*)$/', $name, $matches);
-		switch ($matches[1]) {
-			case 'set':
-				$this->set(strtolower($matches[2]), $args[0]);
-				break;
-			case 'get':
-			case 'has':
-				return $this->$matches[1](strtolower($matches[2]));
-				break;
-			default:
-				throw new RedracerUserModelException(sprintf('%s is not a vaild method call', $name));
-		}
-	}
+    /**
+     * @return      Boolean true if the attribute exists
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->data[$offset]);
+    }
+
+    /**
+     * @return      Mixed the attribute value or null if it does not exist
+     */
+    public function offsetGet($offset)
+    {
+        $getter = 'get'.$offset;
+        if (method_exists($this, $getter)) {
+            return $this->$getter();
+        } else {
+            return isset($this->data[$offset]) ? $this->data[$offset] : null;
+        }
+    }
+
+    /**
+     * Sets the attribute to the given value
+     *
+     * @return      void
+     */
+    public function offsetSet($offset, $value)
+    {
+        $setter = 'set'.$offset;
+        if (method_exists($this, $setter)) {
+            $this->$setter($value);
+        } else {
+            $this->data[$offset] = $value;
+        }
+    }
+
+    /**
+     * Always throws an exception
+     *
+     * @throws RedracerUserModelException
+     */
+    public function offsetUnset($offset)
+    {
+        throw new RedracerUserModelException('Not allowed to unset attributes.');
+    }
 
 	/**
 	 * Convinience function
@@ -183,49 +201,6 @@ class UserModel extends RedracerBaseModel
 		return isset($this->data[$name]);
 	}
 
-	/**
-	 * Accessor function
-	 *
-	 * used by __call to get a user attributes
-	 *
-	 * @param     string $name the attribute name
-	 * @return    mixed
-	 */
-	private function get($name)
-	{
-		if($this->has($name)) {
-			return $this->data[$name];
-		}
-
-		return null;
-	}
-
-	/**
-	 * Mutator function
-	 *
-	 * used by __call to set a user attribute
-	 *
-	 * @param     string $name the attributes name
-	 * @param     mixed $value the attributes value
-	 * @return    void
-	 */
-	private function set($name, $value)
-	{
-		$this->data[$name] = $value;
-	}
-
-	/**
-	 * Checker function
-	 *
-	 * checks if an attribute exsits
-	 *
-	 * @param     string $name the attributes name
-	 * @return    bool
-	 */
-	private function has($name)
-	{
-		return array_key_exists($name, $this->data);
-	}
 }
 
 class RedracerUserModelException extends AgaviException {}

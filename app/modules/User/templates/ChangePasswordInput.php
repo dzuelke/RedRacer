@@ -1,4 +1,5 @@
 <div id="changepw">
+<p><a href="<?php echo $ro->gen('user.index') ?>">Cancel</a></p>
 <form method="post" action="<?php echo $ro->gen('user.changepassword'); ?>" id="redracer-changepassword">
 <fieldset>
 	<legend>Sign-In</legend>

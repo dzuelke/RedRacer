@@ -35,7 +35,7 @@ class User_ChangePasswordAction extends RedracerUserBaseAction
 		 * @var UserModel
 		 */
 		$u = $um->lookupUserByid($userinfo['id']);
-		$u->setPassword($rd->getParameter('newpassword'));
+		$u['password'] = $rd->getParameter('newpassword');
 		
 		// Update the User
 		$um->updateUser($u);

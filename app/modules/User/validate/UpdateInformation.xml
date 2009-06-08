@@ -13,10 +13,11 @@
                 <argument>email</argument>
                 <error>This is not a valid email address.</error>
             </validator>
-            <validator class="RedracerEmailValidator" depends="valid_email_format">
+            <validator class="RedracerUserUniqueValidator" depends="valid_email_format">
                 <argument>email</argument>
                 <error>This email address has already been used by a different account.</error>
                 <ae:parameter name="can_match_current_user">true</ae:parameter>
+                <ae:parameter name="attribute">email</ae:parameter>
             </validator>
 
             <!-- Real Name-->

@@ -1,12 +1,12 @@
 <div id="register">
-<form method="post" action="<?php echo $ro->gen('register'); ?>" id="register">
+<form method="post" action="<?php echo $ro->gen('user.register'); ?>" id="register">
 <fieldset>
 	<legend>Register</legend>
 	<label for="username">Username:</label>
 	<input id="username" type="text" name="username" value="" size="30"/>
-	<label for="realname">Realname:</label>
+	<label for="realname">Real Name:</label>
 	<input id="realname" type="text" name="realname" value="" size="150"/>
-	<label for="email">EMail:</label>
+	<label for="email">Email address:</label>
 	<input id="email" type="text" name="email" value="" size="150"/>
 	<label for="password">Password:</label>
 	<input id="password" type="password" name="password" value="" />
