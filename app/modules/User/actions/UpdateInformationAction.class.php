@@ -31,8 +31,7 @@ class User_UpdateInformationAction extends RedracerUserBaseAction
 	 * @return     String Name of view to be called
 	 */
 	public function execute(AgaviRequestDataHolder $rd)
-	{
-		$this->setUserInfo();
+    {
 		return 'Input';
 	}
 
@@ -41,9 +40,8 @@ class User_UpdateInformationAction extends RedracerUserBaseAction
      *
      * @return      String name of view to be called
      */
-    public function handleWriteError(AgaviRequestDataHolder $rd)
+    public function handleError(AgaviRequestDataHolder $rd)
     {
-        $this->setUserInfo();
         return 'Error';
     }
 
@@ -53,7 +51,7 @@ class User_UpdateInformationAction extends RedracerUserBaseAction
      * @return      String name of view to be called
      */
     public function executeWrite(AgaviRequestDataHolder $rd)
-    {
+	{
         /**
 		 * @var $um UserManagerModel
 		 */
@@ -106,28 +104,6 @@ class User_UpdateInformationAction extends RedracerUserBaseAction
      */
     public function getCredentials() {
         return 'user.updateinformation';
-    }
-
-    /**
-     * Looks up the current user and passes on its information for use in the
-     * view and template.
-     *
-     * @return      void
-     */
-    private function setUserInfo() {
-        /**
-		 * @var UserManagerModel
-		 */
-		$um = $this->getContext()->getModel('UserManager');
-		$userinfo = $this->getContext()->getUser()->getAttribute('userinfo');
-
-		/**
-		 * @var UserModel
-		 */
-		$u = $um->lookupUserById($userinfo['id']);
-
-		// set attibute for the view
-		$this->setAttribute('user', $u);
     }
 
 }
