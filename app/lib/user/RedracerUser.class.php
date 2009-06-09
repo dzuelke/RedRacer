@@ -21,32 +21,6 @@
 class RedracerUser extends AgaviRbacSecurityUser {
 
 	/**
-	 * (non-PHPdoc)
-	 * @see src/user/AgaviUser#startup()
-	 */
-	public function startup() {
-		parent::startup();
-
-		// Fetch the Request Data
-		$reqData = $this->getContext()->getRequest()->getRequestData();
-
-		// Only try to log the user in, if he hasn't been logged in and has
-		// an autologin cookie
-		if(!$this->isAuthenticated() && $reqData->hasCookie('autologon')) {
-			try {
-				// shorten it a bit
-				$login = $reqData->getCookie('autologon');
-
-				// we try to log the user in...
-				$this->login($login['username'], $login['password'], true);
-			} catch (AgaviSecurityException $e) {
-				// ... if it fails we logout the user!
-				$this->logout();
-			}
-		}
-	}
-
-	/**
 	 * User login
 	 * 
 	 * Looks up userinfo from database and trys to authenticat the user.
