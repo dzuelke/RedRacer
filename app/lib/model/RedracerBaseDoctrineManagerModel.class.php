@@ -1,0 +1,173 @@
+<?php
+
+// +---------------------------------------------------------------------------+
+// | This file is part of the Redracer Forge Project.                          |
+// | Copyright (c) 2009 the Redracer Project.                                  |
+// |                                                                           |
+// | For the full copyright and license information, please view the LICENSE   |
+// | file that was distributed with this source code.                          |
+// +---------------------------------------------------------------------------+
+
+/**
+ * RedracerBaseDoctrineManagerModel
+ *
+ * To be extended by Doctrine manager models. Provides basic CRUD operations.
+ *
+ * @author     Eric Brisco <erisco@abstractflow.com>
+ * @copyright  Authors
+ * @license    GPLv3
+ * @package    Redracer
+ * @subpackage User
+ * @since      1.0
+ * @version    $Id$
+ */
+
+abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel {
+
+	/**
+	 * A reference to the Doctrine table this model acts upon
+	 * @var DoctrineTable
+	 */
+	protected $table;
+
+	/**
+	 * Sets up the manager model
+	 * @return void
+	 */
+	public function initialize() {
+		parent::initialize();
+		$this->table = Doctrine::getTable($this->getTableName());
+	}
+
+	/**
+	 * The Doctrine PHP-name of the table this model acts upon. Takes a guess
+	 * based on class name by default.
+	 * @return	string
+	 */
+	abstract protected function getTableName();
+
+	/**
+	 * The table index name. Returns 'id' by default.
+	 * @return	string
+	 */
+	abstract protected function getIndexName();
+
+	/**
+	 * Returns the name of the Doctrine record model
+	 * @return	string
+	 */
+	abstract protected function getDoctrineRecordModelName();
+
+	/**
+	 * Returns the record with the index given
+	 * @param	integer	$index
+	 * @return	object	Record object
+	 */
+	public function lookupByIndex($index) {
+		$finder = 'findOneBy'.$this->getIndexName();
+		$recordArray = $this->table->$finder(
+			$index, Doctrine::HYDRATE_ARRAY
+		);
+		$replica = $this->getContext()->getModel($this-getRecordModelName());
+		$replica->fromArray($recordArray);
+		return $replica;
+	}
+
+	/**
+	 * Returns an array of records that match field's value
+	 * @param	string		$field
+	 * @param	integer|string	$value
+	 * @return	array		Array of record objects
+	 */
+	public function lookupByField($field, $value) {
+		$finder = 'findBy'.$field;
+		$recordArray = $this->table->$finder($value);
+		foreach ($recordArray as &$record) {
+			$replica = $this->getContext()->getModel($this->getRecordModelName());
+			$record = $replica->fromArray($record);
+		}
+		return $recordArray;
+	}
+
+	/**
+	 * Returns the first record that matches the field's value
+	 * @param	string		$field
+	 * @param	integer|string	$value
+	 * @return	object		Record object
+	 */
+	public function lookupOneByField($field, $value) {
+		$finder = 'findOneBy'.$field;
+		$record = $this->table->$finder($value);
+		$replica = $this->getContext->getModel($this->getRecordModelName());
+		$replica->fromArray($record->toArray());
+		return $replica;
+	}
+
+	/**
+	 * Creates a new record in the database
+	 * @param	RedracerBaseRecordModel	$model
+	 * @return	void
+	 */
+	public function insertNewRecord(RedracerBaseRecordModel $model) {
+		$doctrineRecord = new $this->getDoctrineRecordModelName();
+		$doctrineRecord->fromArray($model->toArray());
+		if ($doctrineRecord->isValid()) {
+			$doctrineRecord->save();
+		} else {
+			// TODO: this is suboptimal
+			throw new AgaviException(
+				$this->getDoctrineRecordModelName().' is not valid and '.
+				'therefore cannot be inserted'
+				);
+		}
+	}
+
+	/**
+	 * Updates the given record in the database
+	 * @param	RedracerBaseRecordModel	$model
+	 * @return	void
+	 */
+	public function update(RedracerBaseRecordModel $model) {
+		$doctrineRecord = new $this->getDoctrineRecordModelName();
+		$doctrineRecord->fromArray($model->toArray());
+		if ($doctrineRecord->isValid()) {
+			$doctrineRecord->save();
+		} else {
+			// TODO: this is suboptimal
+			throw new AgaviException(
+				$this->getDoctrineRecordModelName().' is not valid and '.
+				'therefore cannot be updated'
+				);
+		}
+	}
+
+	/**
+	 * Tests if the value does not exist in the given field
+	 * @param	string	$field
+	 * @param	integer|string	$value
+	 * @return	boolean
+	 */
+	public function isUnique($field, $value) {
+		$finder = 'findBy'.$field;
+		return $this->table->$finder($value)->count == 0;
+	}
+
+	/**
+	 * Deletes the record with the index given
+	 * @param	int		$index
+	 * @return	boolean	True if a record was deleted
+	 */
+	public function deleteByIndex($index) {
+		// We must not break any relationships
+		return false;
+		/*$tableName = $this->getTableName();
+		$abbr = strtolower($tableName[0]);
+		$query = Doctrine_Query::create()
+			->delete($tableName.' '.$abbr)
+			->where($abbr.'.'.$this->getIndexName().'='.$index);
+		return $query->execute() > 0;*/
+	}
+
+}
+
+?>
