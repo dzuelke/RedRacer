@@ -142,9 +142,17 @@ Projects:
     name:
       type: string(100)
       notnull: true
-    desciption:
+    description:
       type: clob
       notnull: true
+    number_of_ratings:
+      type: integer(6)
+      notnull: true
+      default: 0
+    average_rating:
+      type: decimal
+      notnull: true
+      default: 0
   relations:
     ProjectType: { local: typeid, foreign: id, type: one }
     ProjectApproval: { local: id, foreign: project, type: many }

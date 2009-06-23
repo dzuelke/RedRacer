@@ -141,7 +141,7 @@ class RedracerBaseRecordModel extends RedracerBaseModel implements ArrayAccess {
 
 }
 
-class RedracerRecordException {}
+class RedracerRecordException extends Exception {}
 class RedracerRecordAttributeException extends RedracerRecordException {}
 
 ?>

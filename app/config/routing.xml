@@ -5,12 +5,12 @@
 			<!-- default action for "/" -->
 			<route name="index" pattern="^/$" module="%actions.default_module%" action="%actions.default_action%" />
 			
-			<route name="project" pattern="^/project" module="Projects">
+			<route name="project" pattern="^/project" module="Project">
 				<!-- do not put the action into the parent route, because that one is not anchored at the end of the pattern! -->
 				<route name=".index" pattern="^$" action="Index" />
 				<route name=".latest" pattern="^/latest$" action="Latest" />
-				
-				<route name=".create" pattern="^/add$" action="Add" />
+				<route name=".list" pattern="^/list$" action="List" />
+				<route name=".create" pattern="^/create$" action="Create" />
 				<!-- "Product" is not an action, but just a folder with sub-actions. if only this route, without children, matches, then the action cannot be resolved and a 404 is shown - exactly what we want! -->
 				<route name=".project" pattern="^/(id:\d+)" action="Project">
 					<route name=".view" pattern="^$" action=".View" />

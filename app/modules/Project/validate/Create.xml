@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/Project/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators method="write">
+
+			<validator class="AgaviStringValidator">
+				<argument>name</argument>
+				<error>Invalid project name.</error>
+				<error for="min">Project name must be at least one character.</error>
+				<error for="max">Project name must be 100 characters or less.</error>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+					<ae:parameter name="max">100</ae:parameter>
+				</ae:parameters>
+			</validator>
+
+			<validator class="AgaviNotoperatorValidator">
+				<error>Invalid project type</error>
+				<validator class="RedracerUniqueFieldValueValidator">
+					<argument>type</argument>
+					<ae:parameters>
+						<ae:parameter name="table_manager">ProjectTypeManager</ae:parameter>
+						<ae:parameter name="field_name">id</ae:parameter>
+					</ae:parameters>
+				</validator>
+			</validator>
+
+			<validator class="AgaviStringValidator">
+				<argument>description</argument>
+				<error>Invalid project description.</error>
+				<error for="min">Project description must be at least one character.</error>
+				<error for="max">Project description must be 1000 characters or less.</error>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+					<ae:parameter name="max">1000</ae:parameter>
+				</ae:parameters>
+			</validator>
+
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

@@ -1,3 +1,6 @@
+<h3>Actions</h3>
+<p><a href="<?php echo $ro->gen('project.create'); ?>">Create a project</a></p>
+
 <h3>Current Informaton</h3>
 
 <table>

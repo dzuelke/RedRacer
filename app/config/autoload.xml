@@ -19,6 +19,9 @@
 		<autoload name="RedracerBaseRecordModel">%core.lib_dir%/model/RedracerBaseRecordModel.class.php</autoload>
 		<autoload name="RedracerBaseDoctrineManagerModel">%core.lib_dir%/model/RedracerBaseDoctrineManagerModel.class.php</autoload>
 
+		<!-- Validators -->
+		<autoload name="RedracerUniqueFieldValueValidator">%core.lib_dir%/validator/RedracerUniqueFieldValueValidator.class.php</autoload>
+
 	</ae:configuration>
 	<ae:configuration environment="development.*">
 		<!-- for FirePHP output  -->

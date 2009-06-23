@@ -20,3 +20,27 @@ Users:
     password: 636daab5233b75e5af2dd2bdf54f75191ecf03eff43ed1c426f9a50a7c4d4303610578bc4e901c1b7aaf4f988ffd63f1344a436bd07bb0a81c088baf282e6aad
     role: Member
     realname: Admin Redracer
+
+Projects:
+    Project_1:
+        typeid: 1
+        name: Quacking Duck
+        description: This project emphasizes the importance of water fowl.
+    Project_2:
+        typeid: 1
+        name: Woofing Dog
+        description: Dogs do not just bark; they can woof too.
+    Project_3:
+        typeid: 2
+        name: Mooing Cow
+        description: They are planning revolt, watch out. Stop them before they rise to power!
+    Project_4:
+        typeid: 2
+        name: Hooting Owl
+        description: A recovery program for owls who feel their identity has been desecrated.
+
+ProjectType:
+    ProjectType_1:
+        type: Wildlife Informative
+    ProjectType_2:
+        type: Absurd Concepts

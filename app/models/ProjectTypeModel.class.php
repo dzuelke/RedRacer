@@ -22,7 +22,7 @@
  * @version    $Id$
  */
 
-class TypeModel extends RedracerBaseRecordModel {
+class ProjectTypeModel extends RedracerBaseRecordModel {
 	
 }
 

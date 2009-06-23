@@ -1,5 +1,4 @@
 <?php
-
 // +---------------------------------------------------------------------------+
 // | This file is part of the Redracer Forge Project.                          |
 // | Copyright (c) 2009 the Redracer Project.                                  |
@@ -9,28 +8,24 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * ProjectModel
- *
- * Need description
- *
- * @author     Eric Brisco <erisco@abstractflow.com>
+ * (Description here)
+ * 
+ * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
  * @license    GPLv3
  * @package    Redracer
- * @subpackage User
+ * @subpackage Project
  * @since      1.0
  * @version    $Id$
- */
+*/
+class Project_UpdateSuccessView extends RedracerProjectBaseView
+{
+	public function executeHtml(AgaviRequestDataHolder $rd)
+	{
+		$this->setupHtml($rd);
 
-class ProjectModel extends RedracerBaseRecordModel implements ArrayAccess {
-
-	protected $data = array(
-		'id' => null,
-		'typeid' => null,
-		'name' => null,
-		'description' => null
-	);
-
+		$this->setAttribute('_title', 'Update');
+	}
 }
 
 ?>

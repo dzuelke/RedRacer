@@ -27,8 +27,60 @@ class ProjectManagerModel extends RedracerBaseDoctrineManagerModel {
 
 	protected function getIndexName() { return 'id'; }
 	protected function getTableName() { return 'Projects'; }
-	protected function getDoctrineRecordModelName() { return 'Project'; }
+	protected function getDoctrineRecordModelName() { return 'Projects'; }
 	protected function getRecordModelName() { return 'Project'; }
+
+	/**
+	 * Fetches an array of project records within a range and by specific order
+	 * @param	integer	$page
+	 * @param	integer	$perpage
+	 * @param	array	$orderings
+	 * @return	array
+	 */
+	public function lookupProjectList($page, $perpage = 20, array $orderings = array()) {
+		$query = Doctrine_Query::create()
+			->select('*')
+			->from('Projects p')
+			->leftJoin('p.ProjectType pt')
+			->offset(($page-1) * $perpage)
+			->limit($perpage);
+		foreach ($orderings as $field => $mode) {
+			$field = strtolower($field);
+			$mode = strtoupper($mode);
+			if ($field == 'type') {
+				$query->orderby('pt.type');
+			} else {
+				$query->orderby('p.'.$field.' '.$mode);
+			}
+		}
+		$records = $query->execute()->getData();
+		$replicas = array();
+		foreach ($records as $record) {
+			$arrayDump = array_merge($record->toArray(),
+				array('type' =>$record->ProjectType['type'])
+			);
+			$replicas[] = $this->recordToReplica($arrayDump);
+		}
+		return $replicas;
+	}
+
+	/**
+	 *
+	 */
+	 public function lookupLatestProjects($number) {
+		 return $this->lookupProjectList(1, $number,
+			 array('created_at' => 'DESC')
+		 );
+	 }
+
+	 /**
+	  *
+	  */
+	  public function lookupPopularProjects($number) {
+		  return $this->lookupProjectList(1, $number,
+			  array('average_rating' => 'DESC')
+		  );
+	  }
 
 }
 

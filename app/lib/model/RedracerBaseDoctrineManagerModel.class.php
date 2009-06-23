@@ -34,8 +34,8 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 * Sets up the manager model
 	 * @return void
 	 */
-	public function initialize() {
-		parent::initialize();
+	public function initialize(AgaviContext $context) {
+		parent::initialize($context);
 		$this->table = Doctrine::getTable($this->getTableName());
 	}
 
@@ -59,17 +59,64 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	abstract protected function getDoctrineRecordModelName();
 
 	/**
+	 * Returns all records
+	 * @return	array
+	 */
+	public function lookupAll() {
+		$records = $this->table->findAll(Doctrine::HYDRATE_ARRAY);
+		$replicas = array_map(array($this, 'recordToReplica'), $records);
+		return $replicas;
+	}
+
+	/**
+	 * Looks up all records within a range and ordered by field
+	 * @param	integer	$offset
+	 * @param	integer	$limit
+	 * @param	array	$orderings
+	 * @return	array
+	 */
+	public function lookupRangeByOrder($offset, $limit, array $orderings) {
+		$tableName = $this->getTableName();
+		$abbr = strtolower($tableName[0]);
+		$query = Doctrine_Query::create()
+			->select('*')
+			->from($tableName.' '.$abbr);
+		foreach ($orderings as $field => $mode) {
+			$query->orderby($abbr.'.'.strtolower($field).' '.strtoupper($mode));
+		}
+		$query->offset($offset);
+		$query->limit($limit);
+		$records = $query->fetchArray();
+		$replicas = array_map(array($this, 'recordToReplica'), $records);
+		return $replicas;
+	}
+
+	/**
+	 * Returns the number of records in the table
+	 * @return	integer
+	 */
+	public function lookupRowCount() {
+		$tableName = $this->getTableName();
+		$abbr = strtolower($tableName[0]);
+		$query = Doctrine_Query::create()
+			->select('COUNT('.$abbr.'.'.$this->getIndexName().') c')
+			->from($tableName.' '.$abbr);
+		$result = $query->fetchArray();
+		$row_count = $result[0]['c'];
+		return $row_count;
+	}
+
+	/**
 	 * Returns the record with the index given
 	 * @param	integer	$index
 	 * @return	object	Record object
 	 */
 	public function lookupByIndex($index) {
 		$finder = 'findOneBy'.$this->getIndexName();
-		$recordArray = $this->table->$finder(
+		$record = $this->table->$finder(
 			$index, Doctrine::HYDRATE_ARRAY
 		);
-		$replica = $this->getContext()->getModel($this-getRecordModelName());
-		$replica->fromArray($recordArray);
+		$replica = $this->recordToReplica($record);
 		return $replica;
 	}
 
@@ -81,12 +128,9 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 */
 	public function lookupByField($field, $value) {
 		$finder = 'findBy'.$field;
-		$recordArray = $this->table->$finder($value);
-		foreach ($recordArray as &$record) {
-			$replica = $this->getContext()->getModel($this->getRecordModelName());
-			$record = $replica->fromArray($record);
-		}
-		return $recordArray;
+		$records = $this->table->$finder($value);
+		$replicas = array_map(array($this, 'recordToReplica'), $records);
+		return $replicas;
 	}
 
 	/**
@@ -98,8 +142,7 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	public function lookupOneByField($field, $value) {
 		$finder = 'findOneBy'.$field;
 		$record = $this->table->$finder($value);
-		$replica = $this->getContext->getModel($this->getRecordModelName());
-		$replica->fromArray($record->toArray());
+		$replica = $this->recordToReplica($record);
 		return $replica;
 	}
 
@@ -109,7 +152,8 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 * @return	void
 	 */
 	public function insertNewRecord(RedracerBaseRecordModel $model) {
-		$doctrineRecord = new $this->getDoctrineRecordModelName();
+		$doctrineRecordModelName = $this->getDoctrineRecordModelName();
+		$doctrineRecord = new $doctrineRecordModelName;
 		$doctrineRecord->fromArray($model->toArray());
 		if ($doctrineRecord->isValid()) {
 			$doctrineRecord->save();
@@ -149,7 +193,7 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 */
 	public function isUnique($field, $value) {
 		$finder = 'findBy'.$field;
-		return $this->table->$finder($value)->count == 0;
+		return $this->table->$finder($value)->count() == 0;
 	}
 
 	/**
@@ -166,6 +210,22 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 			->delete($tableName.' '.$abbr)
 			->where($abbr.'.'.$this->getIndexName().'='.$index);
 		return $query->execute() > 0;*/
+	}
+
+	/**
+	 * Creates a replica from a record
+	 * @param	array|object $record
+	 * @return	object
+	 */
+	protected function recordToReplica($record) {
+		if (!is_array($record)) {
+			$record = $record->toArray();
+		}
+		$replica = $this->getContext()->getModel(
+			$this->getRecordModelName()
+		);
+		$replica->fromArray($record);
+		return $replica;
 	}
 
 }

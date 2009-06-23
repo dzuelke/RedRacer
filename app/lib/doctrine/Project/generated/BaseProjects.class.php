@@ -8,7 +8,9 @@
  * @property integer $id
  * @property integer $typeid
  * @property string $name
- * @property clob $desciption
+ * @property clob $description
+ * @property integer $number_of_ratings
+ * @property decimal $average_rating
  * @property ProjectType $ProjectType
  * @property Doctrine_Collection $ProjectApproval
  * @property Doctrine_Collection $ProjectAttachment
@@ -29,7 +31,9 @@ abstract class BaseProjects extends Doctrine_Record
         $this->hasColumn('id', 'integer', 4, array('type' => 'integer', 'primary' => true, 'autoincrement' => true, 'length' => '4'));
         $this->hasColumn('typeid', 'integer', 4, array('type' => 'integer', 'notnull' => true, 'length' => '4'));
         $this->hasColumn('name', 'string', 100, array('type' => 'string', 'notnull' => true, 'length' => '100'));
-        $this->hasColumn('desciption', 'clob', null, array('type' => 'clob', 'notnull' => true));
+        $this->hasColumn('description', 'clob', null, array('type' => 'clob', 'notnull' => true));
+        $this->hasColumn('number_of_ratings', 'integer', 6, array('type' => 'integer', 'notnull' => true, 'default' => 0, 'length' => '6'));
+        $this->hasColumn('average_rating', 'decimal', null, array('type' => 'decimal', 'notnull' => true, 'default' => 0));
 
 
         $this->setAttribute(Doctrine::ATTR_EXPORT, Doctrine::EXPORT_ALL);

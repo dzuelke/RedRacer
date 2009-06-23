@@ -28,7 +28,7 @@ class ProjectTypeManagerModel extends RedracerBaseDoctrineManagerModel {
 	protected function getIndexName() { return 'id'; }
 	protected function getTableName() { return 'ProjectType'; }
 	protected function getDoctrineRecordModelName() { return 'ProjectType'; }
-	protected function getReplicaModelName() { return 'ProjectType'; }
+	protected function getRecordModelName() { return 'ProjectType'; }
 
 	public function lookupByProject(ProjectModel $projectModel) {
 		return $this->lookupOneByIndex($projectModel['typeid']);
