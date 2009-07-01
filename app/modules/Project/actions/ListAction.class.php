@@ -63,8 +63,9 @@ class Project_ListAction extends RedracerProjectBaseAction
 		// get user model if we need to limit by user
 		$user = $rd->getParameter('user');
 		$userModel = null;
-		if (isset($user[0])) {
-			$userModel = $user[0];
+		if ($user != null) {
+			$userModel = $this->getContext()->getModel('User');
+			$userModel['username'] = $user;
 		}
 
 		$parameters = array(

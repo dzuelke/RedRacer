@@ -80,12 +80,6 @@ class Project_ListSuccessView extends RedracerProjectBaseView
 			)
 		);
 
-		// we need to fix up the user data so that FPF repopulates the form
-		// correctly
-		$user = $rd->getParameter('user');
-		$user = $user[0];
-		$rd->setParameter('user', $user['username']);
-
 		// have FPF automatically populate the form
 		$this->getContext()->getRequest()->setAttribute(
 			'populate', array('listform' => $rd),

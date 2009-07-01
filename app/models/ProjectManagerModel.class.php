@@ -82,11 +82,9 @@ class ProjectManagerModel extends RedracerBaseDoctrineManagerModel {
 
 		// search term, searches project title and project description
 		if ($search !== null) {
-			//$query->where('p.name LIKE :search OR p.description LIKE :search',
-			//	array('search' => '%'.$search.'%')
-			//);
+			$searchTerm = '%'.str_replace('%', '\\%', $search).'%';
 			$query->where('p.name LIKE ? OR p.description LIKE ?',
-				array('%'.$search.'%', '%'.$search.'%')
+				array($searchTerm, $searchTerm)
 			);
 		}
 

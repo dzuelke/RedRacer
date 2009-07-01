@@ -47,7 +47,7 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	abstract protected function getTableName();
 
 	/**
-	 * The table index name. Returns 'id' by default.
+	 * The table index name.
 	 * @return	string
 	 */
 	abstract protected function getIndexName();
@@ -57,6 +57,25 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 * @return	string
 	 */
 	abstract protected function getDoctrineRecordModelName();
+
+	/**
+	 * Uses an optimized query to determine if a value exists under a field.
+	 * This is preferable if you do not need the resulting rows.
+	 *
+	 * @return	boolean	true if the value does not exist in the field,
+	 *					false otherwise
+	 */
+	public function isUnique($field, $value) {
+		$abbr = substr($this->getTableName(), 0, 1);
+		$query = Doctrine_Query::create()
+			->select('COUNT('.$abbr.'.'.$this->getIndexName().') AS numrows')
+			->from($this->getTableName().' as '.$abbr)
+			->where($abbr.'.'.$field.' = ?', $value)
+			->limit(1);
+		$results = $query->fetchArray();
+		$numrows = $results[0]['numrows'];
+		return $numrows == 0;
+	}
 
 	/**
 	 * Returns all records

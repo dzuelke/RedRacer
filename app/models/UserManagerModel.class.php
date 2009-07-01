@@ -124,17 +124,14 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	 */
 	public function isUnique($field, $value)
 	{
-		$return = false;
-		$userinfo = $this->getContext()->getUser()->getAttribute('userinfo');
-		// Check value agains the current users value
-		/*if ($userinfo[$field] == $value) {
-			$return = true;
-		} else {*/
-			$field = 'findBy'.ucfirst($field);
-			$table = Doctrine::getTable('Users');
-			$return = ($table->$field($value)->count() == 0);
-		//}
-		return $return;
+		$query = Doctrine_Query::create()
+			->select('COUNT(u.id) AS numrows')
+			->from('Users as u')
+			->where('u.'.$field.' = ?', $value)
+			->limit(1);
+		$results = $query->fetchArray();
+		$numrows = $results[0]['numrows'];
+		return $numrows == 0;
 	}
 
 	/**

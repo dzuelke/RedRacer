@@ -28,19 +28,30 @@ class RedracerUniqueFieldValueValidator extends AgaviValidator {
 			$this->getParameter('table_manager')
 		);
 		$fieldName = $this->getParameter('field_name');
-		$result = $tableManager->lookupByField($fieldName, $data);
 
-		// we have to wrap the exports in ArrayObject to prevent the elements
-		// from being erased by Agavi
-		if (count($result) == 0) {
-			$this->export(new ArrayObject($result), $arg);
+
+		if ($this->getParameter('export_results')) {
+			$result = $tableManager->lookupByField($fieldName, $data);
+			// we have to wrap the exports in ArrayObject to prevent the elements
+			// from being erased by Agavi
+			if (count($result) == 0) {
+				$this->export(new ArrayObject($result), $arg);
+				return true;
+			}
+			else {
+				$this->export(new ArrayObject($result), $arg);
+				$this->throwError();
+				return false;
+			}
+		} else {
+			$result = $tableManager->isUnique($fieldName, $data);
+			if (!$result) {
+				$this->throwError();
+				return false;
+			}
 			return true;
 		}
-		else {
-			$this->export(new ArrayObject($result), $arg);
-			$this->throwError();
-			return false;
-		}
+		
 	}
 
 }
