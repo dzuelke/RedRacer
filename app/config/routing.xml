@@ -11,6 +11,7 @@
 				<route name=".latest" pattern="^/latest$" action="Latest" />
 				<route name=".list" pattern="^/list$" action="List" />
 				<route name=".create" pattern="^/create$" action="Create" />
+				<route name=".read" pattern="^/view$" action="Read" />
 				<!-- "Product" is not an action, but just a folder with sub-actions. if only this route, without children, matches, then the action cannot be resolved and a 404 is shown - exactly what we want! -->
 				<route name=".project" pattern="^/(id:\d+)" action="Project">
 					<route name=".view" pattern="^$" action=".View" />

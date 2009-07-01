@@ -34,8 +34,8 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 * Sets up the manager model
 	 * @return void
 	 */
-	public function initialize(AgaviContext $context) {
-		parent::initialize($context);
+	public function initialize(AgaviContext $context, array $parameters = array()) {
+		parent::initialize($context, $parameters);
 		$this->table = Doctrine::getTable($this->getTableName());
 	}
 
@@ -128,7 +128,7 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 */
 	public function lookupByField($field, $value) {
 		$finder = 'findBy'.$field;
-		$records = $this->table->$finder($value);
+		$records = $this->table->$finder($value, Doctrine::HYDRATE_ARRAY);
 		$replicas = array_map(array($this, 'recordToReplica'), $records);
 		return $replicas;
 	}
@@ -183,17 +183,6 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 				'therefore cannot be updated'
 				);
 		}
-	}
-
-	/**
-	 * Tests if the value does not exist in the given field
-	 * @param	string	$field
-	 * @param	integer|string	$value
-	 * @return	boolean
-	 */
-	public function isUnique($field, $value) {
-		$finder = 'findBy'.$field;
-		return $this->table->$finder($value)->count() == 0;
 	}
 
 	/**

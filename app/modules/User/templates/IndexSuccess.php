@@ -1,5 +1,7 @@
 <h3>Actions</h3>
 <p><a href="<?php echo $ro->gen('project.create'); ?>">Create a project</a></p>
+<p><a href="<?php echo $ro->gen('project.list',
+	array('user' => $t['user']['username'])); ?>">See projects you own</a></p>
 
 <h3>Current Informaton</h3>
 
@@ -7,19 +9,19 @@
     <tbody>
         <tr>
             <td>Username</td>
-            <td><?php echo $t['user']->username; ?></td>
+            <td><?php echo $t['user']['username']; ?></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><?php echo $t['user']->email; ?></td>
+            <td><?php echo $t['user']['email']; ?></td>
         </tr>
         <tr>
             <td>Real Name</td>
-            <td><?php echo $t['user']->realname; ?></td>
+            <td><?php echo $t['user']['realname']; ?></td>
         </tr>
         <tr>
             <td>Rights</td>
-            <td><?php echo $t['user']->role; ?></td>
+            <td><?php echo $t['user']['role']; ?></td>
         </tr>
     </tbody>
 </table>
@@ -36,8 +38,7 @@
 </thead>
 <tbody>
 <?php 
-$userinfo = $t['user']->toArray();
-foreach ($userinfo as $key => $value) {
+foreach ($t['user'] as $key => $value) {
 ?>
 <tr>
 	<td><?php echo ucfirst($key); ?></td>

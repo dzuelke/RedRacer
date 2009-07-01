@@ -24,27 +24,18 @@ class User_IndexAction extends RedracerUserBaseAction
 	/**
 	 * Generic excute function for action
 	 * 
-	 * We use a gerneric function here, because on POST as well as on GET Requests
-	 * the Index page should be shown with the userinfo
+	 * We use a gerneric function here, because on POST as well as on GET
+	 * Requests the Index page should be shown with the userinfo
 	 * 
 	 * @param      AgaviRequestDataHolder
 	 * @return     String Name of view to be called
 	 */
 	public function execute(AgaviRequestDataHolder $rd)
 	{
-		/**
-		 * @var UserManagerModel
-		 */
-		$um = $this->getContext()->getModel('UserManager');
+		// set the user information
 		$userinfo = $this->getContext()->getUser()->getAttribute('userinfo');
-		
-		/**
-		 * @var UserModel
-		 */
-		$u = $um->lookupUserById($userinfo['id']);
-		
-		// set attibute for the view
-		$this->setAttribute('user', $u);
+		$this->setAttribute('user', $userinfo);
+
 		return 'Success';
 	}
 	

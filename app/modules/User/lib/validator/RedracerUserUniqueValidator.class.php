@@ -29,7 +29,13 @@ class RedracerUserUniqueValidator extends AgaviValidator {
 		 * @var UserManagerModel
 		 */
 		$um = $this->getContext()->getModel('UserManager');
-		
+
+		// pass if it matches the current user
+		$userinfo = $this->getContext()->getUser()->getAttribute('userinfo');
+		if (isset($userinfo[$argument]) && $userinfo[$argument] == $data) {
+			return true;
+		}
+
 		if($um->isUnique($argument, $data)) {
 			return true;
 		}

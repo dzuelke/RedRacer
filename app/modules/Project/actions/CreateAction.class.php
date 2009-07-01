@@ -37,7 +37,21 @@ class Project_CreateAction extends RedracerProjectBaseAction
 		$newProject['description'] = $rd->getParameter('description');
 		$projectManager->insertNewRecord($newProject);
 
-		// should we automatically link it to the user here?
+		// lookup the new project to get its id
+		$newProject = $projectManager->lookupByName($newProject['name']);
+
+		// get the current user and load him into a model
+		$userModel = $this->getContext()->getModel('User');
+		$userModel->fromArray(
+			$this->getContext()->getUser()->getAttribute('userinfo')
+		);
+
+		// link the user to the project
+		$projectMaintainerManager =
+			$this->getContext()->getModel('ProjectMaintainerManager');
+		$projectMaintainerManager
+			->linkMaintainerToProject($userModel, $newProject);
+		
 
 		return 'Success';
 	}

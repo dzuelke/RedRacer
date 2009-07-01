@@ -117,8 +117,6 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 
 	/**
 	 * Checks if a value is unique
-	 * 
-	 * True is also returned if $value matches the current user's value of the field
 	 *
 	 * @param     string $field the field name
 	 * @param     mixed $value
@@ -128,16 +126,33 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	{
 		$return = false;
 		$userinfo = $this->getContext()->getUser()->getAttribute('userinfo');
-		
 		// Check value agains the current users value
-		if ($userinfo[$field] == $value) {
+		/*if ($userinfo[$field] == $value) {
 			$return = true;
-		} else {
+		} else {*/
 			$field = 'findBy'.ucfirst($field);
 			$table = Doctrine::getTable('Users');
 			$return = ($table->$field($value)->count() == 0);
-		}
+		//}
 		return $return;
+	}
+
+	/**
+	 * Returns an array of records that match field's value
+	 * @param	string		$field
+	 * @param	integer|string	$value
+	 * @return	array		Array of record objects
+	 */
+	public function lookupByField($field, $value) {
+		$finder = 'findBy'.$field;
+		$records = Doctrine::getTable('Users')->$finder($value, Doctrine::HYDRATE_ARRAY);
+		$replicas = array();
+		foreach ($records as $record) {
+			$replica = $this->getContext()->getModel('User');
+			$replica->fromArray($record);
+			$replicas[] = $replica;
+		}
+		return $replicas;
 	}
 
 	/**

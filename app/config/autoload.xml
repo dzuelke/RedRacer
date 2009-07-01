@@ -21,6 +21,7 @@
 
 		<!-- Validators -->
 		<autoload name="RedracerUniqueFieldValueValidator">%core.lib_dir%/validator/RedracerUniqueFieldValueValidator.class.php</autoload>
+		<autoload name="RedracerIsArrayValidator">%core.lib_dir%/validator/RedracerIsArrayValidator.class.php</autoload>
 
 	</ae:configuration>
 	<ae:configuration environment="development.*">

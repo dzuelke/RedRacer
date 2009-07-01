@@ -8,6 +8,18 @@
 		
 		<validators method="read">
 
+			<validator class="AgaviStringValidator" required="false" severity="silent">
+				<argument>search</argument>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+					<ae:parameter name="max">100</ae:parameter>
+				</ae:parameters>
+			</validator>
+
+			<validator class="RedracerIsArrayValidator" required="false" severity="silent">
+				<argument>projectTypes</argument>
+			</validator>
+
 			<validator class="AgaviNumberValidator" required="false" severity="silent">
 				<argument>page</argument>
 				<ae:parameters>
@@ -27,6 +39,16 @@
 					<ae:parameter name="sep">,</ae:parameter>
 					<ae:parameter name="case">false</ae:parameter>
 				</ae:parameters>
+			</validator>
+
+			<validator class="AgaviNotoperatorValidator" required="false" severity="silent">
+				<validator class="RedracerUniqueFieldValueValidator" required="false" severity="silent">
+					<argument>user</argument>
+					<ae:parameters>
+						<ae:parameter name="table_manager">UserManager</ae:parameter>
+						<ae:parameter name="field_name">username</ae:parameter>
+					</ae:parameters>
+				</validator>
 			</validator>
 
 		</validators>

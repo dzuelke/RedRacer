@@ -29,7 +29,8 @@ class ProjectMaintainerManagerModel extends RedracerBaseModel {
 	public function getMaintainersByProject(ProjectModel $projectModel) {
 		$query = Doctrine_Query::create()
 			->from('Users u')
-			->leftJoin('u.Projects p')
+			->leftJoin('u.ProjectMaintainer pm')
+			->leftJoin('pm.Projects p')
 			->where('p.id = ?', $projectModel['id']);
 		return $query->fetchArray();
 	}
@@ -37,7 +38,8 @@ class ProjectMaintainerManagerModel extends RedracerBaseModel {
 	public function getProjectsByMaintainer(UserModel $userModel) {
 		$query = Doctrine_Query::create()
 			->from('Projects p')
-			->leftJoin('p.Users u')
+			->leftJoin('p.ProjectMaintainer pm')
+			->leftJoin('pm.Users u')
 			->where('u.id = ?', $userModel['id']);
 		return $query->fetchArray();
 	}
