@@ -21,7 +21,7 @@
  */
 class Project_IndexAction extends RedracerProjectBaseAction
 {
-	public function execute(AgaviWebRequestDataHolder $rd) {
+	public function execute(AgaviRequestDataHolder $rd) {
 		$projectManager = $this->getContext()->getModel('ProjectManager');
 		$this->setAttribute(
 			'latestProjects', $projectManager->lookupLatestProjects(3)

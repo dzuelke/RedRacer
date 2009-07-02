@@ -22,7 +22,7 @@
 class Project_ListAction extends RedracerProjectBaseAction
 {
 
-	public function execute(AgaviWebRequestDataHolder $rd) {
+	public function execute(AgaviRequestDataHolder $rd) {
 		// correct the projectTypes to be an array again
 		// this is done to prevent errors with functions that want arrays
 		// and FPF which will fatal on the ArrayObject

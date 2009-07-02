@@ -22,12 +22,12 @@
 class Project_CreateAction extends RedracerProjectBaseAction
 {
 
-	public function executeRead(AgaviWebRequestDataHolder $rd) {
+	public function executeRead(AgaviRequestDataHolder $rd) {
 		$this->setTypeList();
 		return 'Input';
 	}
 
-	public function executeWrite(AgaviWebRequestDataHolder $rd) {
+	public function executeWrite(AgaviRequestDataHolder $rd) {
 
 		// put the project in the database
 		$projectManager = $this->getContext()->getModel('ProjectManager');
@@ -56,7 +56,7 @@ class Project_CreateAction extends RedracerProjectBaseAction
 		return 'Success';
 	}
 
-	public function handleWriteError(AgaviWebRequestDataHolder $rd) {
+	public function handleWriteError(AgaviRequestDataHolder $rd) {
 		$this->setTypeList();
 		return 'Error';
 	}
