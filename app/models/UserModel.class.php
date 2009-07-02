@@ -23,15 +23,9 @@
  * @version    $Id$
 */
 
-class UserModel extends RedracerBaseModel implements ArrayAccess
+class UserModel extends RedracerBaseRecordModel
 {
 	const SALT_LENGTH = 32;
-
-	/**
-	 * Holds the user attributes
-	 * @var        Array
-	 */
-	private $data;
 
 	/**
 	 * (non-PHPdoc)
@@ -41,9 +35,8 @@ class UserModel extends RedracerBaseModel implements ArrayAccess
 	{
 		parent::initialize($context, $parameters);
 
-		$this->data = array(
-            'role' => AgaviConfig::get('org.redracer.config.user.default_group')
-        );
+		$this->data['role'] =
+            AgaviConfig::get('org.redracer.config.user.default_group');
 	}
 
 	/**
@@ -115,93 +108,6 @@ class UserModel extends RedracerBaseModel implements ArrayAccess
 		$this->data = array_merge($this->data, $userinfo);
 	}
 
-	/**
-	 * Returns the Userinformation as an Array
-	 *
-	 * @return      Array containing the Userinformation
-	 */
-	public function toArray()
-	{
-		return $this->data;
-	}
-
-    /**
-     * @return      Boolean true if the attribute exists
-     */
-    public function offsetExists($offset)
-    {
-        return isset($this->data[$offset]);
-    }
-
-    /**
-     * @return      Mixed the attribute value or null if it does not exist
-     */
-    public function offsetGet($offset)
-    {
-        $getter = 'get'.$offset;
-        if (method_exists($this, $getter)) {
-            return $this->$getter();
-        } else {
-            return isset($this->data[$offset]) ? $this->data[$offset] : null;
-        }
-    }
-
-    /**
-     * Sets the attribute to the given value
-     *
-     * @return      void
-     */
-    public function offsetSet($offset, $value)
-    {
-        $setter = 'set'.$offset;
-        if (method_exists($this, $setter)) {
-            $this->$setter($value);
-        } else {
-            $this->data[$offset] = $value;
-        }
-    }
-
-    /**
-     * Always throws an exception
-     *
-     * @throws RedracerUserModelException
-     */
-    public function offsetUnset($offset)
-    {
-        throw new RedracerUserModelException('Not allowed to unset attributes.');
-    }
-
-	/**
-	 * Convinience function
-	 *
-	 * Provides easier access to user attributes
-	 *
-	 * @param      string $name name of the property
-	 * @return     mixed
-	 */
-	public function __get($name)
-	{
-		if (array_key_exists($name, $this->data)) {
-			return $this->data[$name];
-		}
-
-		return null;
-	}
-
-	/**
-	 * Convinience function
-	 *
-	 * Verifies wether a user attribute exists
-	 *
-	 * @param      string $name name of the user attribute
-	 * @return     bool
-	 */
-	public function __isset($name)
-	{
-		return isset($this->data[$name]);
-	}
-
 }
 
-class RedracerUserModelException extends AgaviException {}
 ?>

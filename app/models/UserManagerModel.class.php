@@ -23,14 +23,13 @@
  * @version    $Id$
  */
 
-class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
+class UserManagerModel extends RedracerBaseDoctrineManagerModel
 {
-	/**
-	 * An array with Doctrine_Record objects
-	 *
-	 * @var        Array with Doctrine_Redord, using userid as key
-	 */
-	private $users = array();
+
+	public function getTableName() { return 'Users'; }
+	public function getIndexName() { return 'id'; }
+	public function getRecordModelName() { return 'User'; }
+	public function getDoctrineRecordModelName() { return 'Users'; }
 
 	/**
 	 * Looks up a user from the Database by his username
@@ -40,26 +39,7 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	 */
 	public function lookupUserByUsername($username)
 	{
-		// Query Database for Userinfo
-		/**
-		* @var Doctrine_Record
-		*/
-		$user = Doctrine::getTable('Users')->findOneByUsername($username, Doctrine::HYDRATE_RECORD);
-
-		if (!$this->hasUser($user->id)) {
-			// save the User if we need him again later
-			$this->users[$user->id] = $user;
-		}
-
-		/**
-		 * Fetch a new UserModel
-		 *
-		 * @var       UserModel
-		 */
-		$u = $this->getContext()->getModel('User');
-		$u->fromArray($user->toArray());
-
-		return $u;
+		return $this->lookupOneByField('username', $username);
 	}
 
 	/**
@@ -70,25 +50,7 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	 */
 	public function lookupUserById($id)
 	{
-		$u = null;
-
-		if(!$this->hasUser($id)) {
-			// Query Database for Userinformation
-			$user = Doctrine::getTable('Users')->findOneById($id, Doctrine::HYDRATE_RECORD);
-			// save the User if we need him again later
-			$this->users[$user->id] = $user;
-		} else {
-			$user = $this->users[$id];
-		}
-
-		/**
-		 * Fetch a new UserModel
-		 *
-		 * @var       UserModel
-		 */
-		$u = $this->getContext()->getModel('User');
-		$u->fromArray($user->toArray());
-		return $u;
+		return $this->lookupOneByField('id', $id);
 	}
 
 	/**
@@ -107,83 +69,42 @@ class UserManagerModel extends RedracerBaseModel implements AgaviISingletonModel
 	/**
 	 * Checks if user was already fetched
 	 *
+	 * This will always return false because there is currently no caching
+	 * mechanism
+	 *
 	 * @param      int $id the user's id
 	 * @return     bool true if user exists, or false
 	 */
 	public function hasUser($id)
 	{
-		return array_key_exists($id, $this->users);
-	}
-
-	/**
-	 * Checks if a value is unique
-	 *
-	 * @param     string $field the field name
-	 * @param     mixed $value
-	 * @return    bool
-	 */
-	public function isUnique($field, $value)
-	{
-		$query = Doctrine_Query::create()
-			->select('COUNT(u.id) AS numrows')
-			->from('Users as u')
-			->where('u.'.$field.' = ?', $value)
-			->limit(1);
-		$results = $query->fetchArray();
-		$numrows = $results[0]['numrows'];
-		return $numrows == 0;
-	}
-
-	/**
-	 * Returns an array of records that match field's value
-	 * @param	string		$field
-	 * @param	integer|string	$value
-	 * @return	array		Array of record objects
-	 */
-	public function lookupByField($field, $value) {
-		$finder = 'findBy'.$field;
-		$records = Doctrine::getTable('Users')->$finder($value, Doctrine::HYDRATE_ARRAY);
-		$replicas = array();
-		foreach ($records as $record) {
-			$replica = $this->getContext()->getModel('User');
-			$replica->fromArray($record);
-			$replicas[] = $replica;
-		}
-		return $replicas;
+		return false;
 	}
 
 	/**
 	 * Creates a new User
 	 *
 	 * Creates a new User in the Database from a UserModel instance
+	 * Alias to insertNewRecord
 	 *
 	 * @param      UserModel
 	 * @return     void
 	 */
 	public function createNewUser(UserModel $u)
 	{
-		$user = new Users();
-		$user->fromArray($u->toArray());
-		if ($user->isValid()) {
-			$user->save();
-		} else {
-			// TODO not nice
-			throw new AgaviException('User could not be save since he was not valid.');
-		}
+		$this->insertNewRecord($u);
 	}
 
+	/**
+	 * Updates a User
+	 *
+	 * Alias to update
+	 *
+	 * @param	UserModel	$u
+	 * @return	void
+	 */
 	public function updateUser(UserModel $u)
 	{
-		if (!$this->hasUser($u['id'])){
-			$this->lookupUserById($u['id']);
-		}
-
-		/**
-		 * @var Users
-		 */
-		$user = $this->users[$u['id']];
-		$user->fromArray($u->toArray());
-		$user->save();
+		$this->update($u);
 	}
 }
 
