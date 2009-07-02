@@ -15,6 +15,7 @@
  * everything else will remain.
  *
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
+ * @author	   Eric Brisco <erisco@abstractflow.com>
  * @copyright  Authors
  * @license    GPLv3
  * @package    Redracer

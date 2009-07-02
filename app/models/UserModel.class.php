@@ -15,6 +15,7 @@
  * not point of having the UserManagerModel.
  * 
  * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
+ * @author	   Eric Brisco <erisco@abstractflow.com>
  * @copyright  Authors
  * @license    GPLv3
  * @package    Redracer
@@ -26,6 +27,16 @@
 class UserModel extends RedracerBaseRecordModel
 {
 	const SALT_LENGTH = 32;
+
+	protected $data = array(
+		'id' => null,
+		'username' => null,
+		'email' => null,
+		'salt' => null,
+		'password' => null,
+		'role' => null,
+		'realname' => null
+	);
 
 	/**
 	 * (non-PHPdoc)
