@@ -31,7 +31,7 @@ class ProjectTypeManagerModel extends RedracerBaseDoctrineManagerModel {
 	protected function getRecordModelName() { return 'ProjectType'; }
 
 	public function lookupByProject(ProjectModel $projectModel) {
-		return $this->lookupOneByIndex($projectModel['typeid']);
+		return $this->lookupByIndex($projectModel['typeid']);
 	}
 
 }

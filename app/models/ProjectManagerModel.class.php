@@ -38,6 +38,35 @@ class ProjectManagerModel extends RedracerBaseDoctrineManagerModel {
 	}
 
 	/**
+	 * 
+	 */
+	public function lookupProjectWithType(ProjectModel $pm) {
+		if (isset($pm['id'])) {
+			$idField = 'id';
+			$idValue = $pm['id'];
+		} elseif (isset($pm['name'])) {
+			$idField = 'name';
+			$idValue = $pm['name'];
+		} else {
+			throw new Exception('Must know project id or project name');
+		}
+
+		// get the project and type
+		$query = Doctrine_Query::create()
+			->select('*')
+			->from('Projects p')
+			->leftJoin('p.ProjectType pt')
+			->where('p.'.$idField.' = ?', $idValue);
+		$records = $query->execute()->getData();
+		$project = $this->recordToReplica($records[0]);
+		$ptReplica = $this->getContext()->getModel('ProjectType');
+		$ptReplica->fromArray($project->ProjectType->toArray());
+		$project['type'] = $ptReplica;
+
+		return $project;
+	}
+
+	/**
 	 * Fetches an array of project records within a range and by specific order
 	 * @param	integer	$page
 	 * @param	integer	$perpage
@@ -111,10 +140,11 @@ class ProjectManagerModel extends RedracerBaseDoctrineManagerModel {
 		$records = $query->execute()->getData();
 		$replicas = array();
 		foreach ($records as $record) {
-			$arrayDump = array_merge($record->toArray(),
-				array('type' => $record->ProjectType['type'])
-			);
-			$replicas[] = $this->recordToReplica($arrayDump);
+			$replica = $this->recordToReplica($record->toArray());
+			$ptReplica = $this->getContext()->getModel('ProjectType');
+			$ptReplica->fromArray($record->ProjectType->toArray());
+			$replica['type'] = $ptReplica;
+			$replicas[] = $replica;
 		}
 		return $replicas;
 	}

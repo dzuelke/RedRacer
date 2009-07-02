@@ -62,7 +62,7 @@
 			<td><a href="<?php echo $ro->gen('project.read',
 				array('project' => $project['name']));
 			?>"><?php echo $project['name']; ?></a></td>
-			<td><?php echo $project['type']; ?></td>
+			<td><?php echo $project['type']['type']; ?></td>
 			<td><?php echo $project['average_rating']; ?></td>
 			<td><?php echo $project['number_of_ratings']; ?></td>
 			<td><?php echo $project['description']; ?></td>

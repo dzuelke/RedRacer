@@ -26,7 +26,7 @@ class ProjectMaintainerManagerModel extends RedracerBaseModel {
 
 	protected function getRecordModelName() { return 'ProjectMaintainer'; }
 
-	public function getMaintainersByProject(ProjectModel $projectModel) {
+	public function lookupMaintainersByProject(ProjectModel $projectModel) {
 		$query = Doctrine_Query::create()
 			->from('Users u')
 			->leftJoin('u.ProjectMaintainer pm')
@@ -35,7 +35,7 @@ class ProjectMaintainerManagerModel extends RedracerBaseModel {
 		return $query->fetchArray();
 	}
 
-	public function getProjectsByMaintainer(UserModel $userModel) {
+	public function lookupProjectsByMaintainer(UserModel $userModel) {
 		$query = Doctrine_Query::create()
 			->from('Projects p')
 			->leftJoin('p.ProjectMaintainer pm')

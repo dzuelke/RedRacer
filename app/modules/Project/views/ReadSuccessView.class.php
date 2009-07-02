@@ -1,5 +1,4 @@
 <?php
-
 // +---------------------------------------------------------------------------+
 // | This file is part of the Redracer Forge Project.                          |
 // | Copyright (c) 2009 the Redracer Project.                                  |
@@ -9,38 +8,36 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * ProjectCommentModel
- *
- * Needs description
- *
- * @author     Eric Brisco <erisco@abstractflow.com>
+ * (Description here)
+ * 
+ * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
  * @license    GPLv3
  * @package    Redracer
- * @subpackage User
+ * @subpackage Project
  * @since      1.0
  * @version    $Id$
- */
+*/
+class Project_ReadSuccessView extends RedracerProjectBaseView
+{
+	public function executeHtml(AgaviRequestDataHolder $rd)
+	{
+		$userinfo =
+			$this->getContext()->getUser()->getAttribute('userinfo');
+		$maintainers = $this->getAttribute('maintainers');
+		$belongsToCurrentUser = false;
+		foreach ($maintainers as $m) {
+			if ($m['username'] = $userinfo['username']) {
+				$belongsToCurrentUser = true;
+				break;
+			}
+		}
+		$this->setAttribute('belongsToCurrentUser', $belongsToCurrentUser);
 
-class ProjectCommentModel extends RedracerBaseRecordModel {
+		$this->setupHtml($rd);
 
-	protected $data = array(
-		'id' => null,
-		'project' => null,
-		'user' => null,
-		'comment' => null,
-		'date' => null
-	);
-
-	protected $user;
-
-	public function setUser(UserModel $u) {
-		$this->user = $u;
+		$this->setAttribute('_title', 'Read');
 	}
-
-	public function getUser() {
-		return $this->user;
-	}
-
 }
+
 ?>

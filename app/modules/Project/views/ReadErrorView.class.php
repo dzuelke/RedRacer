@@ -1,5 +1,4 @@
 <?php
-
 // +---------------------------------------------------------------------------+
 // | This file is part of the Redracer Forge Project.                          |
 // | Copyright (c) 2009 the Redracer Project.                                  |
@@ -9,38 +8,24 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * ProjectCommentModel
- *
- * Needs description
- *
- * @author     Eric Brisco <erisco@abstractflow.com>
+ * (Description here)
+ * 
+ * @author     Benjamin Boerngen-Schmidt <benjamin@boerngen-schmidt.de>
  * @copyright  Authors
  * @license    GPLv3
  * @package    Redracer
- * @subpackage User
+ * @subpackage Project
  * @since      1.0
  * @version    $Id$
- */
+*/
+class Project_ReadErrorView extends RedracerProjectBaseView
+{
+	public function executeHtml(AgaviRequestDataHolder $rd)
+	{
+		$this->setupHtml($rd);
 
-class ProjectCommentModel extends RedracerBaseRecordModel {
-
-	protected $data = array(
-		'id' => null,
-		'project' => null,
-		'user' => null,
-		'comment' => null,
-		'date' => null
-	);
-
-	protected $user;
-
-	public function setUser(UserModel $u) {
-		$this->user = $u;
+		$this->setAttribute('_title', 'This project does not exist!');
 	}
-
-	public function getUser() {
-		return $this->user;
-	}
-
 }
+
 ?>

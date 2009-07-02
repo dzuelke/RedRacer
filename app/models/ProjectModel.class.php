@@ -31,6 +31,16 @@ class ProjectModel extends RedracerBaseRecordModel implements ArrayAccess {
 		'description' => null
 	);
 
+	protected $type;
+
+	public function setType(ProjectTypeModel $type) {
+		$this->type = $type;
+	}
+
+	public function getType() {
+		return $this->type;
+	}
+
 }
 
 ?>

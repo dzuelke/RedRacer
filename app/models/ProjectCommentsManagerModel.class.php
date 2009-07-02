@@ -29,6 +29,24 @@ class ProjectCommentsManagerModel extends RedracerBaseDoctrineManagerModel {
 	protected function getDoctrineRecordModelName() { return 'ProjectComment'; }
 	protected function getRecordModelName() { return 'ProjectComment'; }
 
+	public function lookupByProjectWithUser(ProjectModel $projectModel) {
+		$query = Doctrine_Query::create()
+			->select('*')
+			->from('ProjectComments pc')
+			->leftJoin('pc.Users u')
+			->where('pc.project = ?', $projectModel['id']);
+		$results = $query->execute()->getData();
+		$replicas = array();
+		foreach ($results as $r) {
+			$uReplica = $this->getContext()->getModel('User');
+			$uReplica->fromArray($r->Users->toArray());
+			$replica = $this->recordToReplica($r);
+			$replica['user'] = $uReplica;
+			$replicas[] = $replica;
+		}
+		return $replicas;
+	}
+
 	public function lookupByProject(ProjectModel $projectModel) {
 		return $this->lookupByField('project', $projectModel['id']);
 	}
