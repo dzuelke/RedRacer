@@ -160,7 +160,7 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 */
 	public function lookupOneByField($field, $value) {
 		$finder = 'findOneBy'.$field;
-		$record = $this->table->$finder($value);
+		$record = $this->table->$finder($value, Doctrine::HYDRATE_ARRAY);
 		$replica = $this->recordToReplica($record);
 		return $replica;
 	}
@@ -191,7 +191,9 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	 * @return	void
 	 */
 	public function update(RedracerBaseRecordModel $model) {
-		$doctrineRecord = new $this->getDoctrineRecordModelName();
+		$modelName = $this->getDoctrineRecordModelName();
+		$doctrineRecord = new $modelName;
+		$doctrineRecord->assignIdentifier($model[$this->getIndexName()]);
 		$doctrineRecord->fromArray($model->toArray());
 		if ($doctrineRecord->isValid()) {
 			$doctrineRecord->save();
