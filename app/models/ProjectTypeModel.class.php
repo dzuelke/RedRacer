@@ -23,7 +23,12 @@
  */
 
 class ProjectTypeModel extends RedracerBaseRecordModel {
-	
+
+	protected $defaultData = array(
+		'id' => null,
+		'type' => null
+	);
+
 }
 
 ?>

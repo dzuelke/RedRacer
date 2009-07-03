@@ -38,6 +38,8 @@ class UserModel extends RedracerBaseRecordModel
 		'realname' => null
 	);
 
+	protected $defaultData;
+
 	/**
 	 * (non-PHPdoc)
 	 * @see libs/agavi/model/AgaviModel#initialize()
@@ -48,6 +50,7 @@ class UserModel extends RedracerBaseRecordModel
 
 		$this->data['role'] =
             AgaviConfig::get('org.redracer.config.user.default_group');
+		$this->defaultData = $this->data;
 	}
 
 	/**

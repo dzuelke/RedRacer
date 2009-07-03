@@ -34,8 +34,10 @@ abstract class RedracerBaseManagerModel extends RedracerBaseModel implements Aga
 	 * Creates a new model
 	 * @return	object
 	 */
-	public function createNewModel() {
-		return $this->getContext()->getModel($this->getRecordModelName());
+	public function createNewModel(array $data = array()) {
+		$model = $this->getContext()->getModel($this->getRecordModelName());
+		$model->fromArray($data);
+		return $model;
 	}
 
 }

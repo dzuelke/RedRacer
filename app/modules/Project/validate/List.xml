@@ -16,7 +16,7 @@
 				</ae:parameters>
 			</validator>
 
-			<validator class="RedracerIsArrayValidator" required="false" severity="silent">
+			<validator class="RedracerTypeArrayValidator" required="false" severity="silent">
 				<argument>projectTypes</argument>
 			</validator>
 

@@ -24,7 +24,7 @@
 
 class ProjectCommentModel extends RedracerBaseRecordModel {
 
-	protected $data = array(
+	protected $defaultData = array(
 		'id' => null,
 		'project' => null,
 		'user' => null,

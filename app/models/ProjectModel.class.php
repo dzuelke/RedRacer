@@ -24,11 +24,13 @@
 
 class ProjectModel extends RedracerBaseRecordModel implements ArrayAccess {
 
-	protected $data = array(
+	protected $defaultData = array(
 		'id' => null,
 		'typeid' => null,
 		'name' => null,
-		'description' => null
+		'description' => null,
+		'average_rating' => null,
+		'number_of_ratings' => null
 	);
 
 	protected $type;

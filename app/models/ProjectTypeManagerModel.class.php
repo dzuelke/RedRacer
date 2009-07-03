@@ -34,6 +34,35 @@ class ProjectTypeManagerModel extends RedracerBaseDoctrineManagerModel {
 		return $this->lookupByIndex($projectModel['typeid']);
 	}
 
+	public function allTypesExist(array $types) {
+		if (empty($types)) {
+			return true;
+		}
+		reset($types);
+		$firstType = $types[key($types)];
+		if ($firstType['id'] !== null) {
+			$idField = 'id';
+		} elseif ($firstType['type'] !== null) {
+			$idField = 'type';
+		} else {
+			throw new Exception('Either id or type must be given');
+		}
+		$idList = array();
+		foreach ($types as $t) {
+			$idList[] = $t[$idField];
+		}
+		$query = Doctrine_Query::create()
+			->select('COUNT(pt.id) AS numrows')
+			->from('ProjectType pt')
+			->whereIn('pt.'.$idField, $idList);
+		$result = $query->fetchArray();
+		$numrows = $result[0]['numrows'];
+		if ($numrows != count($idList)) {
+			return false;
+		}
+		return true;
+	}
+
 }
 
 ?>

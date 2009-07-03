@@ -33,10 +33,24 @@ class RedracerBaseRecordModel extends RedracerBaseModel implements ArrayAccess {
 	protected $data = array();
 
 	/**
+	 * A map of field names to corresponding default values
+	 * @var array
+	 */
+	protected $defaultData = array();
+
+	/**
 	 * Reference to the manager for this model
 	 * @var RedracerBaseManagerModel
 	 */
 	protected $manager;
+
+	/**
+	 * 
+	 */
+	public function initialize(AgaviContext $context, array $parameters = array()) {
+		parent::initialize($context, $parameters);
+		$this->data = $this->defaultData;
+	}
 
 	/**
 	 * Loads fields and values from an array
@@ -44,7 +58,9 @@ class RedracerBaseRecordModel extends RedracerBaseModel implements ArrayAccess {
 	 * @return	void
 	 */
 	public function fromArray(array $data) {
-		$this->data = $data;
+		$this->data = array_merge(
+			$this->defaultData, array_intersect_key($data, $this->defaultData)
+		);
 	}
 
 	/**
@@ -83,7 +99,7 @@ class RedracerBaseRecordModel extends RedracerBaseModel implements ArrayAccess {
 			if (array_key_exists($offset, $this->data)) {
 				return $this->data[$offset];
 			} else {
-				throw new RedracerRecordAttributeExpception(
+				throw new RedracerRecordAttributeException(
 					'Attribute "'.$offset.'" does not exist'
 				);
 			}
