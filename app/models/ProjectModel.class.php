@@ -30,7 +30,8 @@ class ProjectModel extends RedracerBaseRecordModel implements ArrayAccess {
 		'name' => null,
 		'description' => null,
 		'average_rating' => null,
-		'number_of_ratings' => null
+		'number_of_ratings' => null,
+		'created_at' => null
 	);
 
 	protected $type;
