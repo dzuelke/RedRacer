@@ -2,14 +2,11 @@
 	Search name &amp; description:
 	<br /><input type="text" name="search" />
 	<br />
-	<br />Only include projects made by user:
-	<br /><input type="text" name="user" />
-	<br />
-	<br />Only include these project types:
-	<?php foreach ($t['projectTypes'] as $pt): ?>
-		<br /><?php echo ucwords($pt['type']); ?>
-		<input type="checkbox" name="projectTypes[]"
-			value="<?php echo $pt['type']; ?>" checked="checked" />
+	<br />Only include projects with these tags:
+	<?php foreach ($t['allTags'] as $pt): ?>
+		<br /><?php echo ucwords($pt['name']); ?>
+		<input type="checkbox" name="tags[]"
+			value="<?php echo $pt['name']; ?>" checked="checked" />
 	<?php endforeach; ?>
 	<br /><input type="submit" value="Search!" />
 </form>
@@ -62,10 +59,10 @@
 			<td><a href="<?php echo $ro->gen('project.read',
 				array('project' => $project['name']));
 			?>"><?php echo $project['name']; ?></a></td>
-			<td><?php echo $project['type']['type']; ?></td>
-			<td><?php echo $project['average_rating']; ?></td>
-			<td><?php echo $project['number_of_ratings']; ?></td>
-			<td><?php echo $project['description']; ?></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><?php echo $project['short_description']; ?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>

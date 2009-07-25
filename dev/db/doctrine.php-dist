@@ -11,6 +11,7 @@ Agavi::bootstrap('%%DEVELOPER.ENVIRONMENT%%');
 spl_autoload_register(array('Doctrine', 'autoload'));
 
 $con = AgaviContext::getInstance('console')->getDatabaseConnection();
+$con->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 
 $dir = dirname(__FILE__);
 

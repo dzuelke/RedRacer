@@ -1,46 +1,128 @@
-Users:
-  User_1:
-    username: admin
-    email: admin@redracer.tld
-    salt: 248df49dfede969fedfc1bf401e0e1d880270768
-    password: ed1c69d1e81ab7265d066583ef92b5ea65c6d83226daa7818307dee2fe42b3f7a5a28fb019de070fc336f6da43289a68b3984d5a133397e1a9424213bae319f3
-    role: Administrator
-    realname: Admin Redracer
-  User_2:
-    username: dev
-    email: dev@redracer.tld
-    salt: 68ba0f4c6da243e6a94e303693a867b9d59b831b
-    password: 6651801da94440a2a2893745d601ac429bc2d122715fa9441503a61fcfda503e8424d62bd9d158bd2a9ffa0b6adf1447d2be5b04b6626ca7f6338d253c8ca2d2
-    role: Developer
-    realname: Admin Redracer
-  User_3:
-    username: member
-    email: member@redracer.tld
-    salt: f06678742d4d959a1ac7f264f21910f596fd8e00
-    password: 636daab5233b75e5af2dd2bdf54f75191ecf03eff43ed1c426f9a50a7c4d4303610578bc4e901c1b7aaf4f988ffd63f1344a436bd07bb0a81c088baf282e6aad
-    role: Member
-    realname: Admin Redracer
+---
+Project:
+  Proj_1:
+    name: Lorem ipsum dolor sit amet
+    short_description: Vivamus fermentum, mauris at mattis egestas, nisi lectus condimentum odio, vitae adipiscing sapien est quis neque. Nulla id tempor velit.
+    long_description: Praesent in urna ante, fringilla scelerisque sem. Ut purus tellus, ullamcorper in faucibus sed, adipiscing luctus orci. Suspendisse consequat tincidunt nibh in mollis. Pellentesque eget massa est. Quisque felis neque, faucibus sed gravida eget, lacinia in ante. Nullam pharetra, dolor vel iaculis adipiscing, risus erat laoreet erat, eu semper enim ipsum vitae lorem. Fusce iaculis tristique convallis.
+    scm_url: http://www.example.com
+    bug_tracker_url: http://www.example.com
+    date: 1234567890
+    Owner: Dev_1
+    Tags: [ Plugin, Alpha ]
+  Proj_2:
+    name: Cras ac ligula felis
+    short_description: Nam ut consectetur ante. Etiam id lectus eu purus sollicitudin pellentesque a eu est.
+    long_description: Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec eros odio, blandit et pharetra in, facilisis ac nisl. Cras molestie ipsum sit amet sem aliquet vestibulum tincidunt nunc aliquam. Pellentesque id mauris eu erat bibendum facilisis. Curabitur placerat dui id metus lacinia mollis. Suspendisse ut lacus mauris. Fusce euismod auctor neque, quis cursus urna eleifend eget. Nam a mauris lorem, nec sodales mauris. Pellentesque porttitor tincidunt ligula, ac volutpat sem lobortis sit amet. Sed tristique suscipit felis in suscipit.
+    date: 1234567891
+    Owner: Dev_1
+    Tags: [ Snippet, Stable ]
+    Releases: [ Rel_2, Rel_3 ]
+  Proj_3:
+    name: Nunc varius lectus a lectus
+    short_description: Donec condimentum dignissim pretium. Suspendisse a risus sapien, at viverra dolor. Nunc venenatis fringilla scelerisque. Donec et tempus urna.
+    long_description: In eu quam a nunc aliquam bibendum sit amet et orci. Aliquam sagittis posuere libero, ac pulvinar sem convallis sed. Sed ac tellus nunc. Nulla lectus erat, hendrerit eget vestibulum vitae, sagittis vel nulla. Phasellus consequat nibh ut nisl scelerisque pellentesque. Sed urna nunc, rutrum et tempor ac, vehicula non odio. Nam in mauris dui, ut faucibus magna. Ut vehicula lectus sit amet magna semper id semper sapien ullamcorper.
+    date: 1234567892
+    Owner: Dev_2
+    Tags: [ Plugin, Beta ]
+    Releases: [ Rel_1 ]
 
-Projects:
-    Project_1:
-        typeid: 1
-        name: Quacking Duck
-        description: This project emphasizes the importance of water fowl.
-    Project_2:
-        typeid: 1
-        name: Woofing Dog
-        description: Dogs do not just bark; they can woof too.
-    Project_3:
-        typeid: 2
-        name: Mooing Cow
-        description: They are planning revolt, watch out. Stop them before they rise to power!
-    Project_4:
-        typeid: 2
-        name: Hooting Owl
-        description: A recovery program for owls who feel their identity has been desecrated.
+Tag:
+  Snippet:
+    name: Snippet
+    description: Small code samples
+  Plugin:
+    name: Plugin
+    description: Complete pluggable extension
+  Alpha:
+    name: Alpha
+    description: Initial development
+  Beta:
+    name: Beta
+    description: Testing for bugs and polishing features
+  Stable:
+    name: Stable
+    description: Ready for production use
 
-ProjectType:
-    ProjectType_1:
-        type: Wildlife Informative
-    ProjectType_2:
-        type: Absurd Concepts
+Release:
+  Rel_1:
+    description: Nullam erat augue, aliquam at lacinia sit amet, sagittis sit amet magna.
+    date: 1248260000
+    Project: Proj_2
+  Rel_2:
+    description: Integer iaculis pellentesque malesuada. Donec quis vulputate ante.
+    date: 1248270000
+    Project: Proj_2
+    Files: [ File_1, File_3]
+  Rel_3:
+    description: Cras tempor augue at risus rhoncus vestibulum non ut turpis.
+    date: 1248280000
+    Project: Proj_3
+    Files: [ File_2 ]
+
+File:
+  File_1:
+    description: Suspendisse bibendum sem in diam faucibus sed aliquam nibh laoreet.
+    binary_path: not_yet_implemented
+    size: 123456
+  File_2:
+    binary_path: not_yet_implemented
+    size: 82341
+  File_3:
+    description: Curabitur non nunc.
+    binary_path: not_yet_implemented
+    size: 4321
+
+Comment:
+  Com_1:
+    text: Mauris aliquet mauris non eros vulputate et auctor lacus volutpat. Integer a eros et dolor pellentesque vulputate. Vestibulum ut euismod justo.
+    date: 1248271000
+    Release: Rel_2
+  Com_2:
+    text: Donec ullamcorper, urna vel fringilla sollicitudin, ipsum odio blandit dui, a posuere ipsum odio ac nulla.
+    date: 1248281000
+    Release: Rel_3
+  Com_3:
+    text: Aliquam imperdiet aliquam mauris, in eleifend nunc viverra vitae. Vestibulum eu libero vitae diam pharetra interdum. In quis elit vel nunc pulvinar auctor. Vestibulum semper dolor in justo euismod dignissim. Aliquam erat volutpat.
+    date: 1248282000
+    Release: Rel_3
+
+ProjectDeveloper:
+  PD_1:
+    approved: true
+    Project: Proj_1
+    Developer: Dev_1
+  PD_2:
+    approved: false
+    Project: Proj_1
+    Developer: Dev_2
+  PD_3:
+    approved: true
+    Project: Proj_2
+    Developer: Dev_1
+  PD_4:
+    approved: true
+    Project: Proj_3
+    Developer: Dev_2
+
+Rating:
+  Rat_1:
+    liked: false
+    Release: Rel_2
+  Rat_2:
+    liked: true
+    Release: Rel_2
+
+Developer:
+  Dev_1:
+    name: Eric Brisco
+    email: eric.brisco@gmail.com
+    salt: 1633204aafecc69ee75a8cdfed1a214a9c7a8ea5
+    password: 8f2d1d4b2ed43a45cb2ca02a6d23e2814b4f25e1a93a93264a7e831658bddf3838b552440020abfd5a402f15edf3109a0cd9a6a268605ba3c683b3bf6ba801ca
+    website_url: http://www.abstractflow.com
+    avatar_url: not_yet_implemented
+    is_team_member: true
+  Dev_2:
+    name: Other Guy
+    email: example@example.com
+    salt: b34006b3a7ec375e6317bafbbd3e8c908cef5ca3
+    password: 2039a0a316e482d24e2034076bf4e98a81308968a0ff9850bdfa85129734e68493832b74f0ab44ab9fed0b4c1d35b1dbb4ad4459d69783b3e4337f13fc4bcca4

@@ -8,7 +8,7 @@
 
 		<!-- Validators -->
 		<autoload name="RedracerOrderModeValidator">%core.module_dir%/Project/lib/validator/RedracerOrderModeValidator.class.php</autoload>
-		<autoload name="RedracerTypeArrayValidator">%core.module_dir%/Project/lib/validator/RedracerTypeArrayValidator.class.php</autoload>
+		<autoload name="RedracerTagArrayValidator">%core.module_dir%/Project/lib/validator/RedracerTagArrayValidator.class.php</autoload>
 
 	</ae:configuration>
 </ae:configurations>

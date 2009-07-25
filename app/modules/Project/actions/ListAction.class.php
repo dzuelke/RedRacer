@@ -23,12 +23,12 @@ class Project_ListAction extends RedracerProjectBaseAction
 {
 
 	public function execute(AgaviRequestDataHolder $rd) {
-		// correct the projectTypes to be an array again
-		// this is done to prevent errors with functions that want arrays
-		// and FPF which will fatal on the ArrayObject
-		$rd->setParameter(
-			'projectTypes', (array)$rd->getParameter('projectTypes')
-		);
+    // tag models
+    if ($rd->getParameter('allTags') === null) {
+      $tagManager = $this->getContext()->getModel('Tag.Manager');
+      $rd->setParameter('allTags', $tagManager->lookupAll());
+    }
+    $this->setAttribute('allTags', $rd->getParameter('allTags'));
 
 		// how many records per page
 		$this->setAttribute('perPage', $perPage = 20);
@@ -39,14 +39,14 @@ class Project_ListAction extends RedracerProjectBaseAction
 			$rd->setParameter('page', $currentPage = 1);
 		}
 
-		$projectManager = $this->getContext()->getModel('ProjectManager');
+		$projectManager = $this->getContext()->getModel('Project.Manager');
 
 		// the number of total records
 		$this->setAttribute('rowCount', $projectManager->lookupRowCount());
 
-		$projectTypeManager =
-			$this->getContext()->getModel('ProjectTypeManager');
-		$this->setAttribute('projectTypes', $projectTypeManager->lookupAll());
+		$tagManager =
+			$this->getContext()->getModel('Tag.Manager');
+		$this->setAttribute('projectTags', $tagManager->lookupAll());
 
 		// figure out how the list should be ordered
 		// default order mode is descending
@@ -60,21 +60,12 @@ class Project_ListAction extends RedracerProjectBaseAction
 			$orderings[$orderByField] = $orderByMode;
 		}
 
-		// get user model if we need to limit by user
-		$user = $rd->getParameter('user');
-		$userModel = null;
-		if ($user != null) {
-			$userModel = $this->getContext()->getModel('User');
-			$userModel['username'] = $user;
-		}
-
 		$parameters = array(
 			'page' => $currentPage,
 			'perpage' => $perPage,
 			'orderings' => $orderings,
-			'user' => $userModel,
 			'search' => $rd->getParameter('search'),
-			'typenames' => $rd->getParameter('projectTypes')
+			'tags' => $rd->getParameter('selectedTags')
 		);
 		// get the right project records
 		$projects = $projectManager->lookupProjectList($parameters);

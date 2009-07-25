@@ -1,0 +1,610 @@
+[Wed Jul  1 13:47:25 2009] Form Population Filter could not parse the document due to the following errors: 
+
+Line 71: Opening and ending tag mismatch: a line 71 and td
+
+Line 76: Opening and ending tag mismatch: td line 71 and tr
+
+Line 78: Opening and ending tag mismatch: a line 78 and td
+
+Line 83: Opening and ending tag mismatch: td line 78 and tr
+
+Line 84: Opening and ending tag mismatch: tr line 77 and tbody
+
+Line 85: Opening and ending tag mismatch: tr line 70 and table
+
+Line 85: Opening and ending tag mismatch: tbody line 69 and div
+
+Line 87: Opening and ending tag mismatch: table line 61 and div
+
+Line 92: Opening and ending tag mismatch: div line 25 and body
+
+Line 93: Opening and ending tag mismatch: div line 11 and html
+
+Line 96: Premature end of data in tag body line 10
+
+Line 96: Premature end of data in tag html line 3
+
+
+Response content:
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<base href="http://localhost/redracer/branches/erisco/pub/" />
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="screen, projection" />
+		<title>Project List - Page 1 - Redracer</title>
+	</head>
+	<body>
+	<div id="outer">
+	<div id="header">
+		<h1><a href="http://www.redracer.org">Redracer</a></h1>
+		<h2>a generic forge based on <a href="http://www.agavi.org">Agavi</a></h2>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="#" accesskey="1" title="">Home</a></li>
+			<li><a href="#" accesskey="2" title="">About Us</a></li>
+			<li><a href="/redracer/branches/erisco/pub/index.php/project" accesskey="3" title="">Projects</a></li>
+                            <li><a href="/redracer/branches/erisco/pub/index.php/user/register" accesskey="4" title="">Register</a></li>
+                <li><a href="/redracer/branches/erisco/pub/index.php/login" accesskey="5" title="">Login</a></li>
+            		</ul>
+	</div>
+	<div id="content">
+		<div id="featured">
+			<h3>Etiam suscipit et</h3>
+			<p>Rhoncus ac, lacinia, nisl. Aliquam gravida massa eu arcu. <a href="#">More&#8230;</a></p>
+			<h3>Fusce dolor tristique</h3>
+			<p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
+			<h3>Nunc pellentesque</h3>
+			<p>Sed vestibulum blandit nisl. Quisque elementum convallis purus. Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in. <a href="#">More&#8230;</a></p>
+			<h3>Ipsum Dolorem</h3>
+			<ul>
+				<li><a href="#">Sagittis Bibendum Erat</a></li>
+				<li><a href="#">Malesuada Turpis</a></li>
+				<li><a href="#">Quis Gravida Massa</a></li>
+				<li><a href="#">Inerat Viverra Ornare</a></li>
+			</ul>
+		</div>
+		<div id="primary">
+			<h2>Project List - Page 1</h2>						<form action="/redracer/branches/erisco/pub/index.php/project/list?search=bar" method="get" id="listform">
+	Search name &amp; description:
+	<br /><input type="text" name="search" />
+	<br />
+	<br />Only include projects made by user:
+	<br /><input type="text" name="user" />
+	<br />
+	<br />Only include these project types:
+			<br />Wildlife Informative		<input type="checkbox" name="projectTypes[]"
+			value="Wildlife Informative" checked="checked" />
+			<br />Absurd Concepts		<input type="checkbox" name="projectTypes[]"
+			value="Absurd Concepts" checked="checked" />
+		<br /><input type="submit" value="Search!" />
+</form>
+
+<p>Jump to page:
+	<a href="/redracer/branches/erisco/pub/index.php/project/list?search=bar&amp;page=1">
+		1	</a></p>
+
+<table>
+	<thead>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=bar&amp;orderby=name&amp;ordermode=descending">Name								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=bar&amp;orderby=type&amp;ordermode=descending">Type								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=bar&amp;orderby=average_rating&amp;ordermode=descending">Avg. Rating								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=bar&amp;orderby=number_of_ratings&amp;ordermode=descending"># Rates								</a></th>
+				<th>Description</th>
+	</thead>
+	<tbody>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Woofing+Dog">Woofing Dog</td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>Dogs do not just bark; they can woof too.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=foo">foo</td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>bar</td>
+		</tr>
+		</tbody>
+</table>		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="footer">
+		<p>Copyright &#169; 2009 http://www.redracer.org. </p>
+	</div>
+    </div>
+	</body>
+</html>
+
+
+<!-- This page took 0.24756002426147 seconds to process -->
+[Wed Jul  1 14:06:27 2009] Form Population Filter could not parse the document due to the following errors: 
+
+Line 61: error parsing attribute name
+
+Line 61: attributes construct error
+
+Line 61: Couldn't find end of Start Tag input line 59
+
+Line 66: error parsing attribute name
+
+Line 66: attributes construct error
+
+Line 66: Couldn't find end of Start Tag input line 64
+
+
+Response content:
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<base href="http://localhost/redracer/branches/erisco/pub/" />
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="screen, projection" />
+		<title>Project List - Page 1 - Redracer</title>
+	</head>
+	<body>
+	<div id="outer">
+	<div id="header">
+		<h1><a href="http://www.redracer.org">Redracer</a></h1>
+		<h2>a generic forge based on <a href="http://www.agavi.org">Agavi</a></h2>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="#" accesskey="1" title="">Home</a></li>
+			<li><a href="#" accesskey="2" title="">About Us</a></li>
+			<li><a href="/redracer/branches/erisco/pub/index.php/project" accesskey="3" title="">Projects</a></li>
+                            <li><a href="/redracer/branches/erisco/pub/index.php/user/register" accesskey="4" title="">Register</a></li>
+                <li><a href="/redracer/branches/erisco/pub/index.php/login" accesskey="5" title="">Login</a></li>
+            		</ul>
+	</div>
+	<div id="content">
+		<div id="featured">
+			<h3>Etiam suscipit et</h3>
+			<p>Rhoncus ac, lacinia, nisl. Aliquam gravida massa eu arcu. <a href="#">More&#8230;</a></p>
+			<h3>Fusce dolor tristique</h3>
+			<p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
+			<h3>Nunc pellentesque</h3>
+			<p>Sed vestibulum blandit nisl. Quisque elementum convallis purus. Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in. <a href="#">More&#8230;</a></p>
+			<h3>Ipsum Dolorem</h3>
+			<ul>
+				<li><a href="#">Sagittis Bibendum Erat</a></li>
+				<li><a href="#">Malesuada Turpis</a></li>
+				<li><a href="#">Quis Gravida Massa</a></li>
+				<li><a href="#">Inerat Viverra Ornare</a></li>
+			</ul>
+		</div>
+		<div id="primary">
+			<h2>Project List - Page 1</h2>						object(ArrayObject)#195 (1) {
+  ["storage":"ArrayObject":private]=>
+  array(2) {
+    [0]=>
+    string(20) "Wildlife Informative"
+    [1]=>
+    string(15) "Absurd Concepts"
+  }
+}
+<form action="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B%5D=Wildlife+Informative&amp;projectTypes%5B%5D=Absurd+Concepts" method="get" id="listform">
+	Search name &amp; description:
+	<br /><input type="text" name="search" />
+	<br />
+	<br />Only include projects made by user:
+	<br /><input type="text" name="user" />
+	<br />
+	<br />Only include these project types:
+			<br />Wildlife Informative		<input type="checkbox" name="projectTypes[]"
+			value="Wildlife Informative"
+		<br />
+<b>Warning</b>:  in_array() expects parameter 2 to be array, object given in <b>/home/eric/NetBeansProjects/RedRacer/branches/erisco/app/modules/Project/templates/ListSuccess.php</b> on line <b>16</b><br />
+		/>
+			<br />Absurd Concepts		<input type="checkbox" name="projectTypes[]"
+			value="Absurd Concepts"
+		<br />
+<b>Warning</b>:  in_array() expects parameter 2 to be array, object given in <b>/home/eric/NetBeansProjects/RedRacer/branches/erisco/app/modules/Project/templates/ListSuccess.php</b> on line <b>16</b><br />
+		/>
+		<br /><input type="submit" value="Search!" />
+</form>
+
+<p>Jump to page:
+	<a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;page=1">
+		1	</a></p>
+
+<table>
+	<thead>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=name&amp;ordermode=descending">Name								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=type&amp;ordermode=descending">Type								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=average_rating&amp;ordermode=descending">Avg. Rating								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=number_of_ratings&amp;ordermode=descending"># Rates								</a></th>
+				<th>Description</th>
+	</thead>
+	<tbody>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Quacking+Duck">Quacking Duck</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>This project emphasizes the importance of water fowl.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Woofing+Dog">Woofing Dog</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>Dogs do not just bark; they can woof too.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Mooing+Cow">Mooing Cow</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>They are planning revolt, watch out. Stop them before they rise to power!</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Hooting+Owl">Hooting Owl</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>A recovery program for owls who feel their identity has been desecrated.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=foo">foo</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>bar</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=blah">blah</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>bloop bloop</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=bugs">bugs</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>are koool</td>
+		</tr>
+		</tbody>
+</table>		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="footer">
+		<p>Copyright &#169; 2009 http://www.redracer.org. </p>
+	</div>
+    </div>
+	</body>
+</html>
+
+
+<!-- This page took 0.27231001853943 seconds to process -->
+[Wed Jul  1 14:08:11 2009] Form Population Filter could not parse the document due to the following errors: 
+
+Line 61: error parsing attribute name
+
+Line 61: attributes construct error
+
+Line 61: Couldn't find end of Start Tag input line 59
+
+Line 66: error parsing attribute name
+
+Line 66: attributes construct error
+
+Line 66: Couldn't find end of Start Tag input line 64
+
+
+Response content:
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<base href="http://localhost/redracer/branches/erisco/pub/" />
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="screen, projection" />
+		<title>Project List - Page 1 - Redracer</title>
+	</head>
+	<body>
+	<div id="outer">
+	<div id="header">
+		<h1><a href="http://www.redracer.org">Redracer</a></h1>
+		<h2>a generic forge based on <a href="http://www.agavi.org">Agavi</a></h2>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="#" accesskey="1" title="">Home</a></li>
+			<li><a href="#" accesskey="2" title="">About Us</a></li>
+			<li><a href="/redracer/branches/erisco/pub/index.php/project" accesskey="3" title="">Projects</a></li>
+                            <li><a href="/redracer/branches/erisco/pub/index.php/user/register" accesskey="4" title="">Register</a></li>
+                <li><a href="/redracer/branches/erisco/pub/index.php/login" accesskey="5" title="">Login</a></li>
+            		</ul>
+	</div>
+	<div id="content">
+		<div id="featured">
+			<h3>Etiam suscipit et</h3>
+			<p>Rhoncus ac, lacinia, nisl. Aliquam gravida massa eu arcu. <a href="#">More&#8230;</a></p>
+			<h3>Fusce dolor tristique</h3>
+			<p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
+			<h3>Nunc pellentesque</h3>
+			<p>Sed vestibulum blandit nisl. Quisque elementum convallis purus. Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in. <a href="#">More&#8230;</a></p>
+			<h3>Ipsum Dolorem</h3>
+			<ul>
+				<li><a href="#">Sagittis Bibendum Erat</a></li>
+				<li><a href="#">Malesuada Turpis</a></li>
+				<li><a href="#">Quis Gravida Massa</a></li>
+				<li><a href="#">Inerat Viverra Ornare</a></li>
+			</ul>
+		</div>
+		<div id="primary">
+			<h2>Project List - Page 1</h2>						object(ArrayObject)#195 (1) {
+  ["storage":"ArrayObject":private]=>
+  array(2) {
+    [0]=>
+    string(20) "Wildlife Informative"
+    [1]=>
+    string(15) "Absurd Concepts"
+  }
+}
+<form action="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B%5D=Wildlife+Informative&amp;projectTypes%5B%5D=Absurd+Concepts" method="get" id="listform">
+	Search name &amp; description:
+	<br /><input type="text" name="search" />
+	<br />
+	<br />Only include projects made by user:
+	<br /><input type="text" name="user" />
+	<br />
+	<br />Only include these project types:
+			<br />Wildlife Informative		<input type="checkbox" name="projectTypes[]"
+			value="Wildlife Informative"
+		<br />
+<b>Warning</b>:  in_array() expects parameter 2 to be array, object given in <b>/home/eric/NetBeansProjects/RedRacer/branches/erisco/app/modules/Project/templates/ListSuccess.php</b> on line <b>16</b><br />
+		/>
+			<br />Absurd Concepts		<input type="checkbox" name="projectTypes[]"
+			value="Absurd Concepts"
+		<br />
+<b>Warning</b>:  in_array() expects parameter 2 to be array, object given in <b>/home/eric/NetBeansProjects/RedRacer/branches/erisco/app/modules/Project/templates/ListSuccess.php</b> on line <b>16</b><br />
+		/>
+		<br /><input type="submit" value="Search!" />
+</form>
+
+<p>Jump to page:
+	<a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;page=1">
+		1	</a></p>
+
+<table>
+	<thead>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=name&amp;ordermode=descending">Name								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=type&amp;ordermode=descending">Type								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=average_rating&amp;ordermode=descending">Avg. Rating								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=number_of_ratings&amp;ordermode=descending"># Rates								</a></th>
+				<th>Description</th>
+	</thead>
+	<tbody>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Quacking+Duck">Quacking Duck</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>This project emphasizes the importance of water fowl.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Woofing+Dog">Woofing Dog</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>Dogs do not just bark; they can woof too.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Mooing+Cow">Mooing Cow</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>They are planning revolt, watch out. Stop them before they rise to power!</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Hooting+Owl">Hooting Owl</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>A recovery program for owls who feel their identity has been desecrated.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=foo">foo</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>bar</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=blah">blah</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>bloop bloop</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=bugs">bugs</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>are koool</td>
+		</tr>
+		</tbody>
+</table>		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="footer">
+		<p>Copyright &#169; 2009 http://www.redracer.org. </p>
+	</div>
+    </div>
+	</body>
+</html>
+
+
+<!-- This page took 0.27304720878601 seconds to process -->
+[Wed Jul  1 14:19:01 2009] Form Population Filter could not parse the document due to the following errors: 
+
+Line 61: error parsing attribute name
+
+Line 61: attributes construct error
+
+Line 61: Couldn't find end of Start Tag input line 59
+
+Line 66: error parsing attribute name
+
+Line 66: attributes construct error
+
+Line 66: Couldn't find end of Start Tag input line 64
+
+
+Response content:
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<base href="http://localhost/redracer/branches/erisco/pub/" />
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="screen, projection" />
+		<title>Project List - Page 1 - Redracer</title>
+	</head>
+	<body>
+	<div id="outer">
+	<div id="header">
+		<h1><a href="http://www.redracer.org">Redracer</a></h1>
+		<h2>a generic forge based on <a href="http://www.agavi.org">Agavi</a></h2>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="#" accesskey="1" title="">Home</a></li>
+			<li><a href="#" accesskey="2" title="">About Us</a></li>
+			<li><a href="/redracer/branches/erisco/pub/index.php/project" accesskey="3" title="">Projects</a></li>
+                            <li><a href="/redracer/branches/erisco/pub/index.php/user/register" accesskey="4" title="">Register</a></li>
+                <li><a href="/redracer/branches/erisco/pub/index.php/login" accesskey="5" title="">Login</a></li>
+            		</ul>
+	</div>
+	<div id="content">
+		<div id="featured">
+			<h3>Etiam suscipit et</h3>
+			<p>Rhoncus ac, lacinia, nisl. Aliquam gravida massa eu arcu. <a href="#">More&#8230;</a></p>
+			<h3>Fusce dolor tristique</h3>
+			<p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
+			<h3>Nunc pellentesque</h3>
+			<p>Sed vestibulum blandit nisl. Quisque elementum convallis purus. Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in. <a href="#">More&#8230;</a></p>
+			<h3>Ipsum Dolorem</h3>
+			<ul>
+				<li><a href="#">Sagittis Bibendum Erat</a></li>
+				<li><a href="#">Malesuada Turpis</a></li>
+				<li><a href="#">Quis Gravida Massa</a></li>
+				<li><a href="#">Inerat Viverra Ornare</a></li>
+			</ul>
+		</div>
+		<div id="primary">
+			<h2>Project List - Page 1</h2>						object(ArrayObject)#195 (1) {
+  ["storage":"ArrayObject":private]=>
+  array(2) {
+    [0]=>
+    string(20) "Wildlife Informative"
+    [1]=>
+    string(15) "Absurd Concepts"
+  }
+}
+<form action="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B%5D=Wildlife+Informative&amp;projectTypes%5B%5D=Absurd+Concepts" method="get" id="listform">
+	Search name &amp; description:
+	<br /><input type="text" name="search" />
+	<br />
+	<br />Only include projects made by user:
+	<br /><input type="text" name="user" />
+	<br />
+	<br />Only include these project types:
+			<br />Wildlife Informative		<input type="checkbox" name="projectTypes[]"
+			value="Wildlife Informative"
+		<br />
+<b>Warning</b>:  in_array() expects parameter 2 to be array, object given in <b>/home/eric/NetBeansProjects/RedRacer/branches/erisco/app/modules/Project/templates/ListSuccess.php</b> on line <b>16</b><br />
+		/>
+			<br />Absurd Concepts		<input type="checkbox" name="projectTypes[]"
+			value="Absurd Concepts"
+		<br />
+<b>Warning</b>:  in_array() expects parameter 2 to be array, object given in <b>/home/eric/NetBeansProjects/RedRacer/branches/erisco/app/modules/Project/templates/ListSuccess.php</b> on line <b>16</b><br />
+		/>
+		<br /><input type="submit" value="Search!" />
+</form>
+
+<p>Jump to page:
+	<a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;page=1">
+		1	</a></p>
+
+<table>
+	<thead>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=name&amp;ordermode=descending">Name								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=type&amp;ordermode=descending">Type								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=average_rating&amp;ordermode=descending">Avg. Rating								</a></th>
+					<th><a href="/redracer/branches/erisco/pub/index.php/project/list?search=&amp;user=&amp;projectTypes%5B0%5D=Wildlife+Informative&amp;projectTypes%5B1%5D=Absurd+Concepts&amp;orderby=number_of_ratings&amp;ordermode=descending"># Rates								</a></th>
+				<th>Description</th>
+	</thead>
+	<tbody>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Quacking+Duck">Quacking Duck</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>This project emphasizes the importance of water fowl.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Woofing+Dog">Woofing Dog</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>Dogs do not just bark; they can woof too.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Mooing+Cow">Mooing Cow</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>They are planning revolt, watch out. Stop them before they rise to power!</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=Hooting+Owl">Hooting Owl</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>A recovery program for owls who feel their identity has been desecrated.</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=foo">foo</a></td>
+			<td>Absurd Concepts</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>bar</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=blah">blah</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>bloop bloop</td>
+		</tr>
+			<tr>
+			<td><a href="/redracer/branches/erisco/pub/index.php/project/view?project=bugs">bugs</a></td>
+			<td>Wildlife Informative</td>
+			<td>0.00</td>
+			<td>0</td>
+			<td>are koool</td>
+		</tr>
+		</tbody>
+</table>		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="footer">
+		<p>Copyright &#169; 2009 http://www.redracer.org. </p>
+	</div>
+    </div>
+	</body>
+</html>
+
+
+<!-- This page took 0.25892114639282 seconds to process -->

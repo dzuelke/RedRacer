@@ -16,8 +16,12 @@
 				</ae:parameters>
 			</validator>
 
-			<validator class="RedracerTypeArrayValidator" required="false" severity="silent">
-				<argument>projectTypes</argument>
+			<validator class="RedracerTagArrayValidator" required="false" severity="silent">
+				<argument>tags</argument>
+        <ae:parameters>
+          <ae:parameter name="selectedTagModelsExport">selectedTags</ae:parameter>
+          <ae:parameter name="allTagModelsExport">allTags</ae:parameter>
+        </ae:parameters>
 			</validator>
 
 			<validator class="AgaviNumberValidator" required="false" severity="silent">
@@ -35,20 +39,10 @@
 			<validator class="AgaviInarrayValidator" required="false" severity="silent">
 				<argument>orderby</argument>
 				<ae:parameters>
-					<ae:parameter name="values">name,type,average_rating,number_of_ratings</ae:parameter>
+					<ae:parameter name="values">name,date</ae:parameter>
 					<ae:parameter name="sep">,</ae:parameter>
 					<ae:parameter name="case">false</ae:parameter>
 				</ae:parameters>
-			</validator>
-
-			<validator class="AgaviNotoperatorValidator" required="false" severity="silent">
-				<validator class="RedracerUniqueFieldValueValidator" required="false" severity="silent">
-					<argument>user</argument>
-					<ae:parameters>
-						<ae:parameter name="table_manager">UserManager</ae:parameter>
-						<ae:parameter name="field_name">username</ae:parameter>
-					</ae:parameters>
-				</validator>
 			</validator>
 
 		</validators>
