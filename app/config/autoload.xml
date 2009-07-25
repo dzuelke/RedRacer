@@ -22,6 +22,10 @@
 		<!-- Validators -->
 		<autoload name="RedracerUniqueFieldValueValidator">%core.lib_dir%/validator/RedracerUniqueFieldValueValidator.class.php</autoload>
 
+    <!-- Exceptions -->
+    <autoload name="RedracerException">%core.lib_dir%/exception/RedracerException.class.php</autoload>
+    <autoload name="RedracerNoRecordException">%core.lib_dir%/exception/RedracerNoRecordException.class.php</autoload>
+
 	</ae:configuration>
 	<ae:configuration environment="development.*">
 		<!-- for FirePHP output  -->

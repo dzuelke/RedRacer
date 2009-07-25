@@ -46,16 +46,22 @@ Tag:
 Release:
   Rel_1:
     description: Nullam erat augue, aliquam at lacinia sit amet, sagittis sit amet magna.
-    date: 1248260000
+    date: 1246000000
+    likes: 10
+    dislikes: 20
     Project: Proj_2
   Rel_2:
     description: Integer iaculis pellentesque malesuada. Donec quis vulputate ante.
-    date: 1248270000
+    date: 1247000000
+    likes: 100
+    dislikes: 10
     Project: Proj_2
     Files: [ File_1, File_3]
   Rel_3:
     description: Cras tempor augue at risus rhoncus vestibulum non ut turpis.
-    date: 1248280000
+    date: 1248000000
+    likes: 5
+    dislikes: 0
     Project: Proj_3
     Files: [ File_2 ]
 
@@ -103,14 +109,6 @@ ProjectDeveloper:
     approved: true
     Project: Proj_3
     Developer: Dev_2
-
-Rating:
-  Rat_1:
-    liked: false
-    Release: Rel_2
-  Rat_2:
-    liked: true
-    Release: Rel_2
 
 Developer:
   Dev_1:

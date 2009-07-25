@@ -53,9 +53,7 @@ class Project_ListSuccessView extends RedracerProjectBaseView
 		// Create a data structure to represent the fields and their ordering
 		$fieldData = array(
 			array('name', 'Name', null, 'descending'),
-			array('type', 'Type', null, 'descending'),
-			array('average_rating', 'Avg. Rating', null, 'descending'),
-			array('number_of_ratings', '# Rates', null, 'descending')
+			array('date', 'Established', null, 'descending'),
 		);
 		$fieldIndex = 0;
 		$readableIndex = 1;

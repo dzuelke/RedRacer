@@ -9,7 +9,7 @@
 
 /**
  * (Description here)
- * 
+ *
  * @author     Eric Brisco <erisco@abstractflow.com>
  * @copyright  Authors
  * @license    GPLv3
@@ -18,26 +18,5 @@
  * @since      1.0
  * @version    $Id$
 */
-class Project_ReadSuccessView extends RedracerProjectBaseView
-{
-	public function executeHtml(AgaviRequestDataHolder $rd)
-	{
-		$userinfo =
-			$this->getContext()->getUser()->getAttribute('userinfo');
-		$developers = $this->getAttribute('developers');
-		$belongsToCurrentUser = false;
-		foreach ($developers as $d) {
-			if ($d['name'] == $userinfo['username']) {
-				$belongsToCurrentUser = true;
-				break;
-			}
-		}
-		$this->setAttribute('belongsToCurrentUser', $belongsToCurrentUser);
-
-		$this->setupHtml($rd);
-
-		$this->setAttribute('_title', 'Read');
-	}
-}
-
+class RedracerException extends Exception {}
 ?>

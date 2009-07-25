@@ -6,18 +6,41 @@
 	</p>
 <?php endif; ?>
 
-<p>Type: <?php echo $t['project']['type']['type']; ?>
-<br />Description: <?php echo $t['project']['description']; ?></p>
+<?php if ($t['rating'] === false): ?>
+<p>Current Rating: N/A</p>
+<?php else: ?>
+<p>Current Rating: <?php echo round($t['rating'] * 100); ?>%</p>
+<?php endif; ?>
 
-<h3>Maintainers</h3>
+<p><?php echo $t['project']['long_description']; ?></p>
+
+<h3>Developers</h3>
 <ul>
-<?php foreach ($t['maintainers'] as $m): ?>
-	<li><?php echo $m['username']; ?></li>
+<?php foreach ($t['developers'] as $d): ?>
+	<li><?php echo $d['name']; ?></li>
 <?php endforeach; ?>
 </ul>
 
-<h3>Comments</h3>
-<?php foreach ($t['comments'] as $c): ?>
-	<p>On <?php echo $c['date']; ?>,
-	<?php echo $c['user']['username']; ?> said: <?php echo $c['comment']; ?></p>
+<h3>Latest Release</h3>
+<?php if ($t['latestRelease'] === false): ?>
+<p>No releases!</p>
+<?php else: ?>
+<p><?php echo $t['latestRelease']['description']; ?></p>
+<?php endif; ?>
+
+<h3>All Releases</h3>
+<?php if (empty($t['releases'])): ?>
+<p>No releases!</p>
+<?php endif; ?>
+<?php foreach ($t['releases'] as $r): ?>
+  <p>Date: <?php echo date('Y/m/d', $r['date']); ?>
+  <br />Rating:
+  <?php if ($r['ratingPercent'] === false): ?>
+    N/A
+  <?php else: ?>
+    <?php echo $r['ratingPercent']; ?>%
+  <?php endif; ?>
+  (<?php echo $r['numRatings']; ?> rates)
+  <br />Description: <?php echo $r['description']; ?>
+  </p>
 <?php endforeach; ?>

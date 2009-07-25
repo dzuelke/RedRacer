@@ -25,8 +25,29 @@ class Release_RecordModel extends RedracerBaseRecordModel
     'id' => null,
     'description' => null,
     'date' => null,
-    'project' => null
+    'project' => null,
+    'likes' => null,
+    'dislikes' => null
   );
+
+  public function getRating() {
+    if ($this['likes'] == 0 && $this['dislikes'] == 0) {
+      return false;
+    }
+    return $this['likes'] / ($this['likes'] + $this['dislikes']);
+  }
+
+  public function getRatingPercent() {
+    $rating = $this->getRating();
+    if ($rating === false) {
+      return false;
+    }
+    return round($rating * 100);
+  }
+
+  public function getNumRatings() {
+    return $this['likes'] + $this['dislikes'];
+  }
 
 }
 

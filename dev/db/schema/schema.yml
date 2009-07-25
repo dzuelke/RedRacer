@@ -76,6 +76,12 @@ Release:
     project:
       type: integer
       notnull: true
+    likes:
+      type: integer
+      notnull: true
+    dislikes:
+      type: integer
+      notnull: true
   relations:
     Project:
       local: project
@@ -195,24 +201,6 @@ Comment:
       foreign: id
       type: one
 
-Rating:
-  package: Project
-  tableName: rating
-  columns:
-    release:
-      type: integer
-      notnull: true
-    liked:
-      type: boolean
-      notnull: true
-  relations:
-    Release:
-      local: release
-      foreign: id
-      type: one
-      foreignType: many
-      foreignAlias: Ratings
-
 ProjectsTags:
   package: Project
   tableName: project_tag
@@ -243,13 +231,16 @@ RatingsLog:
     date:
       type: integer
       notnull: true
-    rating:
+    release:
       type: integer
       notnull: true
+    liked:
+      type: boolean
+      notnull: true
   relations:
-    Rating:
-      local: rating
+    Release:
+      local: release
       type: one
       foreign: id
-      foreignAlias: Log
-      foreignType: one
+      foreignAlias: RatingLogs
+      foreignType: many

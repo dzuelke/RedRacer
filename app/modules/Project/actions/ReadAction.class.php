@@ -21,27 +21,36 @@
 class Project_ReadAction extends RedracerProjectBaseAction
 {
 	public function execute(AgaviRequestDataHolder $rd) {
-		// get project data
+		// get & set project data
 		$results = $rd->getParameter('project');
 		$project = $results[0];
+    $this->setAttribute('project', $project);
 
-		// get project type
-		$ptManager = $this->getContext()->getModel('ProjectTypeManager');
-		$projectType = $ptManager->lookupByProject($project);
-		$project['type'] = $projectType;
+		// get and set project tags
+		$pm = $this->getContext()->getModel('Project.Manager');
+		$tags = $pm->lookupTagsFor($project);
+		$this->setAttribute('tags', $tags);	
 
-		// set project data
-		$this->setAttribute('project', $project);
+    // get and set project developers
+    $developers = $pm->lookupDevelopersFor($project);
+    $this->setAttribute('developers', $developers);
 
-		// get and set the project comments
-		$pcManager = $this->getContext()->getModel('ProjectCommentsManager');
-		$comments = $pcManager->lookupByProjectWithUser($project);
-		$this->setAttribute('comments', $comments);
+    // get and set releases
+    $releases = $pm->lookupReleasesFor($project);
+    $this->setAttribute('releases', $releases);
+    if (count($releases) >= 1) {
+      $this->setAttribute('latestRelease', $releases[0]);
+    } else {
+      $this->setAttribute('latestRelease', false);
+    }  
 
-		// get and set the project maintainers
-		$pmManager = $this->getContext()->getModel('ProjectMaintainerManager');
-		$maintainers = $pmManager->lookupMaintainersByProject($project);
-		$this->setAttribute('maintainers', $maintainers);
+    // get and set current project rating
+    try {
+      $rating = $pm->calculateRatingWith($releases);
+      $this->setAttribute('rating', $rating);
+    } catch (RedracerNoRecordException $e) {
+      $this->setAttribute('rating', false);
+    }
 
 		return 'Success';
 	}

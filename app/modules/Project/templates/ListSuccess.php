@@ -59,9 +59,7 @@
 			<td><a href="<?php echo $ro->gen('project.read',
 				array('project' => $project['name']));
 			?>"><?php echo $project['name']; ?></a></td>
-			<td></td>
-			<td></td>
-			<td></td>
+      <td><?php echo date('Y/m/d', $project['date']); ?></td>
 			<td><?php echo $project['short_description']; ?></td>
 		</tr>
 	<?php endforeach; ?>

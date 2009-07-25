@@ -26,6 +26,80 @@ class Project_ManagerModel extends RedracerBaseDoctrineManagerModel
 	protected function getDoctrineRecordModelName() { return 'Project'; }
 	protected function getRecordModelName() { return 'Project.Record'; }
 
+  public function lookupTagsFor(Project_RecordModel $p) {
+    $query = Doctrine_Query::create()
+      ->select('t.name, t.description')
+      ->from('Tag t')
+      ->leftJoin('t.Projects p');
+    if ($p['id'] !== null) {
+      $query->where('p.id = ?', $p['id']);
+    } elseif ($p['name'] !== null) {
+      $query->where('p.name =?', $p['name']);
+    } else {
+      throw new Exception('Must specify project name or id');
+    }
+    $results = $query->fetchArray();
+    $replicas = array_map(array($this, 'recordToReplica'), $results);
+    return $replicas;
+  }
+
+  public function lookupDevelopersFor(Project_RecordModel $p) {
+    $query = Doctrine_Query::create()
+      ->select('d.name, d.email, d.website_url, d.avatar_url')
+      ->from('Developer d')
+      ->leftJoin('d.DevelopingProjects p');
+    if ($p['id'] !== null) {
+      $query->where('p.id = ?', $p['id']);
+    } elseif ($p['name'] !== null) {
+      $query->where('p.name =?', $p['name']);
+    } else {
+      throw new Exception('Must specify project name or id');
+    }
+    $results = $query->fetchArray();
+    $replicas = array_map(array($this, 'recordToReplica'), $results);
+    return $replicas;
+  }
+
+  public function lookupReleasesFor(Project_RecordModel $p) {
+    $rm = $this->getContext()->getModel('Release.Manager');
+    return $rm->lookupByProject($p);
+  }
+
+  public function lookupRatingFor(Project_RecordModel $p) {
+    return $this->calculateRatingWith($this->lookupReleasesFor($p));
+  }
+
+  public function calculateRatingWith($releases) {
+    if (empty($releases)) {
+      throw new RedracerNoRecordException();
+    }
+    $avgNumRatings = 0;
+    $cReleases = count($releases);
+    for ($i = 0; $i < $cReleases; ++$i) {
+      $avgNumRatings += $releases[$i]['likes'] + $releases[$i]['dislikes'];
+    }
+    $avgNumRatings /= $i;
+
+    $curRating = 0;
+    $ratingSpots = $avgNumRatings;
+    for ($i = 0; $ratingSpots != 0; ++$i) {
+      $likes = $releases[$i]['likes'];
+      $dislikes = $releases[$i]['dislikes'];
+      $remaining = $ratingSpots - $likes - $dislikes;
+      if ($remaining < 0) {
+        $weight = $ratingSpots;
+        $ratingSpots = 0;
+      } else {
+        $weight = $likes + $dislikes;
+        $ratingSpots -= $weight;
+      }
+      $avgRating = $likes / ($likes + $dislikes);
+      $curRating += $avgRating*$weight;
+    }
+    $curRating /= $avgNumRatings;
+    return $curRating;
+  }
+
 	/**
 	 *
 	 */

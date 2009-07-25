@@ -12,6 +12,8 @@
 							<ae:parameter name="AUTOLOAD_TABLE_CLASSES">true</ae:parameter>
 							<ae:parameter name="VALIDATE">ALL</ae:parameter>
 							<ae:parameter name="AUTO_ACCESSOR_OVERRIDE">true</ae:parameter>
+              <!-- this happens to be Doctrine::ATTR_QUOTE_IDENTIFIER -->
+              <ae:parameter name="101">true</ae:parameter>
 						</ae:parameters>
 					</ae:parameter>
 					<ae:parameter name="manager_attributes">

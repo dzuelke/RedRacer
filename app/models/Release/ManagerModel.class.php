@@ -22,9 +22,28 @@ class Release_ManagerModel extends RedracerBaseDoctrineManagerModel
 {
 
   protected function getIndexName() { return 'id'; }
-  protected function getTableName() { return 'release'; }
+  protected function getTableName() { return 'Release'; }
   protected function getDoctrineRecordModelName() { return 'Release'; }
   protected function getRecordModelName() { return 'Release.Record'; }
+
+  public function lookupByProject(Project_RecordModel $p) {
+    $query = Doctrine_Query::create()
+      ->select('r.date, r.description, r.likes, r.dislikes')
+      ->from('Release r')
+      ->leftJoin('Project p')
+      ->orderby('r.date DESC');
+    if ($p['id'] !== null) {
+      $query->where('r.project = ?', $p['id']);
+    } elseif ($p['name'] !== null) {
+      $query->where('r.project = p.id');
+      $query->andWhere('p.name = ?', $p['name']);
+    } else {
+      throw new Exception('Must specify project name or id');
+    }
+    $results = $query->fetchArray();
+    $replicas = array_map(array($this, 'recordToReplica'), $results);
+    return $replicas;
+  }
 
 }
 
