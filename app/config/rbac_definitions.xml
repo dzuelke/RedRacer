@@ -4,28 +4,21 @@
 	<ae:configuration>
 
 		<roles>
-			<role name="Member">
+			<role name="Developer">
 				<permissions>
 					<permission>user.changepassword</permission>
 					<permission>user.index</permission>
-                    <permission>user.updateinformation</permission>
+          <permission>user.updateinformation</permission>
+          <permission>approve</permission>
 				</permissions>
 
-				<roles>
-					<role name="Developer">
-						<permissions>
-							<permission>approve</permission>
-						</permissions>
-
-						<roles>
-							<role name="Administrator">
-								<permissions>
-									<permission>all</permission>
-								</permissions>
-							</role>
-						</roles>
-					</role>
-				</roles>
+          <roles>
+            <role name="Administrator">
+              <permissions>
+                <permission>all</permission>
+              </permissions>
+            </role>
+          </roles>
 			</role>
 		</roles>
 	</ae:configuration>

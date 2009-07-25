@@ -32,30 +32,30 @@ class RedracerUser extends AgaviRbacSecurityUser {
 	 * @throws     AgaviSecurityException
 	 * @return     void
 	 */
-	public function login($username, $password, $isPasswordHashed = false)
+	public function login($name, $password, $isPasswordHashed = false)
 	{
 		/**
 		 * @var        UserModel
 		 */
-		$user = $this->getContext()->getModel('UserManager')->lookupUserByUsername($username);
-
-		if($user === false) {
-			throw new AgaviSecurityException('username');
-		}
+    try {
+      $user = $this->getContext()->getModel('Developer.Manager')->lookupByName($name);
+    } catch (RedracerNoRecordException $e) {
+      throw new AgaviSecurityException('username');
+    }
 
 		// Hash the Password. No need for plaintext.
 		if (!$isPasswordHashed) {
-			$password = $this->computeHash($password, $user->salt);
+			$password = $this->computeHash($password, $user['salt']);
 		}
 
-		if($password != $user->password) {
+		if($password != $user['password']) {
 			throw new AgaviSecurityException('password');
 		}
 
 		$this->setAuthenticated(true);
 		$this->clearCredentials();
 		$this->revokeAllRoles();
-		$this->grantRole($user->role);
+		$this->grantRole('Developer');
 		
 		// Set the userinfo
 		$this->setAttribute('userinfo', $user->toArray());

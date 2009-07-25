@@ -135,6 +135,9 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 		$record = $this->table->$finder(
 			$index, Doctrine::HYDRATE_ARRAY
 		);
+    if ($record === false) {
+      throw new RedracerNoRecordException();
+    }
 		$replica = $this->recordToReplica($record);
 		return $replica;
 	}
@@ -161,6 +164,9 @@ abstract class RedracerBaseDoctrineManagerModel extends RedracerBaseManagerModel
 	public function lookupOneByField($field, $value) {
 		$finder = 'findOneBy'.$field;
 		$record = $this->table->$finder($value, Doctrine::HYDRATE_ARRAY);
+    if ($record === false) {
+      throw new RedracerNoRecordException();
+    }
 		$replica = $this->recordToReplica($record);
 		return $replica;
 	}
