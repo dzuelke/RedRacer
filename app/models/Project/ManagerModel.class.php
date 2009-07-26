@@ -26,18 +26,23 @@ class Project_ManagerModel extends RedracerBaseDoctrineManagerModel
 	protected function getDoctrineRecordModelName() { return 'Project'; }
 	protected function getRecordModelName() { return 'Project.Record'; }
 
+  protected function getIdentity(Project_RecordModel $p) {
+    if ($p['id'] !== null) {
+      return 'id';
+    } elseif ($p['name'] !== null) {
+      return 'name';
+    } else {
+      throw new Exception('Must specify project name or id');
+    }
+  }
+
   public function lookupTagsFor(Project_RecordModel $p) {
     $query = Doctrine_Query::create()
       ->select('t.name, t.description')
       ->from('Tag t')
       ->leftJoin('t.Projects p');
-    if ($p['id'] !== null) {
-      $query->where('p.id = ?', $p['id']);
-    } elseif ($p['name'] !== null) {
-      $query->where('p.name =?', $p['name']);
-    } else {
-      throw new Exception('Must specify project name or id');
-    }
+    $ident = $this->getIdentity($p);
+    $query->where('p.'.$ident.' = ?', $p[$ident]);
     $results = $query->fetchArray();
     $replicas = array_map(array($this, 'recordToReplica'), $results);
     return $replicas;
@@ -48,16 +53,24 @@ class Project_ManagerModel extends RedracerBaseDoctrineManagerModel
       ->select('d.name, d.email, d.website_url, d.avatar_url')
       ->from('Developer d')
       ->leftJoin('d.DevelopingProjects p');
-    if ($p['id'] !== null) {
-      $query->where('p.id = ?', $p['id']);
-    } elseif ($p['name'] !== null) {
-      $query->where('p.name =?', $p['name']);
-    } else {
-      throw new Exception('Must specify project name or id');
-    }
+    $ident = $this->getIdentity($p);
+    $query->where('p.'.$ident.' = ?', $p[$ident]);
     $results = $query->fetchArray();
     $replicas = array_map(array($this, 'recordToReplica'), $results);
     return $replicas;
+  }
+
+  public function addTagsTo(Project_RecordModel $p, array $tags) {
+    $dproj = new Project;
+    $dproj->fromArray($p->toArray());
+    $dproj->assignIdentifier($p['id']);
+    foreach ($tags as $t) {
+      $dtag = new Tag;
+      $dtag->fromArray($t->toArray());
+      $dtag->assignIdentifier($t['id']);
+      $dproj->Tags[] = $dtag;
+    }
+    $dproj->save();
   }
 
   public function lookupReleasesFor(Project_RecordModel $p) {
@@ -120,6 +133,7 @@ class Project_ManagerModel extends RedracerBaseDoctrineManagerModel
 			'perpage' => 20,
 			'orderings' => array(),
 			'search' => null,
+      'owner' => null,
 			'tags' => array()
 		);
 		$parameters = array_merge(
@@ -161,6 +175,18 @@ class Project_ManagerModel extends RedracerBaseDoctrineManagerModel
           $tagNames[] = $t['name'];
         }
         $query->whereIn('p.Tags.name', $tagNames);
+      }
+    }
+
+    // limit to projects by a particular owner
+    if ($owner !== null) {
+      $query->leftJoin('p.Owner o');
+      if ($owner['id'] !== null) {
+        $query->andWhere('o.id = ?', $owner['id']);
+      } elseif ($owner['email'] !== null) {
+        $query->andWhere('o.email = ?', $owner['email']);
+      } else {
+        throw new Exception('Owner given but id nor email is specified.');
       }
     }
 

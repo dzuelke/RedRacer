@@ -4,20 +4,20 @@
     <table>
         <tbody>
             <tr>
-                <td>Username</td>
-                <td><?php echo $userinfo['username']; ?></td>
+                <td>Name</td>
+                <td><input type="text" name="name" value="<?php echo htmlspecialchars($userinfo['name']); ?>" /></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td><input type="text" name="email" value="<?php echo $userinfo['email']; ?>" /></td>
+                <td><input type="text" name="email" value="<?php echo htmlspecialchars($userinfo['email']); ?>" /></td>
             </tr>
             <tr>
-                <td>Real Name</td>
-                <td><input type="text" name="realname" value="<?php echo $userinfo['realname']; ?>" /></td>
+                <td>Wesite</td>
+                <td><input type="text" name="website" value="<?php echo htmlspecialchars($userinfo['website_url']); ?>" /></td>
             </tr>
             <tr>
-                <td>Rights</td>
-                <td><?php echo $userinfo['role']; ?></td>
+                <td>Avatar</td>
+                <td><input type="text" name="avatar" value="<?php echo htmlspecialchars($userinfo['avatar_url']); ?>" /></td>
             </tr>
         </tbody>
     </table>

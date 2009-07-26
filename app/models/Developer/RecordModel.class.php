@@ -22,13 +22,40 @@ class Developer_RecordModel extends RedracerBaseRecordModel
 {
 
   protected $defaultData = array(
+    'id' => null,
     'name' => null,
     'email' => null,
     'password' => null,
     'salt' => null,
     'website_url' => null,
-    'avatar_path' => null
+    'avatar_url' => null
   );
+
+  /**
+	 * Special mutator function for password
+	 *
+	 * If the password is not yet hashed a new salt and hashed password will be calculated and saved
+	 *
+	 * @param     string $password
+	 * @param     bool $isHashed wether the password is already
+	 * @return    void
+	 */
+	public function setPassword($password, $isHashed = false)
+	{
+		if ($isHashed && $this->has('salt')) {
+			$this->set('password', $password);
+		} else {
+			/**
+			 * @var RedracerUser
+			 */
+			$usr = $this->getContext()->getUser();
+			if (!array_key_exists('salt', $this->data)) {
+				$salt = $usr->computeSalt();
+				$this->data['salt'] = $salt;
+			}
+			$this->data['password'] = $usr->computeHash($password, $this->data['salt']);
+		}
+	}
 
 }
 

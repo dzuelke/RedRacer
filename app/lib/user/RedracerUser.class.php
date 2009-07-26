@@ -23,7 +23,7 @@ class RedracerUser extends AgaviRbacSecurityUser {
 	/**
 	 * User login
 	 * 
-	 * Looks up userinfo from database and trys to authenticat the user.
+	 * Looks up userinfo from database and trys to authenticate the user.
 	 *
 	 * @param      String the username
 	 * @param      String the users password, either clear text or hashed
@@ -32,13 +32,13 @@ class RedracerUser extends AgaviRbacSecurityUser {
 	 * @throws     AgaviSecurityException
 	 * @return     void
 	 */
-	public function login($name, $password, $isPasswordHashed = false)
+	public function login($email, $password, $isPasswordHashed = false)
 	{
 		/**
 		 * @var        UserModel
 		 */
     try {
-      $user = $this->getContext()->getModel('Developer.Manager')->lookupByName($name);
+      $user = $this->getContext()->getModel('Developer.Manager')->lookupByEmail($email);
     } catch (RedracerNoRecordException $e) {
       throw new AgaviSecurityException('username');
     }

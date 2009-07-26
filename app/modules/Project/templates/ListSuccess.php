@@ -2,6 +2,9 @@
 	Search name &amp; description:
 	<br /><input type="text" name="search" />
 	<br />
+  <br />Search by project owner:
+  <br /><input type="text" name="owner" />
+  <br />
 	<br />Only include projects with these tags:
 	<?php foreach ($t['allTags'] as $pt): ?>
 		<br /><?php echo ucwords($pt['name']); ?>

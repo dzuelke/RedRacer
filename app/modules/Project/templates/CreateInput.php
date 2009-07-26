@@ -1,12 +1,15 @@
 <form action="<?php echo $ro->gen(null); ?>" method="post">
 	Name: <input type="text" name="name" />
-	<br />Type: <select name="type">
-		<option value="0">-- Select --</option>
-		<?php foreach($t['projectTypes'] as $pt): ?>
-			<option value="<?php echo $pt['id']; ?>"><?php echo $pt['type']; ?></option>
-		<?php endforeach; ?>
-	</select>
-	<br />Description:
-	<br /><textarea rows="6" cols="50" name="description"></textarea>
+	<br />Tags:
+  <?php $i = 0; ?>
+  <?php foreach($t['tags'] as $tag): ?>
+    <br /><?php echo $tag['name']; ?>
+    <input type="checkbox" name="tags[<?php echo $i; ?>]" value="<?php echo $tag['name']; ?>" />
+    <?php ++$i; ?>
+  <?php endforeach; ?>
+	<br />Short Description:
+	<br /><textarea rows="3" cols="50" name="short_description"></textarea>
+  <br />Long Description:
+	<br /><textarea rows="12" cols="50" name="long_description"></textarea>
 	<br /><input type="submit" value="Create Project" />
 </form>

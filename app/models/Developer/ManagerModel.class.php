@@ -26,8 +26,8 @@ class Developer_ManagerModel extends RedracerBaseDoctrineManagerModel
   protected function getDoctrineRecordModelName() { return 'Developer'; }
   protected function getRecordModelName() { return 'Developer.Record'; }
 
-  public function lookupByName($name) {
-    return $this->lookupOneByField('name', $name);
+  public function lookupByEmail($email) {
+    return $this->lookupOneByField('email', $email);
   }
 
 }

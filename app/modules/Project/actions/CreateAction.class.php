@@ -23,41 +23,37 @@ class Project_CreateAction extends RedracerProjectBaseAction
 {
 
 	public function executeRead(AgaviRequestDataHolder $rd) {
-		$this->setTypeList();
+		$this->setTagList();
 		return 'Input';
 	}
 
 	public function executeWrite(AgaviRequestDataHolder $rd) {
 
 		// put the project in the database
-		$projectManager = $this->getContext()->getModel('ProjectManager');
+		$projectManager = $this->getContext()->getModel('Project.Manager');
 		$newProject = $projectManager->createNewModel();
 		$newProject['name'] = $rd->getParameter('name');
-		$newProject['typeid'] = $rd->getParameter('type');
-		$newProject['description'] = $rd->getParameter('description');
+		$newProject['short_description'] = $rd->getParameter('short_description');
+		$newProject['long_description'] = $rd->getParameter('long_description');
+    $newProject['date'] = time();
+
+		// link the user to the project
+    $userinfo = $this->getContext()->getUser()->getAttribute('userinfo');
+    $newProject['owner'] = $userinfo['id'];
+
 		$projectManager->insertNewRecord($newProject);
 
 		// lookup the new project to get its id
 		$newProject = $projectManager->lookupByName($newProject['name']);
 
-		// get the current user and load him into a model
-		$userModel = $this->getContext()->getModel('User');
-		$userModel->fromArray(
-			$this->getContext()->getUser()->getAttribute('userinfo')
-		);
-
-		// link the user to the project
-		$projectMaintainerManager =
-			$this->getContext()->getModel('ProjectMaintainerManager');
-		$projectMaintainerManager
-			->linkMaintainerToProject($userModel, $newProject);
-		
+    // give tags to the project
+    $projectManager->addTagsTo($newProject, $rd->getParameter('selectedTags'));
 
 		return 'Success';
 	}
 
 	public function handleWriteError(AgaviRequestDataHolder $rd) {
-		$this->setTypeList();
+		$this->setTagList();
 		return 'Error';
 	}
 
@@ -82,11 +78,11 @@ class Project_CreateAction extends RedracerProjectBaseAction
 		return 'Input';
 	}
 
-	protected function setTypeList() {
-		// get a list of project types
-		$projectTypeManager = $this->getContext()->getModel('ProjectTypeManager');
-		$types = $projectTypeManager->lookupAll();
-		$this->setAttribute('projectTypes', $types);
+	protected function setTagList() {
+		// set a list of tags
+		$tm = $this->getContext()->getModel('Tag.Manager');
+		$tags = $tm->lookupAll();
+		$this->setAttribute('tags', $tags);
 	}
 
 }

@@ -45,6 +45,10 @@
 				</ae:parameters>
 			</validator>
 
+      <validator class="AgaviIssetValidator" required="false">
+        <argument>owner</argument>
+      </validator>
+
 		</validators>
 		
 	</ae:configuration>

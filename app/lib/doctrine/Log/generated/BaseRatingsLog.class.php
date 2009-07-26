@@ -9,8 +9,9 @@
  * @property string $ip_address
  * @property string $session_id
  * @property integer $date
- * @property integer $rating
- * @property Rating $Rating
+ * @property integer $release
+ * @property boolean $liked
+ * @property Release $Release
  * 
  * @package    Redracer
  * @subpackage Database
@@ -26,7 +27,8 @@ abstract class BaseRatingsLog extends Doctrine_Record
         $this->hasColumn('ip_address', 'string', 15, array('type' => 'string', 'notnull' => true, 'length' => '15'));
         $this->hasColumn('session_id', 'string', 100, array('type' => 'string', 'notnull' => true, 'length' => '100'));
         $this->hasColumn('date', 'integer', null, array('type' => 'integer', 'notnull' => true));
-        $this->hasColumn('rating', 'integer', null, array('type' => 'integer', 'notnull' => true));
+        $this->hasColumn('release', 'integer', null, array('type' => 'integer', 'notnull' => true));
+        $this->hasColumn('liked', 'boolean', null, array('type' => 'boolean', 'notnull' => true));
 
 
         $this->setAttribute(Doctrine::ATTR_EXPORT, Doctrine::EXPORT_ALL);
@@ -37,7 +39,7 @@ abstract class BaseRatingsLog extends Doctrine_Record
 
     public function setUp()
     {
-        $this->hasOne('Rating', array('local' => 'rating',
-                                      'foreign' => 'id'));
+        $this->hasOne('Release', array('local' => 'release',
+                                       'foreign' => 'id'));
     }
 }

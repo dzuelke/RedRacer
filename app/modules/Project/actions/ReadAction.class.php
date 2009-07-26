@@ -52,6 +52,30 @@ class Project_ReadAction extends RedracerProjectBaseAction
       $this->setAttribute('rating', false);
     }
 
+    $userinfo =
+			$this->getContext()->getUser()->getAttribute('userinfo');
+
+    $isDeveloper = false;
+
+    // is this user the owner?
+    if ($project['owner'] == $userinfo['id']) {
+      $this->setAttribute('isOwner', true);
+    } else {
+      $this->setAttribute('isOwner', false);
+
+      // maybe they are a developer?
+      $isDeveloper = false;
+      foreach ($developers as $d) {
+        if ($d['name'] == $userinfo['name']) {
+          $isDeveloper = true;
+          break;
+        }
+      }
+
+    }
+
+    $this->setAttribute('isDeveloper', $isDeveloper);
+
 		return 'Success';
 	}
 

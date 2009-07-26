@@ -48,6 +48,14 @@ class Project_ListAction extends RedracerProjectBaseAction
 			$this->getContext()->getModel('Tag.Manager');
 		$this->setAttribute('projectTags', $tagManager->lookupAll());
 
+    // get the owner to limit by
+    $owner = null;
+    if ($rd->getParameter('owner')) {
+      $dm = $this->getContext()->getModel('Developer.Manager');
+      $owner = $dm->createNewModel();
+      $owner['email'] = $rd->getParameter('owner');
+    }
+
 		// figure out how the list should be ordered
 		// default order mode is descending
 		$orderings = array();
@@ -65,6 +73,7 @@ class Project_ListAction extends RedracerProjectBaseAction
 			'perpage' => $perPage,
 			'orderings' => $orderings,
 			'search' => $rd->getParameter('search'),
+      'owner' => $owner,
 			'tags' => $rd->getParameter('selectedTags')
 		);
 		// get the right project records

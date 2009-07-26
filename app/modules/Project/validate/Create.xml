@@ -10,7 +10,7 @@
 
 			<validator class="AgaviStringValidator">
 				<argument>name</argument>
-				<error>Invalid project name.</error>
+				<error>You must provide a new project name.</error>
 				<error for="min">Project name must be at least one character.</error>
 				<error for="max">Project name must be 100 characters or less.</error>
 				<ae:parameters>
@@ -19,25 +19,42 @@
 				</ae:parameters>
 			</validator>
 
-			<validator class="AgaviNotoperatorValidator">
-				<error>Invalid project type</error>
-				<validator class="RedracerUniqueFieldValueValidator">
-					<argument>type</argument>
-					<ae:parameters>
-						<ae:parameter name="table_manager">ProjectTypeManager</ae:parameter>
-						<ae:parameter name="field_name">id</ae:parameter>
-					</ae:parameters>
-				</validator>
+      <validator class="AgaviArraylengthValidator" provides="tags_non_empty">
+        <argument>tags</argument>
+        <error>You must select at least one tag.</error>
+        <ae:parameters>
+          <ae:parameter name="min">1</ae:parameter>
+        </ae:parameters>
+      </validator>
+
+			<validator class="RedracerTagArrayValidator" depends="tags_non_empty">
+				<argument>tags</argument>
+        <error>The selected tags are invalid.</error>
+        <ae:parameters>
+          <ae:parameter name="selectedTagModelsExport">selectedTags</ae:parameter>
+          <ae:parameter name="allTagModelsExport">allTags</ae:parameter>
+        </ae:parameters>
 			</validator>
 
 			<validator class="AgaviStringValidator">
-				<argument>description</argument>
-				<error>Invalid project description.</error>
+				<argument>short_description</argument>
+				<error>You must provide a short project description.</error>
 				<error for="min">Project description must be at least one character.</error>
-				<error for="max">Project description must be 1000 characters or less.</error>
+				<error for="max">Project description must be 200 characters or less.</error>
 				<ae:parameters>
 					<ae:parameter name="min">1</ae:parameter>
-					<ae:parameter name="max">1000</ae:parameter>
+					<ae:parameter name="max">200</ae:parameter>
+				</ae:parameters>
+			</validator>
+
+      <validator class="AgaviStringValidator">
+				<argument>long_description</argument>
+				<error>You must provide a long project description.</error>
+				<error for="min">Project description must be at least one character.</error>
+				<error for="max">Project description must be 10000 characters or less.</error>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+					<ae:parameter name="max">10000</ae:parameter>
 				</ae:parameters>
 			</validator>
 

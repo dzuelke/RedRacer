@@ -22,6 +22,7 @@ class Project_RecordModel extends RedracerBaseRecordModel
 {
   protected $defaultData = array(
 		'id' => null,
+    'owner' => null,
 		'name' => null,
 		'short_description' => null,
 		'long_description' => null,

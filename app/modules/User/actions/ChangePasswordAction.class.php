@@ -26,7 +26,7 @@ class User_ChangePasswordAction extends RedracerUserBaseAction
 		/**
 		 * @var $um UserManagerModel
 		 */
-		$um = $this->getContext()->getModel('UserManager');
+		$um = $this->getContext()->getModel('Developer.Manager');
 		
 		$usr = $this->getContext()->getUser();
 		$userinfo = $usr->getAttribute('userinfo');
@@ -34,11 +34,11 @@ class User_ChangePasswordAction extends RedracerUserBaseAction
 		/**
 		 * @var UserModel
 		 */
-		$u = $um->lookupUserByid($userinfo['id']);
+		$u = $um->lookupByIndex($userinfo['id']);
 		$u['password'] = $rd->getParameter('newpassword');
 		
 		// Update the User
-		$um->updateUser($u);
+		$um->update($u);
 		
 		// Save new userinfo
 		$usr->setAttribute('userinfo', $u->toArray());

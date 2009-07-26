@@ -22,21 +22,11 @@ class Project_ReadSuccessView extends RedracerProjectBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
-		$userinfo =
-			$this->getContext()->getUser()->getAttribute('userinfo');
-		$developers = $this->getAttribute('developers');
-		$belongsToCurrentUser = false;
-		foreach ($developers as $d) {
-			if ($d['name'] == $userinfo['username']) {
-				$belongsToCurrentUser = true;
-				break;
-			}
-		}
-		$this->setAttribute('belongsToCurrentUser', $belongsToCurrentUser);
 
 		$this->setupHtml($rd);
 
-		$this->setAttribute('_title', 'Read');
+    $project = $this->getAttribute('project');
+		$this->setAttribute('_title', $project['name']);
 	}
 }
 

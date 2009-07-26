@@ -9,10 +9,12 @@
  * @property string $description
  * @property integer $date
  * @property integer $project
+ * @property integer $likes
+ * @property integer $dislikes
  * @property Project $Project
  * @property Doctrine_Collection $Files
  * @property Doctrine_Collection $Comment
- * @property Doctrine_Collection $Ratings
+ * @property Doctrine_Collection $RatingLogs
  * 
  * @package    Redracer
  * @subpackage Database
@@ -28,6 +30,8 @@ abstract class BaseRelease extends Doctrine_Record
         $this->hasColumn('description', 'string', 1000, array('type' => 'string', 'length' => '1000'));
         $this->hasColumn('date', 'integer', null, array('type' => 'integer', 'notnull' => true));
         $this->hasColumn('project', 'integer', null, array('type' => 'integer', 'notnull' => true));
+        $this->hasColumn('likes', 'integer', null, array('type' => 'integer', 'notnull' => true));
+        $this->hasColumn('dislikes', 'integer', null, array('type' => 'integer', 'notnull' => true));
 
 
         $this->setAttribute(Doctrine::ATTR_EXPORT, Doctrine::EXPORT_ALL);
@@ -47,7 +51,7 @@ abstract class BaseRelease extends Doctrine_Record
         $this->hasMany('Comment', array('local' => 'id',
                                         'foreign' => 'release'));
 
-        $this->hasMany('Rating as Ratings', array('local' => 'id',
-                                                  'foreign' => 'release'));
+        $this->hasMany('RatingsLog as RatingLogs', array('local' => 'id',
+                                                         'foreign' => 'release'));
     }
 }

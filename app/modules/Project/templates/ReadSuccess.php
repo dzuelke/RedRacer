@@ -1,7 +1,11 @@
-<h2>Project Name: <?php echo $t['project']['name']; ?></h2>
+<?php if ($t['isOwner']): ?>
+<p>You are the owner of this project!
+<br /><a href="<?php echo $ro->gen('project.update'); ?>">Update Project</a>
+</p>
+<?php endif; ?>
 
-<?php if ($t['belongsToCurrentUser']): ?>
-	<p>You are a maintainer of this project!
+<?php if ($t['isDeveloper']): ?>
+	<p>You are a developer of this project!
 	<br /><a href="<?php echo $ro->gen('project.update'); ?>">Update Project</a>
 	</p>
 <?php endif; ?>

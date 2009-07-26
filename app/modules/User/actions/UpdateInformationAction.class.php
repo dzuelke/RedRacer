@@ -52,23 +52,21 @@ class User_UpdateInformationAction extends RedracerUserBaseAction
      */
     public function executeWrite(AgaviRequestDataHolder $rd)
 	{
-        /**
-		 * @var $um UserManagerModel
-		 */
-		$um = $this->getContext()->getModel('UserManager');
+
+		$dm = $this->getContext()->getModel('Developer.Manager');
 
 		$usr = $this->getContext()->getUser();
 		$userinfo = $usr->getAttribute('userinfo');
 
-		/**
-		 * @var UserModel
-		 */
-		$u = $um->lookupUserByid($userinfo['id']);
-        $u['email'] = $rd->getParameter('email');
-        $u['realname'] = $rd->getParameter('realname');
+
+		$u = $dm->lookupByIndex($userinfo['id']);
+    $u['email'] = $rd->getParameter('email');
+    $u['name'] = $rd->getParameter('name');
+    $u['website_url'] = $rd->getParameter('website');
+    $u['avatar_url'] = $rd->getParameter('avatar');
 
 		// Update the User
-		$um->updateUser($u);
+		$dm->update($u);
 
 		// Save new userinfo
 		$usr->setAttribute('userinfo', $u->toArray());
