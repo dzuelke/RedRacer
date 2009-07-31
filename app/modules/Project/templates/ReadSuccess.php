@@ -16,6 +16,20 @@
 <p>Current Rating: <?php echo round($t['rating'] * 100); ?>%</p>
 <?php endif; ?>
 
+<?php if ($t['project']['scm_url'] || $t['project']['bug_tracker_url']): ?>
+<p>
+  <?php if ($t['project']['scm_url']): ?>
+    <a href="<?php echo $t['project']['scm_url']; ?>">SCM</a>
+  <?php endif; ?>
+  <?php if ($t['project']['scm_url'] && $t['project']['bug_tracker_url']): ?>
+    &nbsp;/&nbsp;
+  <?php endif; ?>
+  <?php if ($t['project']['bug_tracker_url']): ?>
+    <a href="<?php echo $t['project']['bug_tracker_url']; ?>">Bug Tracker</a>
+  <?php endif; ?>
+</p>
+<?php endif; ?>
+
 <p><?php echo $t['project']['long_description']; ?></p>
 
 <h3>Developers</h3>

@@ -58,6 +58,16 @@
 				</ae:parameters>
 			</validator>
 
+      <validator class="RedracerUrlValidator" required="false">
+        <argument>scm_url</argument>
+        <error>The url provided cannot be accepted.</error>
+      </validator>
+
+      <validator class="RedracerUrlValidator" required="false">
+        <argument>bug_tracker_url</argument>
+        <error>The url provided cannot be accepted.</error>
+      </validator>
+
 		</validators>
 		
 	</ae:configuration>

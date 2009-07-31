@@ -35,6 +35,8 @@ class Project_CreateAction extends RedracerProjectBaseAction
 		$newProject['name'] = $rd->getParameter('name');
 		$newProject['short_description'] = $rd->getParameter('short_description');
 		$newProject['long_description'] = $rd->getParameter('long_description');
+    $newProject['scm_url'] = $rd->getParameter('scm_url');
+    $newProject['bug_tracker_url'] = $rd->getParameter('bug_tracker_url');
     $newProject['date'] = time();
 
 		// link the user to the project
