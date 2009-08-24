@@ -1,0 +1,1 @@
+<p>Your new project has been successfully created.</p>

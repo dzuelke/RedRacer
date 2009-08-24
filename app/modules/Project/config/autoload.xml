@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<ae:configuration>
+		
+		<autoload name="RedracerProjectBaseAction">%core.module_dir%/Project/lib/action/RedracerProjectBaseAction.class.php</autoload>
+		<autoload name="RedracerProjectBaseModel">%core.module_dir%/Project/lib/model/RedracerProjectBaseModel.class.php</autoload>
+		<autoload name="RedracerProjectBaseView">%core.module_dir%/Project/lib/view/RedracerProjectBaseView.class.php</autoload>
+
+		<!-- Validators -->
+		<autoload name="RedracerOrderModeValidator">%core.module_dir%/Project/lib/validator/RedracerOrderModeValidator.class.php</autoload>
+		<autoload name="RedracerTagArrayValidator">%core.module_dir%/Project/lib/validator/RedracerTagArrayValidator.class.php</autoload>
+
+	</ae:configuration>
+</ae:configurations>

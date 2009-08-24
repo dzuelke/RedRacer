@@ -13,7 +13,20 @@
 		<autoload name="RedracerBaseAction">%core.lib_dir%/action/RedracerBaseAction.class.php</autoload>
 		<autoload name="RedracerBaseModel">%core.lib_dir%/model/RedracerBaseModel.class.php</autoload>
 		<autoload name="RedracerBaseView">%core.lib_dir%/view/RedracerBaseView.class.php</autoload>
-		
+
+		<!-- Base Models -->
+		<autoload name="RedracerBaseManagerModel">%core.lib_dir%/model/RedracerBaseManagerModel.class.php</autoload>
+		<autoload name="RedracerBaseRecordModel">%core.lib_dir%/model/RedracerBaseRecordModel.class.php</autoload>
+		<autoload name="RedracerBaseDoctrineManagerModel">%core.lib_dir%/model/RedracerBaseDoctrineManagerModel.class.php</autoload>
+
+		<!-- Validators -->
+		<autoload name="RedracerUniqueFieldValueValidator">%core.lib_dir%/validator/RedracerUniqueFieldValueValidator.class.php</autoload>
+		<autoload name="RedracerUrlValidator">%core.lib_dir%/validator/RedracerUrlValidator.class.php</autoload>
+
+    <!-- Exceptions -->
+    <autoload name="RedracerException">%core.lib_dir%/exception/RedracerException.class.php</autoload>
+    <autoload name="RedracerNoRecordException">%core.lib_dir%/exception/RedracerNoRecordException.class.php</autoload>
+
 	</ae:configuration>
 	<ae:configuration environment="development.*">
 		<!-- for FirePHP output  -->

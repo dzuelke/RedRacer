@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/Project/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators method="read">
+
+			<validator class="AgaviStringValidator" required="false" severity="silent">
+				<argument>search</argument>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+					<ae:parameter name="max">100</ae:parameter>
+				</ae:parameters>
+			</validator>
+
+			<validator class="RedracerTagArrayValidator" required="false" severity="silent">
+				<argument>tags</argument>
+        <ae:parameters>
+          <ae:parameter name="selectedTagModelsExport">selectedTags</ae:parameter>
+          <ae:parameter name="allTagModelsExport">allTags</ae:parameter>
+        </ae:parameters>
+			</validator>
+
+			<validator class="AgaviNumberValidator" required="false" severity="silent">
+				<argument>page</argument>
+				<ae:parameters>
+					<ae:parameter name="type">integer</ae:parameter>
+					<ae:parameter name="min">1</ae:parameter>
+				</ae:parameters>
+			</validator>
+
+			<validator class="RedracerOrderModeValidator" required="false" severity="silent">
+				<argument>ordermode</argument>
+			</validator>
+
+			<validator class="AgaviInarrayValidator" required="false" severity="silent">
+				<argument>orderby</argument>
+				<ae:parameters>
+					<ae:parameter name="values">name,date</ae:parameter>
+					<ae:parameter name="sep">,</ae:parameter>
+					<ae:parameter name="case">false</ae:parameter>
+				</ae:parameters>
+			</validator>
+
+      <validator class="AgaviIssetValidator" required="false">
+        <argument>owner</argument>
+      </validator>
+
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

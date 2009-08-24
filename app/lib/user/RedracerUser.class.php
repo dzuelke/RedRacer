@@ -21,35 +21,9 @@
 class RedracerUser extends AgaviRbacSecurityUser {
 
 	/**
-	 * (non-PHPdoc)
-	 * @see src/user/AgaviUser#startup()
-	 */
-	public function startup() {
-		parent::startup();
-
-		// Fetch the Request Data
-		$reqData = $this->getContext()->getRequest()->getRequestData();
-
-		// Only try to log the user in, if he hasn't been logged in and has
-		// an autologin cookie
-		if(!$this->isAuthenticated() && $reqData->hasCookie('autologon')) {
-			try {
-				// shorten it a bit
-				$login = $reqData->getCookie('autologon');
-
-				// we try to log the user in...
-				$this->login($login['username'], $login['password'], true);
-			} catch (AgaviSecurityException $e) {
-				// ... if it fails we logout the user!
-				$this->logout();
-			}
-		}
-	}
-
-	/**
 	 * User login
 	 * 
-	 * Looks up userinfo from database and trys to authenticat the user.
+	 * Looks up userinfo from database and trys to authenticate the user.
 	 *
 	 * @param      String the username
 	 * @param      String the users password, either clear text or hashed
@@ -58,30 +32,30 @@ class RedracerUser extends AgaviRbacSecurityUser {
 	 * @throws     AgaviSecurityException
 	 * @return     void
 	 */
-	public function login($username, $password, $isPasswordHashed = false)
+	public function login($email, $password, $isPasswordHashed = false)
 	{
 		/**
 		 * @var        UserModel
 		 */
-		$user = $this->getContext()->getModel('UserManager')->lookupUserByUsername($username);
-
-		if($user === false) {
-			throw new AgaviSecurityException('username');
-		}
+    try {
+      $user = $this->getContext()->getModel('Developer.Manager')->lookupByEmail($email);
+    } catch (RedracerNoRecordException $e) {
+      throw new AgaviSecurityException('username');
+    }
 
 		// Hash the Password. No need for plaintext.
 		if (!$isPasswordHashed) {
-			$password = $this->computeHash($password, $user->salt);
+			$password = $this->computeHash($password, $user['salt']);
 		}
 
-		if($password != $user->password) {
+		if($password != $user['password']) {
 			throw new AgaviSecurityException('password');
 		}
 
 		$this->setAuthenticated(true);
 		$this->clearCredentials();
 		$this->revokeAllRoles();
-		$this->grantRole($user->role);
+		$this->grantRole('Developer');
 		
 		// Set the userinfo
 		$this->setAttribute('userinfo', $user->toArray());

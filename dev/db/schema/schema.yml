@@ -1,195 +1,246 @@
+---
 options:
   collate: utf8_unicode_ci
   charset: utf8
 attributes:
   export: all
 
-ProjectApproval:
+Project:
   package: Project
-  tableName: project_approval
+  tableName: project
   columns:
     id:
-      type: integer(8)
+      type: integer
       autoincrement: true
       primary: true
-    project:
-      type: integer(4)
-      notnull: true
-    developer:
-      type: integer(4)
-      notnull: true
-    status:
-      type: integer(1)
-      notnull: true
-    reason: string(2147483647)
-  relations:
-    Users: { local: developer, foreign: id, type: one }
-    Projects: { local: project, foreign: id, type: one }
-
-
-ProjectAttachment:
-  package: Project
-  tableName: project_attachment
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    projectid:
-      type: integer(4)
-      notnull: true
     name:
-      type: string(120)
+      type: string(50)
       notnull: true
-    md5:
-      type: string(32)
-      fixed: true
-    sha1:
-      type: string(128)
-      fixed: true
-    extension:
-      type: string(5)
-      fixed: true
-    type:
-      type: enum(4)
-      values: [file, dir]
+    short_description:
+      type: string(200)
       notnull: true
-    mime: string(30)
-  relations:
-    Projects: { local: projectid, foreign: id, type: one }
-  actAs:
-    NestedSet:
-      hasManyRoots: true
-      rootColumnName: projectid
-    Timestampable:
-
-
-ProjectComments:
-  package: Project
-  tableName: project_comments
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    project:
-      type: integer(4)
+    long_description:
+      type: string(10000)
       notnull: true
-    user:
-      type: integer(4)
+    scm_url:
+      type: string(200)
+      notnull: false
+    bug_tracker_url:
+      type: string(200)
+      notnull: false
+    date:
+      type: integer
       notnull: true
-    comment:
-      type: string(2147483647)
-      notnull: true
-    date: timestamp(25)
-  relations:
-    Users: { local: user, foreign: id, type: one }
-    Projects: { local: project, foreign: id, type: one }
-
-
-ProjectMaintainer:
-  package: Project
-  tableName: project_maintainer
-  columns:
-    id:
-      type: integer(8)
-      autoincrement: true
-      primary: true
-    project:
-      type: integer(4)
-      notnull: true
-    maintainer:
-      type: integer(4)
+    owner:
+      type: integer
       notnull: true
   relations:
-    Users: { local: maintainer, foreign: id, type: one }
-    Projects: { local: project, foreign: id, type: one }
+    Owner:
+      local: owner
+      type: one
+      class: Developer
+      foreignAlias: OwnedProjects
+      foreignType: many
+      foreign: id
+    Developers:
+      class: Developer
+      local: project
+      type: many
+      foreign: developer
+      foreignAlias: DevelopingProjects
+      foreignType: many
+      refClass: ProjectDeveloper
+    Tags:
+      local: project
+      foreign: tag
+      type: many
+      foreignType: many
+      class: Tag
+      refClass: ProjectsTags
+      foreignAlias: Projects
 
-
-ProjectRating:
+Release:
   package: Project
-  tableName: project_rating
+  tableName: release
   columns:
     id:
-      type: integer(8)
+      type: integer
       autoincrement: true
       primary: true
-    user:
-      type: integer(4)
+    description:
+      type: string(1000)
+      notnull: false
+    date:
+      type: integer
       notnull: true
     project:
-      type: integer(4)
+      type: integer
       notnull: true
-    rate:
-      type: integer(1)
+    likes:
+      type: integer
+      notnull: true
+    dislikes:
+      type: integer
       notnull: true
   relations:
-    Users: { local: user, foreign: id, type: one }
-    Projects: { local: project, foreign: id, type: one }
+    Project:
+      local: project
+      foreign: id
+      type: one
+      foreignAlias: Releases
+      
 
-
-Projects:
+File:
   package: Project
-  tableName: projects
+  tableName: file
   columns:
     id:
-      type: integer(4)
-      primary: true
+      type: integer
       autoincrement: true
-    typeid:
-      type: integer(4)
+      primary: true
+    description:
+      type: string(200)
+      notnull: false
+    binary_path:
+      type: string(200)
       notnull: true
+    size:
+      type: integer
+      notnull: true
+    release:
+      type: integer
+      notnull: true
+  relations:
+    Release:
+      local: release
+      foreign: id
+      type: one
+      foreignAlias: Files
+
+Tag:
+  package: Project
+  tableName: tag
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
     name:
-      type: string(100)
-      notnull: true
-    desciption:
-      type: clob
-      notnull: true
-  relations:
-    ProjectType: { local: typeid, foreign: id, type: one }
-    ProjectApproval: { local: id, foreign: project, type: many }
-    ProjectAttachment: { local: id, foreign: projectid, type: many }
-    ProjectComments: { local: id, foreign: project, type: many }
-    ProjectMaintainer: { local: id, foreign: project, type: many }
-    ProjectRating: { local: id, foreign: project, type: many }
-  actAs: [ Timestampable ]
-
-
-ProjectType:
-  package: Project
-  tableName: project_type
-  columns:
-    id:  
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    type: 
       type: string(20)
       notnull: true
-  relations:
-    Projects: { local: id, foreign: typeid, type: many }
+    description:
+      type: string(200)
+      notnull: true
 
-
-Users:
-  package: User
-  tableName: users
+ProjectDeveloper:
+  package: Project
+  tableName: project_developer
   columns:
-    id: { type: integer(4), primary: true, autoincrement: true }
-    username: { type: string(50), notnull: true }
-    email: { type: string(100), notnull: true }
-    salt: { type: string(40), fixed: true, notnull: true }
-    password: { type: string(128), fixed: true, notnull: true }
-    role: { type: string(30), notnull: true }
-    realname: { type: string(120) }
-  relations:
-    ProjectApproval: { local: id, foreign: developer, type: many }
-    ProjectComments: { local: id, foreign: user, type: many }
-    ProjectMaintainer: { local: id, foreign: maintainer, type: many }
-    ProjectRating: { local: id, foreign: user, type: many }
-  indexes:
-    username:
-      fields: [username]
-      type: unique
+    project:
+      type: integer
+      primary: true
+    developer:
+      type: integer
+      primary: true
+    approved:
+      type: boolean
+      notnull: true
+      default: false
+
+Developer:
+  package: Developer
+  tableName: developer
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    name:
+      type: string(50)
+      notnull: true
     email:
-      fields: [email]
-      type: unique
+      type: string(50)
+      notnull: true
+    website_url:
+      type: string(200)
+      notnull: false
+    avatar_url:
+      type: string(200)
+      notnull: false
+    password:
+      type: string(128)
+      notnull: true
+    salt:
+      type: string(40)
+      notnull: true
+    is_team_member:
+      type: boolean
+      notnull: true
+      default: false
+
+Comment:
+  package: Developer
+  tableName: comment
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    text:
+      type: string(1000)
+      notnull: true
+    date:
+      type: integer
+      notnull: true
+    release:
+      type: integer
+      notnull: true
+  relations:
+    Release:
+      local: release
+      foreign: id
+      type: one
+
+ProjectsTags:
+  package: Project
+  tableName: project_tag
+  columns:
+    project:
+      type: integer
+      notnull: true
+      primary: true
+    tag:
+      type: integer
+      notnull: true
+      primary: true
+
+RatingsLog:
+  package: Log
+  tableName: ratings_log
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    ip_address:
+      type: string(15)
+      notnull: true
+    session_id:
+      type: string(100)
+      notnull: true
+    date:
+      type: integer
+      notnull: true
+    release:
+      type: integer
+      notnull: true
+    liked:
+      type: boolean
+      notnull: true
+  relations:
+    Release:
+      local: release
+      type: one
+      foreign: id
+      foreignAlias: RatingLogs
+      foreignType: many

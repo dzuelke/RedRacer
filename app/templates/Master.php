@@ -16,7 +16,7 @@
 		<ul>
 			<li class="first"><a href="#" accesskey="1" title="">Home</a></li>
 			<li><a href="#" accesskey="2" title="">About Us</a></li>
-			<li><a href="#" accesskey="3" title="">Products</a></li>
+			<li><a href="<?php echo $ro->gen('project.index'); ?>" accesskey="3" title="">Projects</a></li>
             <?php if ($us->isAuthenticated()): ?>
                 <li><a href="<?php echo $ro->gen('user.index'); ?>" accesskey="4" title="">User</a></li>
                 <li><a href="<?php echo $ro->gen('logout');?>" accesskey="5" title="">Logout</a></li>
