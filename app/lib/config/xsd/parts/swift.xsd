@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema targetNamespace="http://redracer.org/config/mailing"
-	elementFormDefault="qualified" 
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:mail="http://redracer.org/config/mailing" 
-	xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0"
-	xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0">
+<xs:schema targetNamespace="http://redracer.org/config/swift"
+	elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0" xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0" xmlns:swift="http://redracer.org/config/swift">
 
 	<xs:import namespace="http://agavi.org/agavi/config/global/envelope/1.0"
 		schemaLocation="../../../../../libs/agavi/config/xsd/_envelope.xsd">
@@ -13,17 +9,18 @@
 		schemaLocation="../../../../../libs/agavi/config/xsd/_types.xsd"></xs:import>
 	<xs:complexType name="transports">
 		<xs:sequence>
-			<xs:element name="transport" type="mail:transport"></xs:element>
+			<xs:element name="transport" type="swift:transport"></xs:element>
 		</xs:sequence>
 		<xs:attribute name="default" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="fallback" type="xs:string" use="optional"></xs:attribute>
 	</xs:complexType>
 
 	<xs:group name="configuration">
         <xs:all>
-            <xs:element name="swift" type="mail:swift" maxOccurs="1" minOccurs="0"></xs:element>
-            <xs:element name="transports" type="mail:transports" minOccurs="0" maxOccurs="1">
+            <xs:element name="swift" type="swift:swift" maxOccurs="1" minOccurs="0"></xs:element>
+            <xs:element name="transports" type="swift:transports" minOccurs="0" maxOccurs="1">
 			</xs:element>
-			<xs:element name="transport" type="mail:transport" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="transport" type="swift:transport" maxOccurs="1" minOccurs="0"></xs:element>
 		</xs:all>
 	</xs:group>
 
@@ -42,4 +39,5 @@
 			<xs:group ref="envelope_1_0:parameters"></xs:group>
 		</xs:sequence>
 	</xs:complexType>
+
 </xs:schema>

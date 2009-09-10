@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://redracer.org/config/mailing">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://redracer.org/config/swift">
 	<ae:configuration>
 		<swift>
 			<ae:parameters>
@@ -12,18 +11,24 @@
 					<ae:parameters>
 						<ae:parameter name="charset">utf-8</ae:parameter>
 						<ae:parameter name="cache_type">disk</ae:parameter>
-						<ae:parameter name="temp_dir">%core.cache_dir%/swift</ae:parameter>
-				</ae:parameters>
+						<ae:parameter name="temp_dir">%core.cache_dir%/swift
+						</ae:parameter>
+					</ae:parameters>
 				</ae:parameter>
 			</ae:parameters>
 		</swift>
 
-		<transports default="localhost">
+		<transports default="localhost" fallback="sendmail">
 			<transport name="localhost" class="Swift_SmtpTransport">
 				<ae:parameters>
 					<ae:parameter name="host">localhost</ae:parameter>
 					<ae:parameter name="port">25</ae:parameter>
 					<ae:parameter name="username">redracer</ae:parameter>
+				</ae:parameters>
+			</transport>
+			<transport name="sendmail" class="Swift_SendmailTransport">
+				<ae:parameters>
+					<ae:parameter name="command">/usr/bin/sendmail -bs</ae:parameter>
 				</ae:parameters>
 			</transport>
 		</transports>

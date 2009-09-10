@@ -20,44 +20,70 @@
  * @since      1.0
  * @version    $Id$
  */
-class RedracerMailingConfigHandler extends AgaviXmlConfigHandler
+class RedracerSwiftConfigHandler extends AgaviXmlConfigHandler
 {
-	const XML_NAMESPACE = 'http://redracer.org/config/mailing';
+	const XML_NAMESPACE = 'http://redracer.org/config/swift';
 
 	public function execute(AgaviXmlConfigDomDocument $document)
 	{
 		// set up our default namespace
-		$document->setDefaultNamespace(self::XML_NAMESPACE, 'mailing');
+		$document->setDefaultNamespace(self::XML_NAMESPACE, 'swift');
 
+		// get the settings for swift
 		$swift = array();
 		$swift = $this->parseSwift($document);
 
+		// get the settings for the transports
 		$transports = array();
 		$defaultTransport = null;
-		$transports = $this->parseTransports($document, $defaultTransport);
+		$fallbackTransport = null;
+		$transports = $this->parseTransports($document, $defaultTransport, $fallbackTransport);
+		
+		// check if everything is set right
 		if(!isset($transports[$defaultTransport])) {
 			$error = 'Configuration file "%s" specifies undefined default transport "%s".';
 			$error = sprintf($error, $document->documentURI, $defaultTransport);
 			throw new AgaviConfigurationException($error);
 		}
+		
+		if($fallbackTransport != null && !isset($transports[$fallbackTransport])) {
+			$error = 'Configuration file "%s" specifies undefined fallback transport "%s".';
+			$error = sprintf($error, $document->documentURI, $defaultTransport);
+			throw new AgaviConfigurationException($error);
+		}
 
+		// build the config file
 		$data = array();
-		$config = array_merge($swift, array('defaultTransport' => $defaultTransport, 'transports' => $transports));
+		$config = array_merge($swift, array('defaultTransport' => $defaultTransport, 
+											'fallbackTransport' => $fallbackTransport, 
+											'transports' => $transports));
 		$data[] = sprintf('return %s;', var_export($config, true));
 
 		return $this->generate($data, $document->documentURI);
 	}
 
-	private function parseTransports(AgaviXmlConfigDomDocument $document, &$default)
+	/**
+	 * Parses the configuration file's transports
+	 * 
+	 * @param     AgaviXmlConfigDomDocument $document ze configuration file
+	 * @param     String $default the default transport
+	 * @param     String $fallback the Fallback transport
+	 * @return    Array of configured transports
+	 */
+	private function parseTransports(AgaviXmlConfigDomDocument $document, &$default, &$fallback)
 	{
 		// loop over the different configuration elements for transports
 		foreach ($document->getConfigurationElements() as $configuration) {
-			// if configuration has no transport
+			/* @var $configuration AgaviXmlConfigDomElement */
 			if(!$configuration->has('transports')) {
+				// if configuration has no transport
 				continue;
 			}
 
-			// work on the <transports> tag
+			/* 
+			 * work on the <transports> tag
+			 * @var $transportsElement AgaviXmlConfigDomNode
+			 */
 			$transportsElement = $configuration->getChild('transports');
 			// make sure we have a default database exists
 			if(!$transportsElement->hasAttribute('default') && $default === null) {
@@ -68,7 +94,8 @@ class RedracerMailingConfigHandler extends AgaviXmlConfigHandler
 				throw new AgaviParseException($error);
 			}
 			$default = $transportsElement->getAttribute('default');
-
+			$fallback = $transportsElement->hasAttribute('fallback') ? $transportsElement->getAttribute('fallback') : null;
+			
 			// work on the <transport> tags
 			foreach($configuration->get('transports') as $transport) {
 				$name = $transport->getAttribute('name');
@@ -92,6 +119,14 @@ class RedracerMailingConfigHandler extends AgaviXmlConfigHandler
 		return $transports;
 	}
 
+	/**
+	 * parses the configuration file for the swift element
+	 * 
+	 * If now swift element is present, the function will return the default settings.
+	 * 
+	 * @param     AgaviXmlConfigDomDocument $document ze configuration file
+	 * @return    Array with settings for swift
+	 */
 	private function parseSwift(AgaviXmlConfigDomDocument $document)
 	{
 		$swiftDefault = array(

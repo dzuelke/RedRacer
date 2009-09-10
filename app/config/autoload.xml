@@ -7,8 +7,10 @@
 		<!-- User -->
 		<autoload name="RedracerUser">%core.lib_dir%/user/RedracerUser.class.php</autoload>
 		
-		<!-- Confighandler -->
-		<autoload name="RedracerMailingConfigHandler">%core.lib_dir%/config/RedracerMailingConfigHandler.class.php</autoload>
+		<!-- Mailing -->
+		<autoload name="RedracerSwiftConfigHandler">%core.lib_dir%/config/RedracerSwiftConfigHandler.class.php</autoload>
+		<autoload name="RedracerIMailing">%core.lib_dir%/model/RedracerIMailing.interface.php</autoload>
+		<autoload name="SwiftMailingModel">%core.lib_dir%/model/SwiftMailingModel.class.php</autoload>
 		
 		<autoload name="RedracerBaseAction">%core.lib_dir%/action/RedracerBaseAction.class.php</autoload>
 		<autoload name="RedracerBaseModel">%core.lib_dir%/model/RedracerBaseModel.class.php</autoload>
